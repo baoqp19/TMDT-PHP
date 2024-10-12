@@ -36,9 +36,28 @@ return [
     */
 
     'guards' => [
+
+        // sử dụng phiên session để xác thực người dùng
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        // Sử dụng xác thực dựa trên token. Người dùng sẽ gửi token trong header của mỗi yêu cầu API.
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+
+        // Sử dụng phiên (session) để quản lý xác thực cho quản trị viên
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        // sử dụng token để xác thực cho các yêu cầu API.
+        'admin_api' => [
+            'driver' => 'sanctum',
+            'provider' => 'admins',
         ],
     ],
 
@@ -61,9 +80,17 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
+            //. Eloquent cho phép bạn tương tác với cơ sở dữ liệu một cách dễ dàng và thuận tiện.
+            'driver' => 'eloquent', 
             'model' => App\Models\User::class,
+        //    Đây là model Eloquent đại diện cho bảng người dùng trong cơ sở dữ liệu. Khi bạn gọi các phương thức xác thực (như Auth::attempt()), Laravel sẽ sử dụng model này để truy xuất thông tin người dùng từ cơ sở dữ liệu.
         ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',
