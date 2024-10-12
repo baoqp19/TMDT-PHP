@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
 
-    protected $fillable = ['user_id', 'user_name', 'user_content', 'admin_content', 'time'];
+
+    // self: gọi phương thức static
+    protected $fillable = [
+        'user_id',
+        'user_name',
+        'user_content',
+        'admin_content',
+        'time'
+    ];
 
     public function user()
     {
@@ -17,7 +25,7 @@ class Activity extends Model
 
     public static function addActivity($user_content, $admin_content)
     {
-        $user = auth()->user();
+        $user = auth()->user(); // có người dùng đăng nhập
         if ($user) {
             Activity::create([
                 "user_id" => $user->id,
