@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Slider extends Model
+class PostProduct extends Model
 {
     protected $fillable = [
-        'name',
         'product_id',
-        'show_hide',
-        'image',
+        'title',
+        'description',
+        'content',
     ];
 
     public function product()

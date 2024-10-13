@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Slider extends Model
+class Gallery extends Model
 {
     protected $fillable = [
-        'name',
         'product_id',
-        'show_hide',
-        'image',
+        'image'
     ];
+    
+    protected $table = 'gallerys';
 
     public function product()
     {
