@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\{
     HomeController,
     UserAuthController,
@@ -58,23 +59,32 @@ Route::group([
     // Route::get('product/{id}', [ProductController::class, 'detail'])->name('product.detail');
     // Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
-    Route::prefix('signup')->group(function () {
-        Route::get('/', [UserAuthController::class, 'signup'])->name('user.signup_get');
-        Route::post('/', [UserAuthController::class, 'handleSignup'])->name('user.signup_post');
+    Route::group([
+        'prefix' => 'user',
+        'as'     => 'user.',
+    ],function () {
+        Route::get('login', [UserAuthController::class, 'login'])->name('login');
+        Route::post('handleSignin', [UserAuthController::class, 'handleSignin'])->name('handleSignin');
+    });
+
+    Route::group([
+        'prefix' => 'user',
+        'as'     => 'user.',
+    ],function () {
+        Route::get('register', [UserAuthController::class, 'register'])->name('register');
+        Route::post('handleSignup', [UserAuthController::class, 'handleSignup'])->name('handleSignup');
     });
 
     Route::prefix('signin')->group(function () {
-        Route::get('/', [UserAuthController::class, 'signin'])->name('user.signin_get');
-        Route::post('/', [UserAuthController::class, 'handleSignin'])->name('user.signin_post');
-    //     Route::get('google', [SocialLoginController::class, 'redirect_to_google'])->name('social.google');
-    //     Route::get('zalo', [SocialLoginController::class, 'redirect_to_zalo'])->name('social.zalo');
-    //     Route::get('facebook', [SocialLoginController::class, 'redirect_to_facebook'])->name('social.facebook');
-    //     Route::get('zalo-social', [SocialLoginController::class, 'handle_signin_zalo']);
-    //     Route::get('google-social', [SocialLoginController::class, 'handle_signin_google']);
-    //     Route::get('facebook-social', [SocialLoginController::class, 'handle_signin_facebook']);
+        //     Route::get('google', [SocialLoginController::class, 'redirect_to_google'])->name('social.google');
+        //     Route::get('zalo', [SocialLoginController::class, 'redirect_to_zalo'])->name('social.zalo');
+        //     Route::get('facebook', [SocialLoginController::class, 'redirect_to_facebook'])->name('social.facebook');
+        //     Route::get('zalo-social', [SocialLoginController::class, 'handle_signin_zalo']);
+        //     Route::get('google-social', [SocialLoginController::class, 'handle_signin_google']);
+        //     Route::get('facebook-social', [SocialLoginController::class, 'handle_signin_facebook']);
     });
 
-    // Route::get('forgot-password', [UserController::class, 'forgot_password'])->name('user.forgot_password');
+    Route::get('forgot-password', [UserController::class, 'forgot_password'])->name('user.forgot_password');
     // Route::get('new-password/{code}', [UserController::class, 'new_password'])->name('user.new_password');
     // Route::post('set-password', [UserController::class, 'set_password'])->name('user.set_password');
     // Route::post('send-mail-password', [MailController::class, 'handle_mail_reset_password'])->name('mail.reset_password');
@@ -116,7 +126,7 @@ Route::group([
 
     //     Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
     //     Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);
-        
+
     //     Route::prefix('chat')->group(function () {
     //         Route::post('get', [ChatController::class, 'get_user_chat']);
     //         Route::post('send', [ChatController::class, 'send_user_chat']);

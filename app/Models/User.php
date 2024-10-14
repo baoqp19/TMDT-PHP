@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     protected $table = 'users';
-    public $remember_token = false;     // không sử dụng remember_me
+    public $remember_token = true;     // không sử dụng remember_me
 
 
     public function comments()
