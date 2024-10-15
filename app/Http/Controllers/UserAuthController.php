@@ -15,9 +15,9 @@ class UserAuthController extends Controller
 {
     public function login(): View|RedirectResponse
     {
-        if (Auth::check()) {
-            return redirect()->route('home.index');
-        }
+        // if (Auth::check()) {
+        //     return redirect()->route('home.index');
+        // }
         return view('user.login');
     }
 
@@ -35,7 +35,7 @@ class UserAuthController extends Controller
 
         $remember = $request->has('remember');
 
-    
+
         // Thực hiện xác thực người dùng
         if (!Auth::attempt($credentials, $remember)) {
             // Nếu xác thực thất bại, trả về với lỗi
@@ -72,7 +72,7 @@ class UserAuthController extends Controller
 
         Auth::login($user, true);
 
-        return redirect()->route('home.index')->with('signup-success', true);
+        return redirect()->route('user.login')->with('signup-success', true);
     }
 
     public function signout(): RedirectResponse

@@ -22,7 +22,8 @@ use App\Http\Controllers\{
     StaticController,
     SliderController,
     BrandController,
-    CouponController
+    CouponController,
+    ProductController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -56,7 +57,7 @@ Route::group([
     // Route::any('search', [SearchController::class, 'search'])->name('search');
     // Route::post('search-live', [SearchController::class, 'search_live'])->name('search.live');
 
-    // Route::get('product/{id}', [ProductController::class, 'detail'])->name('product.detail');
+    Route::get('product/{id}', [ProductController::class, 'detail'])->name('product.detail');
     // Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
     Route::group([
