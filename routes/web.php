@@ -54,7 +54,7 @@ Route::group([
     // Route::resource('covid', CovidController::class);
     // Route::resource('weather', WeatherController::class);
 
-    // Route::any('search', [SearchController::class, 'search'])->name('search');
+    Route::any('search', [SearchController::class, 'search'])->name('search');
     // Route::post('search-live', [SearchController::class, 'search_live'])->name('search.live');
 
     Route::get('product/{id}', [ProductController::class, 'detail'])->name('product.detail');
