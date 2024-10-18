@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 :root {
     --primary: #0850eab7;
     --secondary: #13d2b8;
@@ -217,16 +217,27 @@ i.lnr.lnr-arrow-left {
     box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px,
         rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
 }
-.single-product:hover .pro-img {
+/* .single-product:hover .pro-img {
     transform: rotateY(180deg) !important;
     padding: 10px 10px !important;
-}
+} */
 .pro-img {
     transition: transform 0.6s ease 0s !important;
 }
 .primary-img {
     border-radius: 10px;
 }
+.title-brand{
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.title-brand:hover{
+     color: #F78C6B !important;
+}
+
+
+
 
 .comment-box-image {
     display: flex;
@@ -327,7 +338,7 @@ i.lnr.lnr-arrow-left {
 }
 
 .header-chat-avatar::before {
-    content: "";
+    /* content: "";
     position: absolute;
     bottom: 7px;
     right: 9px;
@@ -335,7 +346,7 @@ i.lnr.lnr-arrow-left {
     height: 11px;
     border-radius: 50%;
     border: 2px solid white;
-    background-color: #31a24c;
+    background-color: #31a24c; */
 }
 
 .header-chat-info {
@@ -508,7 +519,7 @@ i.lnr.lnr-arrow-left {
 }
 
 #btn-chat:hover {
-    background-image: linear-gradient(to right, #ffcd2b, #fb07ee);
+    /* background-image: linear-gradient(to right, #ffcd2b, #fb07ee); */
 }
 
 #btn-chat > i {
@@ -530,7 +541,7 @@ i.lnr.lnr-arrow-left {
 }
 
 .custom-btn-submit:hover {
-    background-image: linear-gradient(to right, #ffcd2b, #fb07ee);
+    /* background-image: linear-gradient(to right, #ffcd2b, #fb07ee); */
 }
 
 .custom-box-quantity {
@@ -604,12 +615,14 @@ table .thead-light th {
 }
 
 .title-name {
-    color: #414dd1;
-    font-family: "Baloo", sans-serif;
-    font-size: 45px;
-    font-weight: bold;
-    text-transform: uppercase !important;
-    margin-left: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F78C6B;
+    font-family: "Poppins", sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 30px;
 }
 
 .table-responsive-sm {
@@ -715,7 +728,7 @@ table .thead-light th {
 }
 
 .price {
-    font-family: Baloo, sans-serif !important;
+    font-family: "Baloo", sans-serif !important;
     font-size: 16px;
 }
 
@@ -724,7 +737,7 @@ table .thead-light th {
     text-align: center;
     font-family: "Baloo", sans-serif;
     text-transform: uppercase;
-    color: #007bff;
+    color: #F78C6B;
     font-weight: bold;
 }
 
@@ -746,7 +759,7 @@ table .thead-light th {
     text-transform: uppercase;
     margin: 0 auto;
     font-size: 40px;
-    color: #007bff;
+    color: #F78C6B;
 }
 
 .box-temp {
@@ -763,7 +776,7 @@ table .thead-light th {
 }
 
 .text-temp {
-    color: #007bff;
+    color: #F78C6B;
     font-weight: bold;
 }
 
@@ -789,7 +802,7 @@ table .thead-light th {
 
 .weather-info-text {
     text-align: center;
-    color: #007bff;
+    color: #F78C6B;
     font-weight: bold;
 }
 
@@ -803,7 +816,7 @@ table .thead-light th {
 }
 .weather-city {
     text-align: center;
-    color: #007bff;
+    color: #F78C6B;
     font-weight: bold;
 }
 
@@ -960,4 +973,8 @@ table .thead-light th {
     width: 400px;
     object-fit: cover;
     border-radius: 4px;
+}
+
+.nav-link:hover{
+    color: #F78C6B;
 }

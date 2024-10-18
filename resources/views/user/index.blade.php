@@ -3,7 +3,7 @@
 @section('title', 'MW Store | Thương mại điện tử')
 @section('meta_desc', 'MW Store website thương mại điện tử.')
 
-@section('content_page')
+@section('ContentPage')
 @if(count($sliders) > 0)
 <div class="slider_box">
     <div class="slider-wrapper theme-default">
@@ -20,7 +20,7 @@
     <div class="container">
         <div class="trending-box">
             <div class="">
-                <h2 class="title-name">@lang('lang.feather')</h2>
+                <p class="title-name">@lang('lang.feather')</p>
             </div>
             <div class="product-list-box">
                 <div class="trending-pro-active owl-carousel">
@@ -37,7 +37,8 @@
                             <div class="pro-info">
                                 <h4><a href="{{route('product.detail', $product_feather->slug)}}">{{$product_feather->name}}</a></h4>
                                 <p>
-                                    <span class="price">@money($product_feather->price)</span>
+                                    <span class="price">{{ number_format($product_feather->price, 0, ',', '.') . ' VND' }}
+                                    </span>
                                 </p>
                                 <div class="rating">
                                     @for ($m = 0; $m < floor($product_feather->star()); $m++) <i class="fas fa-star"></i>
@@ -71,7 +72,7 @@
     <div class="container">
         <div class="trending-box">
             <div class="">
-                <h2 class="title-name">@lang('lang.new_product')</h2>
+                <p class="title-name">@lang('lang.new_product')</p>
             </div>
             <div class="product-list-box">
                 <div class="trending-pro-active owl-carousel">
@@ -88,7 +89,7 @@
                             <div class="pro-info">
                                 <h4><a href="{{route('product.detail', $product_new->slug)}}">{{$product_new->name}}</a></h4>
                                 <p>
-                                    <span class="price">@money($product_new->price)</span>
+                                    <span class="price">{{number_format($product_new->price, 0, ',', '.') . ' VND'}}</span>
                                 </p>
                                 <div class="rating">
                                     @for ($m = 0; $m < floor($product_new->star()); $m++) <i class="fas fa-star"></i>
@@ -121,21 +122,34 @@
 <div class="arrivals-product mt-70">
     <div class="container">
         <div class="main-product-tab-area">
-            <div class="tab-menu mb-25">
-                <div class="">
-                    <h2 class="title-name">@lang('lang.brand')</h2>
-                </div>
+            <div class="tab-menu mb-25 d-flex justify-content-center">
+                {{-- <div class="">
+                    <p class="title-name">@lang('lang.brand')</p>
+                </div> --}}
                 <ul class="nav tabs-area" role="tablist">
                     @if(count($brands) > 0)
-                    <?php $is_active = true; ?>
-                    @foreach($brands as $brand)
-                    <li class="nav-item">
-                        <a class="nav-link <?php if ($is_active) {
-                                                echo 'active';
-                                            }
-                                            $is_active = false; ?>" data-toggle="tab" href="#brand{{$brand->id}}">{{$brand->name}}</a>
-                    </li>
-                    @endforeach
+                        <?php 
+                        $hasActiveBrand = false;
+                        $is_active = true; 
+                        ?>
+                        @foreach($brands as $brand)
+                            @if($is_active)
+                                <?php $hasActiveBrand = true; ?>
+                            @endif
+                            <li class="nav-item title-brand">
+                                <a class="nav-link <?php if ($is_active) {
+                                                        echo 'active';
+                                                    }
+                                                    $is_active = false; ?>" data-toggle="tab" href="#brand{{$brand->id}}">{{$brand->name}}</a>
+                            </li>
+                        @endforeach
+                
+                        {{-- Nếu không có brand nào active thì hiển thị thông báo --}}
+                        @if(!$hasActiveBrand)
+                            <p>Không có thương hiệu nào được kích hoạt.</p>
+                        @endif
+                    @else
+                        <p>Không có thương hiệu nào để hiển thị.</p>
                     @endif
                 </ul>
             </div>

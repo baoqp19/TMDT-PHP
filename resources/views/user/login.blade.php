@@ -15,7 +15,7 @@
         <!----------------------- Login Container -------------------------->
         <div class="row border rounded-5 p-3 bg-white shadow box-area">
             <!--------------------------- Left Box ----------------------------->
-            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #4f90ff;">
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #F78B6C;">
                 <div class="featured-image mb-3">
                     {{-- <img src="{{asset('users/img/1.png')}}" class="img-fluid" style="width: 250px;"> --}}
                 </div>

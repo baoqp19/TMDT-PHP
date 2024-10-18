@@ -1,40 +1,8 @@
-﻿@font-face {
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Lato Regular"), local("Lato-Regular"),
-    url(s/lato/v17/S6uyw4BMUTPHjx4wWw.ttf) format("truetype");
-}
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,100&display=swap');
 
-@font-face {
-  font-family: "Anton";
-  font-style: normal;
-  font-weight: 400;
-  src: url(../fonts/anton.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 700;
-  src: local("Lato Bold"), local("Lato-Bold"),
-    url(s/lato/v17/S6u9w4BMUTPHh6UVSwiPHA.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 900;
-  src: local("Lato Black"), local("Lato-Black"),
-    url(s/lato/v17/S6u9w4BMUTPHh50XSwiPHA.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Open Sans Regular"), local("OpenSans-Regular"),
-    url(s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0e.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Baloo";
-  src: url(./../fonts/BalooTamma2-Medium.ttf) format("truetype");
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }

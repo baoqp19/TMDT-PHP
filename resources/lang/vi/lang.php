@@ -33,7 +33,7 @@ return [
     'signup_success' => "Đăng ký tài khoản thành công",
     'not_found' => "Không tìm thấy",
     'not_found_again' => "Chúng tôi không tìm thấy trang bạn yêu cầu, vui lòng thử lại",
-    'feather' => "Nổi bật",
+    'feather' => "Sản phẩm nổi bật",
     'view_detail_more' => "Xem chi tiết thông tin về sản phẩm",
     'view_detail' => "Xem chi tiết",
     'add_compare' => "So sánh",

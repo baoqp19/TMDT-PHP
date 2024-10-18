@@ -48,22 +48,22 @@ Route::group([
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-    // Route::resource('contact', ContactController::class);
-    // Route::resource('news', NewsController::class);
-    // Route::resource('music', MusicController::class);
-    // Route::resource('covid', CovidController::class);
-    // Route::resource('weather', WeatherController::class);
+    Route::resource('contact', ContactController::class);
+    Route::resource('news', NewsController::class);
+    Route::resource('music', MusicController::class);
+    Route::resource('covid', CovidController::class);
+    Route::resource('weather', WeatherController::class);
 
     Route::any('search', [SearchController::class, 'search'])->name('search');
     // Route::post('search-live', [SearchController::class, 'search_live'])->name('search.live');
 
     Route::get('product/{id}', [ProductController::class, 'detail'])->name('product.detail');
-    // Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
     Route::group([
         'prefix' => 'user',
         'as'     => 'user.',
-    ],function () {
+    ], function () {
         Route::get('login', [UserAuthController::class, 'login'])->name('login');
         Route::post('handleSignin', [UserAuthController::class, 'handleSignin'])->name('handleSignin');
     });
@@ -71,11 +71,12 @@ Route::group([
     Route::group([
         'prefix' => 'user',
         'as'     => 'user.',
-    ],function () {
+    ], function () {
         Route::get('register', [UserAuthController::class, 'register'])->name('register');
         Route::post('handleSignup', [UserAuthController::class, 'handleSignup'])->name('handleSignup');
-    });
 
+        Route::get('/', [UserController::class, 'index'])->name('index');
+    });
     Route::prefix('signin')->group(function () {
         //     Route::get('google', [SocialLoginController::class, 'redirect_to_google'])->name('social.google');
         //     Route::get('zalo', [SocialLoginController::class, 'redirect_to_zalo'])->name('social.zalo');
@@ -92,7 +93,7 @@ Route::group([
 
     // Route::group(['middleware' => ['auth_user']], function () {
     //     Route::prefix('user')->group(function () {
-    //         Route::get('/', [UserController::class, 'index'])->name('user.index');
+    //         
     //         Route::post('update', [UserController::class, 'update'])->name('user.update');
     //     });
 
@@ -104,26 +105,26 @@ Route::group([
     //         Route::post('delete', [CommentController::class, 'delete'])->name('comment.delete');
     //     });
 
-    //     Route::prefix('cart')->group(function () {
-    //         Route::post('delete', [CartController::class, 'delete'])->name('cart.delete');
-    //         Route::post('update', [CartController::class, 'update'])->name('cart.update');
-    //         Route::post('store', [CartController::class, 'store'])->name('cart.store');
-    //     });
+    Route::prefix('cart')->group(function () {
+        Route::post('delete', [CartController::class, 'delete'])->name('cart.delete');
+        Route::post('update', [CartController::class, 'update'])->name('cart.update');
+        Route::post('store', [CartController::class, 'store'])->name('cart.store');
+    });
 
-    //     Route::prefix('checkout')->group(function () {
-    //         Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index');
-    //         Route::post('calc-feeship', [CheckoutController::class, 'calc_feeship'])->name('checkout.calc_feeship');
-    //     });
+    Route::prefix('checkout')->group(function () {
+        Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index');
+        Route::post('calc-feeship', [CheckoutController::class, 'calc_feeship'])->name('checkout.calc_feeship');
+    });
 
-    //     Route::prefix('order')->group(function () {
-    //         Route::get('/', [OrderController::class, 'index'])->name('order.index');
-    //         Route::get('detail/{id}', [OrderController::class, 'show'])->name('order.show');
-    //         Route::get('delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
+    Route::prefix('order')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('order.index');
+        //         Route::get('detail/{id}', [OrderController::class, 'show'])->name('order.show');
+        //         Route::get('delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
 
-    //         Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
-    //         Route::post('order-confirm', [OrderController::class, 'confirm_order'])->name('order.confirm');
-    //         Route::get('print-order/{id}', [OrderController::class, 'print_order'])->name('order.print');
-    //     });
+        //         Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
+        //         Route::post('order-confirm', [OrderController::class, 'confirm_order'])->name('order.confirm');
+        //         Route::get('print-order/{id}', [OrderController::class, 'print_order'])->name('order.print');
+    });
 
     //     Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
     //     Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);

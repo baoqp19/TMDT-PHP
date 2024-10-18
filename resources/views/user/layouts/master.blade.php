@@ -1,3 +1,3 @@
 @include('user.inc.header')
-@yield('conten-page')
+@yield('ContentPage')
 @include('user.inc.footer')

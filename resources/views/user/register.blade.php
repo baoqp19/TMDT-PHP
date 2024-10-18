@@ -50,15 +50,8 @@
                             <label for="password" class="form-label">Nhập lại mật khẩu</label>
                             <input type="password" name="password_confirmation" class="form-control form-control-sm" placeholder="Nhập lại mật khẩu" />
                         </div>
-                        <div class="mb-3 d-flex justify-content-between align-items-center">
-                            <div class="form-check">
-                                <input type="checkbox" name="remember" class="form-check-input" id="remember">
-                                <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
-                            </div>
-                            <a href="{{route('user.forgot_password')}}" class="text-decoration-none">Quên mật khẩu?</a>
-                        </div>
                         <div class="d-grid gap-2">
-                            <button type="submit" class="button-login btn btn-lg btn-primary text-light w-100 fs-6">Đăng nhập</button>
+                            <button type="submit" class="button-login btn btn-lg btn-primary text-light w-100 fs-6">Đăng ký</button>
                             <button type="button" class="btn btn-lg btn-light w-100 fs-6">
                                 <img src="{{asset('users/img/google.png')}}" alt="Google" style="width:20px" class="me-2">
                                 Đăng nhập bằng Google
@@ -66,11 +59,11 @@
                         </div>
                     </form>
                     <div class="text-center mt-3">
-                        <small>Chưa có tài khoản? <a href="{{route('user.register')}}" class="text-decoration-none">Đăng ký</a></small>
+                        <small>Tôi đã có tài khoản? <a href="{{route('user.login')}}" class="text-decoration-none">Đăng nhập</a></small>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #4f90ff;">
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #F78B6C;">
                 <div class="featured-image mb-3">
                     {{-- <img src="{{asset('users/img/1.png')}}" class="img-fluid" style="width: 250px;"> --}}
                 </div>

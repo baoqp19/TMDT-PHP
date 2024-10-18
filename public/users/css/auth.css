@@ -21,7 +21,8 @@
 }
 
 .button-login{
-    background:  #695CFE !important;
+    border: 1px solid #F78B6C;
+    background:  #F78B6C !important;
 }
 
 

@@ -17,11 +17,10 @@
     <meta property="og:description" content="@yield('desc_og')" />
     <meta property="og:url" content="@yield('canonical')" />
     <meta property="og:type" content="website" />
-
+     
     <link rel="shortcut icon" href="{{asset('users/img/favicon.ico')}}">
     <!-- Fontawesome css -->
-    <link rel="stylesheet" href="{{asset('users/css/all.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('users/css/fontawesome.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('users/font/css/all.min.css')}}">
     <!-- Ionicons css -->
     <link rel="stylesheet" href="{{asset('users/css/ionicons.min.css')}}" rel="stylesheet">
     <!-- linearicons css -->
@@ -50,12 +49,27 @@
     <link rel="stylesheet" href="{{asset('users/css/toastr.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('users/css/sweetalert.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('users/css/custom-style.css')}}" rel="stylesheet">
-    <script src="{{asset('users/js/jquery-3.2.1.min.js')}}"></script>
-    <script src="{{asset('users/js/axios.js')}}"></script>
-    <script src="{{asset('users/js/moment.js')}}"></script>
-    <script src="{{asset('users/js/bootstrap.bundle.min.js')}}" ></script>
 
-    
+
+    @stack('styles')
+    <style>
+        .header-full{
+            
+        }
+
+        .header-bottom-list .active:hover{
+            color: #F78B6C !important;
+        }
+
+        .header-bottom-list .active {
+            color: #F78B6C; /* Màu khi có class active */
+        }
+
+        .header-bottom-list li:hover {
+            color: inherit; /* Giữ nguyên màu khi hover nếu không có class active */
+        }
+
+    </style>
 </head>
 
 <body>
@@ -64,13 +78,13 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="vxvABfyp"></script>
 
     <div class="wrapper">
-        <header>
+        <header class="header-full" >
             <div class="header-middle ptb-15">
                 <div class="container">
                     <div class="row align-items-center no-gutters">
                         <div class="col-lg-3 col-md-12">
                             <div class="logo mb-all-30 ">
-                                <a href="{{route('home.index')}}"><img src="{{asset('users/img/logo.png')}}" alt="logo-image" style="width: 120px;"></a>
+                                <a href="{{route('home.index')}}"><img src="{{asset('users/img/onlineShop.png')}}" alt="logo-image" style="width: 120px;"></a>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-8 ml-auto mr-auto col-10">
@@ -90,13 +104,13 @@
                             <div class="cart-box mt-all-30">
                                 <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
                                     <li>
-                                        <a href="{{route('cart.index')}}"><i class="fas fa-shopping-cart" style="color: #414DD1;"></i><span class="my-cart"><span class="total-pro">
+                                        <a href="{{route('cart.index')}}"><i class="fas fa-shopping-basket" style="color: #F78B6C" ></i><span class="my-cart"><span class="total-pro">
                                                     @if(Auth::check())
                                                     {{count(Auth::user()->carts)}}
                                                     @else
                                                     0
                                                     @endif
-                                                </span><span style="font-family: Baloo, sans-serif;">@lang('lang.cart')</span></span>
+                                                </span><span style="font-family: Baloo, sans-serif; color: #F78B6C;">@lang('lang.cart')</span></span>
                                         </a>
                                         @auth
                                         @php $carts = Auth::user()->carts; @endphp
@@ -138,7 +152,7 @@
                                             <img class="avatar-user align-middle" src="{{asset('admins/uploads/avatars/'.Auth::user()->image)}}" alt="">
                                             <span class="fullname-user align-middle">{{Auth::user()->name}} <i class="fas fa-angle-down"></i></span>
                                             <ul class="ht-dropdown dropdown-style-two" style="width: 200px;">
-                                                <li class="list-group-item list-group-item-action" style="border: none;"><a href="{{route('user.signout')}}" style="color: #212529;">@lang('lang.signout')</a></li>
+                                                <li class="list-group-item list-group-item-action" style="border: none;"><a href="{{route('user.register')}}" style="color: #212529;">@lang('lang.signout')</a></li>
                                                 <li class="list-group-item list-group-item-action" style="border: none;"><a href="{{route('user.index')}}" style="color: #212529;">@lang('lang.user_info')</a></li>
                                             </ul>
                                         </div>
@@ -146,9 +160,9 @@
                                         <a href="#" class="align-middle">
                                             <i class="lnr lnr-user"></i>
                                             <div class="my-cart align-middle">
-                                                <a href="{{route('user.signup_get')}}" style="cursor:pointer; color: black;  font-family:  Baloo, sans-serif;">@lang('lang.signin')</a>
+                                                <a href="{{route('user.register')}}" style="cursor:pointer; color: black;  font-family:  Baloo, sans-serif;">@lang('lang.signin')</a>
                                                 <p>
-                                                    <a href="{{route('user.signin_get')}}" style="cursor:pointer; color: black;  font-family:  Baloo, sans-serif;">@lang('lang.signup')</a>
+                                                    <a href="{{route('user.login')}}" style="cursor:pointer; color: black;  font-family:  Baloo, sans-serif;">@lang('lang.signup')</a>
                                                 </p>
                                             </div>
                                         </a>
@@ -220,4 +234,16 @@
                     </div>
                 </div>
             </div>
+
+
         </header>
+    </div>
+    @stack('scripts')
+
+    <script src="{{asset('users/js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{asset('users/js/axios.js')}}"></script>
+    <script src="{{asset('users/js/moment.js')}}"></script>
+    <script src="{{asset('users/js/bootstrap.bundle.min.js')}}" ></script>
+</body>
+
+</html>

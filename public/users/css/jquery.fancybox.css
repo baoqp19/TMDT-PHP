@@ -331,7 +331,7 @@
 
 .fancybox-caption a {
   color: #fff;
-  text-decoration: underline; }
+  text-decoration: none; }
 
 /* Buttons */
 .fancybox-button {

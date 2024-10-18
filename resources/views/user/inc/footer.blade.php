@@ -5,7 +5,7 @@
     <div class="content-center">
         <div class="info-left">
             <h6 class="title-info">@lang('lang.about')</h6>
-            <p class="footer-info-item"><i class="fas fa-map-marked-alt"></i> @lang('lang.address'): Không có địa chỉ</p>
+            <p class="footer-info-item"><i class="fas fa-map-marked-alt" style="color: red;" ></i> @lang('lang.address'): Không có địa chỉ</p>
             <p class="footer-info-item"><i class="fas fa-mobile-alt"></i> @lang('lang.phone'): 123.456.7898</p>
 
         </div>
