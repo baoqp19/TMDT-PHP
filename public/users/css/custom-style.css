@@ -233,7 +233,7 @@ i.lnr.lnr-arrow-left {
 }
 
 .title-brand:hover{
-     color: #F78C6B !important;
+     color: #B5292F !important;
 }
 
 
@@ -518,9 +518,6 @@ i.lnr.lnr-arrow-left {
     cursor: pointer;
 }
 
-#btn-chat:hover {
-    /* background-image: linear-gradient(to right, #ffcd2b, #fb07ee); */
-}
 
 #btn-chat > i {
     font-size: 22px;
@@ -530,11 +527,12 @@ i.lnr.lnr-arrow-left {
 }
 
 .custom-btn-submit {
+    min-width: 200px;
     color: #f0e7e7 !important;
-    text-transform: uppercase;
-    font-weight: bold;
+    font-size: 15px;
+    background: #B5292F !important;
     border-radius: 30px !important;
-    background-image: linear-gradient(to right, #37ccff, #7b22ff);
+
     box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
         rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
     border: none;
@@ -617,10 +615,11 @@ table .thead-light th {
 .title-name {
     display: flex;
     justify-content: center;
+    text-transform: uppercase;
     align-items: center;
-    color: #F78C6B;
+    color: #B5292F;
     font-family: "Poppins", sans-serif;
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 400;
     margin-bottom: 30px;
 }
@@ -737,7 +736,7 @@ table .thead-light th {
     text-align: center;
     font-family: "Baloo", sans-serif;
     text-transform: uppercase;
-    color: #F78C6B;
+    color: #B5292F;
     font-weight: bold;
 }
 
@@ -759,7 +758,7 @@ table .thead-light th {
     text-transform: uppercase;
     margin: 0 auto;
     font-size: 40px;
-    color: #F78C6B;
+    color: #B5292F;
 }
 
 .box-temp {
@@ -776,7 +775,7 @@ table .thead-light th {
 }
 
 .text-temp {
-    color: #F78C6B;
+    color: #B5292F;
     font-weight: bold;
 }
 
@@ -802,7 +801,7 @@ table .thead-light th {
 
 .weather-info-text {
     text-align: center;
-    color: #F78C6B;
+    color: #B5292F;
     font-weight: bold;
 }
 
@@ -816,7 +815,7 @@ table .thead-light th {
 }
 .weather-city {
     text-align: center;
-    color: #F78C6B;
+    color: #B5292F;
     font-weight: bold;
 }
 
@@ -860,17 +859,12 @@ table .thead-light th {
     overflow: hidden;
 }
 
-.post-title {
+.container .post-title {
     color: black;
-    font-size: 18px;
-    padding-bottom: 2px;
-    font-weight: 500;
-    flex-shrink: 0;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding-bottom: 12px;
     overflow: hidden;
-    display: -webkit-box;
 }
 .post-content {
     flex-grow: 1;
@@ -946,13 +940,6 @@ table .thead-light th {
     left: 16px !important;
 }
 
-.pro-info a {
-    color: #116ed1;
-}
-
-.pro-info span.price {
-    color: #d2a828;
-}
 
 .border-custom {
     border-radius: 16px;
@@ -976,5 +963,5 @@ table .thead-light th {
 }
 
 .nav-link:hover{
-    color: #F78C6B;
+    color: #B5292F;
 }

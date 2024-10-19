@@ -77,6 +77,7 @@ Route::group([
 
         Route::get('/', [UserController::class, 'index'])->name('index');
     });
+
     Route::prefix('signin')->group(function () {
         //     Route::get('google', [SocialLoginController::class, 'redirect_to_google'])->name('social.google');
         //     Route::get('zalo', [SocialLoginController::class, 'redirect_to_zalo'])->name('social.zalo');
@@ -105,10 +106,13 @@ Route::group([
     //         Route::post('delete', [CommentController::class, 'delete'])->name('comment.delete');
     //     });
 
-    Route::prefix('cart')->group(function () {
-        Route::post('delete', [CartController::class, 'delete'])->name('cart.delete');
-        Route::post('update', [CartController::class, 'update'])->name('cart.update');
-        Route::post('store', [CartController::class, 'store'])->name('cart.store');
+    Route::group([
+        'prefix' => 'cart',
+        'as'     => 'cart.',
+    ], function () {
+        Route::post('delete', [CartController::class, 'delete'])->name('delete');
+        Route::post('update', [CartController::class, 'update'])->name('update');
+        Route::post('store', [CartController::class, 'store'])->name('store');
     });
 
     Route::prefix('checkout')->group(function () {

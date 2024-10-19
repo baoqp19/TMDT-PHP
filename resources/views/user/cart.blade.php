@@ -3,8 +3,9 @@
 
 @push('styles')
     <style>
-        .custom-btn:hover{
-            background: #294D81;
+        .custom-btn{
+            background: #294D81 !important;
+            color: white !important; 
         }
 
         .card1{
@@ -19,13 +20,13 @@
             color: #B5292F;
         }
 
-        .s3:hover{
-            background: #EF476F;
+        .s3{
+            background: #B5292F !important;
         }
 
         .s3{
-            color: #333;
-            background: #fff;
+            border: none !important;
+            color: white !important; 
         }
 
         .input-quanlity{
@@ -37,7 +38,7 @@
         }
 
         .titleProduct:hover{
-            color: #EF476F !important;
+            color: #B5292F !important;
         }
 
         .input-quanlity {
@@ -50,7 +51,6 @@
         }
 
         .table-hover tbody tr:hover {
-            background-color: #F78C6B !important; /* Màu nền khi hover */
             color: white !important; /* Màu chữ khi hover */
         }
 
@@ -66,6 +66,8 @@
 
 @section('ContentPage')
 <div class="container mt-5">
+
+    {{-- TRANG CHỦ / CART --}}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home.index')}}">@lang('lang.home')</a></li>
@@ -77,6 +79,8 @@
     <div class="row">
         <div class="col-12">
             @if(count($carts))
+
+            {{-- THÔNG TIN SẢN PHẨM TABLE  --}}
             <div class="card shadow-md mb-4">
                 <div class="card-body">
                     <h2 class="card-title mb-4">@lang('lang.cart')</h2>
@@ -122,10 +126,13 @@
             </div>
 
             <div class="row">
+
+                {{-- THÊM SẢN PHẨM --}}
                 <div class="col-md-6 d-flex align-items-center">
-                   
-                    <a href="{{route('home.index')}}" class="btn btn-outline-primary custom-btn"><i class="fa-solid fa-house"></i>&nbsp Trang Chủ</a>
+                    <a href="{{route('home.index')}}" class="btn btn-outline-primary custom-btn"><i class="fa-solid fa-house"></i>&nbsp Thêm sản phẩm</a>
                 </div>
+
+                {{-- THANH TOÁN --}}
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                     <div class="card-body d-flex justify-content-end align-items-center">
                         <h5 class="card1 titlePrice card-title">@lang('lang.total_money'):</h5>
@@ -135,16 +142,22 @@
                         <a href="{{route('checkout.index')}}" class=" card1 s3 btn btn-primary btn-block"> <i class="fa-solid fa-bag-shopping"></i>&nbsp @lang('lang.checkout')</a>
                     </div>
                 </div>
+
+
             </div>
+            {{-- KHÔNG CÓ SẢN PHẨM --}}
             @else
             <div class="alert alert-info text-center" role="alert">
                 @lang('lang.no_product_to_show')
             </div>
             @endif
+
         </div>
     </div>
     @endauth
 
+
+    {{-- HIỂN THỊ LOGIN AND REGISTOR KHI CHƯA ĐĂNG NHẬP --}}
     @guest
     <div class="row justify-content-center">
         <div class="col-md-6">

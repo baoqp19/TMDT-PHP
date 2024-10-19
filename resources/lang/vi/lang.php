@@ -52,7 +52,7 @@ return [
     'edit_review' => "Chỉnh sửa đánh giá",
     'reviewed' => "Bạn đã đánh giá sản phẩm này rồi",
     "product" => "Sản phẩm",
-    'send' => "Gửi",
+    'send' => "Đánh giá",
     'image' => "Hình ảnh",
     'product_name' => 'Tên sản phẩm',
     'quantity' => "Số lượng",

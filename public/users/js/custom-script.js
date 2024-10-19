@@ -32,12 +32,6 @@ $(document).ready(function () {
         $(".box-edit").toggle();
     });
 
-    $(".review-list > .review-list-li > i.fa").on("click", function () {
-        ratedIndex = parseInt($(this).data("index"));
-        resetStar();
-        setStar(ratedIndex);
-    });
-
     $(".review-submit").on("click", function (e) {
         e.preventDefault();
         sendReviewAjax("store");
@@ -86,22 +80,28 @@ $(document).ready(function () {
             },
         });
     }
+    // Khi người dùng click vào sao
+    $(".review-list > .review-list-li > i.fa-light").on("click", function () {
+        // Lấy chỉ số của sao được nhấp
+        ratedIndex = parseInt($(this).data("index"));
+        resetStar(); // Reset lại tất cả các sao
+        setStar(ratedIndex); // Set các sao từ 1 đến ratedIndex thành đã đánh giá
+    });
 
+    // Hàm set sao theo chỉ số
     function setStar(star) {
         for (var i = 0; i < star; i++) {
-            $(
-                ".review-list > .review-list-li > i.fa:eq(" + i + ")"
-            ).removeClass("fa-star-o");
-            $(".review-list > .review-list-li > i.fa:eq(" + i + ")").addClass(
-                "fa-star"
-            );
+            $(".review-list > .review-list-li > i.fa-light:eq(" + i + ")")
+                .removeClass("fa-star-o") // Loại bỏ class sao rỗng
+                .addClass("fa-star"); // Thêm class sao đầy
         }
     }
 
+    // Hàm reset tất cả sao về trạng thái ban đầu
     function resetStar() {
-        $(".review-list > .review-list-li > i.fa.fa-star")
-            .removeClass("fa-star")
-            .addClass("fa-star-o");
+        $(".review-list > .review-list-li > i.fa-light")
+            .removeClass("fa-star") // Loại bỏ tất cả class sao đầy
+            .addClass("fa-star-o"); // Thêm class sao rỗng
     }
 
     function sendChat() {

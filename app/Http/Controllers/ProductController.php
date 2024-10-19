@@ -47,7 +47,7 @@ class ProductController extends Controller
             'product_id' => $product->id,
             'status' => 1,
         ])->latest('id')->take(15)->get();
-
+            
         $your_comment = [];
         if (Auth::check()) {
             $your_comment = Comment::where([

@@ -7,6 +7,31 @@
 @section('desc_og', $product->description)
 @section('img_og', asset('admins/uploads/products/'.$product->image))
 
+@push('styles')
+    <style>
+        .nameProduct{
+
+            text-decoration: none !important;
+            font-size: 15px !important;
+            color: #000 !important;
+            font-weight: normal !important;
+        }
+
+        .price,.nameProduct,.rating,.compare{
+            text-align: center !important;
+        }
+        .price,.rating{
+            color: #B5292F; 
+        }
+
+        .actions-secondary{
+            padding-left: 12px;
+        }
+        
+    </style>
+@endpush
+
+
 @section('ContentPage')
 <div class="breadcrumb-area mt-30">
     <div class="container">
@@ -23,6 +48,8 @@
         <div class="thumb-bg">
             <div class="row">
                 @if(count($gallerys))
+
+                {{-- Image Product khi không có ảnh  --}}
                     <div class="col-lg-5 mb-all-40">
                         <div class="tab-content">
                             @foreach($gallerys as $index => $gallery)
@@ -61,11 +88,13 @@
                         </div>
                     </div>
                 @endif
-            
+
+                {{-- Detail Product --}}
                 <div class="col-lg-7">
                     <div class="thubnail-desc fix">
                         <h3 class="product-header">{{ $product->name }}</h3>
                         
+                        {{-- Share public --}}
                         <div class="d-flex">
                             <div class="fb-share-button" 
                                  data-href="{{ url()->current() }}" 
@@ -89,11 +118,19 @@
                                  data-color="blue" 
                                  data-customize=false></div>
                             <div class="zalo-follow-only-button ml-2" 
-                                 data-oaid="2905292136695329731"></div>
+                                 data-oaid="2905292136695329731" style="margin-left: 5px;" ></div>
                         </div>
                         
-                        <div class="rating-summary fix mtb-10">
-                            <div class="rating">
+                       {{-- Price and start --}}
+                        <div class="d-flex justify-content-start align-items-center">
+                            <div class="pro-price mtb-30">
+                                <p class="d-flex align-items-center">
+                                    <span class="prev-price"></span>
+                                    <span class="price">{{  number_format($product->price, 0, ',', '.') . ' VND'}}</span>
+                                    <span class="saving-price" style="display: none;"></span>
+                                </p>
+                            </div>
+                            <div class="rating" style="maring-left: 30px;" >
                                 @for ($i = 0; $i < 5; $i++)
                                     <i class="{{ $i < floor($product->star()) ? 'fas' : 'far' }} fa-star"></i>
                                 @endfor
@@ -101,44 +138,22 @@
                                 <i class="fas fa-eye"></i>
                                 <span class="visit">{{ $product->visit }}</span>
                             </div>
-                            <div class="rating-feedback">
-                                <p>
-                                    @if(count($comments))
-                                        {{ count($comments) }} @lang('lang.product_review')
-                                    @else
-                                        @lang('lang.no_review')
-                                    @endif
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="pro-price mtb-30">
-                            <p class="d-flex align-items-center">
-                                <span class="prev-price"></span>
-                                <span class="price">@money($product->price)</span>
-                                <span class="saving-price" style="display: none;"></span>
-                            </p>
                         </div>
                         
                         <p class="mb-20 pro-desc-details">{{ $product->description }}</p>
                         
+                        {{-- Quanlity and cart and Favorire and Heart  --}}
                         <div class="box-quantity d-flex hot-product2">
                             <form action="{{ route('cart.store') }}" method="POST">
                                 @csrf
                                 <div style="display: flex;">
                                     <input type="hidden" name="product_id" value="{{ $product->id }}" />
-                                    <input class="quantity mr-15 custom-box-quantity" type="number" name="quantity" min="1" value="1" />
+                                    <input class="quantity mr-15 custom-box-quantity" style=" color: #B5292F; " type="number" name="quantity" min="1" value="1" />
                                     <button class="btn btn-primary custom-btn-submit" type="submit">@lang('lang.add_cart')</button>
                                     <div class="ml-md-2 pro-actions">
-                                        <div class="ml-2 actions-secondary">
-                                            <a href="#" title="WishList">
-                                                <i class="fas fa-heartbeat" style="color: #FF006F;"></i>
-                                                <span>@lang('lang.add_wishlist')</span>
-                                            </a>
-                                            <a href="#" title="Compare">
-                                                <i class="fas fa-sync-alt" style="color: #414DD1;"></i>
-                                                <span>@lang('lang.add_compare')</span>
-                                            </a>
+                                        <div class="actions-secondary">
+                                            <a class="compare" href="#" title="@lang('lang.add_compare')"><i class="fa-light fa-code-compare" style="color: #B5292F;"></i> <span>@lang('lang.add_compare')</span></a>
+                                            <a class="compare" href="#" title=">@lang('lang.add_wishlist')"><i class="fa-regular fa-heart" style="color: #B5292F; "></i><span>@lang('lang.add_wishlist')</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -148,15 +163,20 @@
                         <div class="pro-ref mt-20"></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
+        {{-- đánh giá sản phẩm --}}
+
 <div class="thumnail-desc pb-100 pb-sm-60">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+
+                {{-- tablist bootstrap --}}
                 <ul class="main-thumb-desc nav tabs-area" role="tablist">
                     <li><a class="active" data-toggle="tab" href="#dtail">@lang('lang.desc')</a></li>
                     <li><a data-toggle="tab" href="#comment-fb">@lang('lang.comment_fb')</a></li>
@@ -166,8 +186,9 @@
                     @endauth
 
                 </ul>
+                
                 <div class="tab-content thumb-content border-default">
-
+                    {{-- mô tả sản phẩm --}}
                     <div id="dtail" class="tab-pane fade show active">
                         @if(!$post)
                         <p>{{$product->description}}</p>
@@ -179,10 +200,12 @@
                         @endif
                     </div>
 
+                    {{-- bình luận trên FB --}}
                     <div id="comment-fb" class="tab-pane fade">
                         <div class="fb-comments" data-href="{{url()->current()}}" data-width="800" data-numposts="20"></div>
                     </div>
-
+                    
+                    {{-- Các thông tin đánh giá --}}
                     <div id="all-review" class="tab-pane fade ">
                         @if(count($comments))
                         @php $i = 1; @endphp
@@ -227,6 +250,8 @@
                         <p>@lang('lang.no_review')</p>
                         @endif
                     </div>
+
+                    {{-- Bình luật của bạn --}}
                     @auth
                     <div id="your-review" class="tab-pane fade">
                         @if(!$your_comment)
@@ -238,21 +263,23 @@
                             <p class="review-mini-title">@lang('lang.review')</p>
                             <ul class="review-list">
                                 <li class="review-list-li">
-                                    <i class="fa fa-star-o" data-index="1"></i>
-                                    <i class="fa fa-star-o" data-index="2"></i>
-                                    <i class="fa fa-star-o" data-index="3"></i>
-                                    <i class="fa fa-star-o" data-index="4"></i>
-                                    <i class="fa fa-star-o" data-index="5"></i>
+                                    <i class="fa-light fa-star" data-index="1"></i>
+                                    <i class="fa-light fa-star" data-index="2"></i>
+                                    <i class="fa-light fa-star" data-index="3"></i>
+                                    <i class="fa-light fa-star" data-index="4"></i>
+                                    <i class="fa-light fa-star" data-index="5"></i>
+                                    
                                 </li>
                             </ul>
                             <div class="riview-field mt-40">
                                 <form autocomplete="off" action="" id="form-review" method="POST">
+                                    @csrf 
                                     <div class="form-group">
                                         <label class="req" for="comments">@lang('lang.review')</label>
                                         <input type="hidden" class="productID" value="{{$product->id}}">
                                         <textarea class="form-control review-comment" rows="5" id="comment" name="review-comment" required="required"></textarea>
                                     </div>
-                                    <div class="customer-btn review-submit">@lang('lang.send')</div>
+                                    <button class="customer-btn review-submit"> @lang('lang.send')</button>
                                 </form>
                             </div>
                         </div>
@@ -274,10 +301,10 @@
                                         <div class="mr-2">
                                             <div class="list-star">
                                                 @php $star = floor($your_comment->star); @endphp
-                                                @for ($j = 0; $j < $star; $j++) <i class="fas fa-star"></i>
+                                                @for ($j = 0; $j < $star; $j++) <i class="fa-light fa-star"></i>
                                                     @endfor
 
-                                                    @for ($k = $star; $k < 5; $k++) <i class="far fa-star"></i>
+                                                    @for ($k = $star; $k < 5; $k++)  <i class="fa-light fa-star"></i>
                                                         @endfor
                                             </div>
                                         </div>
@@ -326,15 +353,19 @@
                         @endif
                     </div>
                     @endauth
+
+                    {{-- end --}}
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+{{-- Sản phẩm liên quan --}}
+
 <div class="hot-deal-products pb-90 pb-sm-50">
     <div class="container">
-        <div class="post-title pb-10">
+        <div class="post-title  pb-10">
             <h2>@lang('lang.product_related')</h2>
         </div>
         <div class="hot-deal-active owl-carousel">
@@ -348,9 +379,9 @@
                 </div>
                 <div class="pro-content">
                     <div class="pro-info">
-                        <h4><a href="{{$product_brand->id}}">{{$product_brand->name}}</a></h4>
-                        <p>
-                            <span class="price">@money($product_brand->price)</span>
+                        <h4><a class="nameProduct" href="{{$product_brand->id}}">{{$product_brand->name}}</a></h4>
+                        <p class="price">
+                            <span>{{ number_format($product_brand->price, 0, ',', '.') . ' VND' }}</span>
                         </p>
                         <div class="rating">
                             @for ($m = 0; $m < floor($product_brand->star()); $m++) <i class="fas fa-star"></i>
@@ -365,8 +396,8 @@
                             <a href="{{route('product.detail', $product_brand->slug)}}" title="@lang('lang.view_detail_more')">@lang('lang.view_detail')</a>
                         </div>
                         <div class="actions-secondary">
-                            <a href="#" title="@lang('lang.add_compare')"><i class="lnr lnr-sync"></i> <span>@lang('lang.add_compare')</span></a>
-                            <a href="#" title=">@lang('lang.add_wishlist')"><i class="lnr lnr-heart"></i> <span>@lang('lang.add_wishlist')</span></a>
+                            <a class="compare" href="#" title="@lang('lang.add_compare')"><i class="fa-light fa-code-compare" style="color: #B5292F;"></i> <span>@lang('lang.add_compare')</span></a>
+                            <a class="compare" href="#" title=">@lang('lang.add_wishlist')"><i class="fa-regular fa-heart" style="color: #B5292F; "></i><span>@lang('lang.add_wishlist')</span></a>
                         </div>
                     </div>
                 </div>
