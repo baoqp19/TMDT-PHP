@@ -21,19 +21,29 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with(['user'])->where(['user_id' => Auth::user()->id, ['status', '<>', 3]])->latest('id')->get();
-        return view('user.order.order')->with(compact(['orders']));
+        $orders = Order::with(['user'])
+            ->where(['user_id' => Auth::user()->id])
+            ->where('status', '<>', 3)
+            ->latest('id')
+            ->get();
+
+        return view('user.order.order')->with(compact('orders'));
     }
 
     public  function manage()
     {
-        $orders = Order::with(['user'])->latest('id')->get();
+        $orders = Order::with(['user'])
+            ->latest('id')
+            ->get();
+
         return view('admin.order.manage')->with(compact(['orders']));
     }
 
     public function show($id)
     {
-        $order = Order::with(['user', 'shipping', 'orderDetails', 'feeship', 'coupon'])->findOrFail($id);
+        $order = Order::with(['user', 'shipping', 'orderDetails', 'feeship', 'coupon'])
+            ->findOrFail($id);
+
         return view('user.order.detail')->with(compact(['order']));
     }
 
@@ -114,99 +124,100 @@ class OrderController extends Controller
         session()->forget(['data_order', 'coupon', 'feeship_id', 'address', 'feeship', 'total_money']);
     }
 
-    public function confirm_order(OrderRequest $req)
-    {
-        if (!session('feeship')) {
-            return back()->with('error_shipping', 'Vui lòng chọn địa chỉ nhận hàng.');
-        }
+    // public function confirm_order(OrderRequest $req)
+    // {
+    // return redirect()->route('home.index')
+    // if (!session('feeship')) {
+    //     return back()->with('error_shipping', 'Vui lòng chọn địa chỉ nhận hàng.');
+    // }
 
-        $data_order = [
-            'order_code' => strtoupper(substr(md5(microtime()), rand(0, 26), 8)),
-            'name' => $req->name,
-            'email' => $req->email,
-            'phone' => $req->phone,
-            'note' => $req->note,
-            'method' => $req->payment,
-            'coupon_code' =>  session('coupon.code', 'NO'),
-            'feeship_id' => session('feeship_id'),
-            'address' => session('address'),
-        ];
+    // $data_order = [
+    //     'order_code' => strtoupper(substr(md5(microtime()), rand(0, 26), 8)),
+    //     'name' => $req->name,
+    //     'email' => $req->email,
+    //     'phone' => $req->phone,
+    //     'note' => $req->note,
+    //     'method' => $req->payment,
+    //     'coupon_code' =>  session('coupon.code', 'NO'),
+    //     'feeship_id' => session('feeship_id'),
+    //     'address' => session('address'),
+    // ];
 
-        //cash payment
-        if ($req->payment == 0) {
-            $this->handle_order_shipping_coupon($data_order);
-            Cart::where('user_id', Auth::user()->id)->delete();
-            return redirect()->route('order.index');
-        }
+    // //cash payment
+    // if ($req->payment == 0) {
+    //     $this->handle_order_shipping_coupon($data_order);
+    //     Cart::where('user_id', Auth::user()->id)->delete();
+    //     return redirect()->route('order.index');
+    // }
 
-        $total_money =  session('total_money');
-        session(['data_order' =>  $data_order]);
+    // $total_money =  session('total_money');
+    // session(['data_order' =>  $data_order]);
 
-        //vnpay payment
-        if ($req->payment == 1) {
-            $vnp_OrderInfo = 'Thanh toán mua hàng tại hệ thống MW Store -' . Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
-            $vnp_BankCode = $req->bank_code;
+    // //vnpay payment
+    // if ($req->payment == 1) {
+    //     $vnp_OrderInfo = 'Thanh toán mua hàng tại hệ thống MW Store -' . Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
+    //     $vnp_BankCode = $req->bank_code;
 
-            $inputData = [
-                "vnp_Version" => "2.0.0",
-                "vnp_TmnCode" => env('VPN_TMN_CODE'),
-                "vnp_Amount" => $total_money * 100,
-                "vnp_Command" => "pay",
-                "vnp_CreateDate" => date('YmdHis'),
-                "vnp_CurrCode" => "VND",
-                "vnp_IpAddr" =>  $_SERVER['REMOTE_ADDR'],
-                "vnp_Locale" => 'vn',
-                "vnp_OrderInfo" => $vnp_OrderInfo,
-                "vnp_ReturnUrl" => env('RETURN_URL_PAYMENT'),
-                "vnp_TxnRef" => $data_order['order_code'],
-            ];
+    //     $inputData = [
+    //         "vnp_Version" => "2.0.0",
+    //         "vnp_TmnCode" => env('VPN_TMN_CODE'),
+    //         "vnp_Amount" => $total_money * 100,
+    //         "vnp_Command" => "pay",
+    //         "vnp_CreateDate" => date('YmdHis'),
+    //         "vnp_CurrCode" => "VND",
+    //         "vnp_IpAddr" =>  $_SERVER['REMOTE_ADDR'],
+    //         "vnp_Locale" => 'vn',
+    //         "vnp_OrderInfo" => $vnp_OrderInfo,
+    //         "vnp_ReturnUrl" => env('RETURN_URL_PAYMENT'),
+    //         "vnp_TxnRef" => $data_order['order_code'],
+    //     ];
 
-            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-                $inputData['vnp_BankCode'] = $vnp_BankCode;
-            }
+    //     if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+    //         $inputData['vnp_BankCode'] = $vnp_BankCode;
+    //     }
 
-            ksort($inputData);
-            $query = "";
-            $i = 0;
-            $hashdata = "";
-            foreach ($inputData as $key => $value) {
-                if ($i == 1) {
-                    $hashdata .= '&' . $key . "=" . $value;
-                } else {
-                    $hashdata .= $key . "=" . $value;
-                    $i = 1;
-                }
-                $query .= urlencode($key) . "=" . urlencode($value) . '&';
-            }
+    //     ksort($inputData);
+    //     $query = "";
+    //     $i = 0;
+    //     $hashdata = "";
+    //     foreach ($inputData as $key => $value) {
+    //         if ($i == 1) {
+    //             $hashdata .= '&' . $key . "=" . $value;
+    //         } else {
+    //             $hashdata .= $key . "=" . $value;
+    //             $i = 1;
+    //         }
+    //         $query .= urlencode($key) . "=" . urlencode($value) . '&';
+    //     }
 
-            $vnp_Url = env('VPN_URL') . "?" . $query;
-            if (env('VPN_HASH_SERECT')) {
-                $vnpSecureHash = hash('sha256', env('VPN_HASH_SERECT') . $hashdata);
-                $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
-            }
-            return redirect($vnp_Url);
-        }
+    //     $vnp_Url = env('VPN_URL') . "?" . $query;
+    //     if (env('VPN_HASH_SERECT')) {
+    //         $vnpSecureHash = hash('sha256', env('VPN_HASH_SERECT') . $hashdata);
+    //         $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+    //     }
+    //     return redirect($vnp_Url);
+    // }
 
-        //momo payment
-        // if ($req->payment == 2) {
-        //     $moMoConfig = config('payment.gateways.MoMoAIO');
-        //     $response = \MoMoAIO::purchase([
-        //         'amount' => $total_money,
-        //         'returnUrl' => env('RETURN_URL_PAYMENT'),
-        //         'notifyUrl' => 'http://localhost:8000/order/ipn/',
-        //         'orderId' => $data_order['order_code'],
-        //         'requestId' => $data_order['order_code'],
-        //         'orderInfo' => 'Thanh toán mua hàng tại hệ thống MW Store -' . Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s'),
-        //     ])->send();
+    //  momo payment
+    // if ($req->payment == 2) {
+    //     $moMoConfig = config('payment.gateways.MoMoAIO');
+    //     $response = \MoMoAIO::purchase([
+    //         'amount' => $total_money,
+    //         'returnUrl' => env('RETURN_URL_PAYMENT'),
+    //         'notifyUrl' => 'http://localhost:8000/order/ipn/',
+    //         'orderId' => $data_order['order_code'],
+    //         'requestId' => $data_order['order_code'],
+    //         'orderInfo' => 'Thanh toán mua hàng tại hệ thống MW Store -' . Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s'),
+    //     ])->send();
 
-        //     if ($response->isRedirect()) {
-        //         $redirectUrl = $response->getRedirectUrl();
+    //     if ($response->isRedirect()) {
+    //         $redirectUrl = $response->getRedirectUrl();
 
-        //         return redirect($redirectUrl);
-        //         // TODO: chuyển khách sang trang MoMo để thanh toán
-        //     }
-        // }
-    }
+    //         return redirect($redirectUrl);
+    //         // TODO: chuyển khách sang trang MoMo để thanh toán
+    //     }
+    // }
+    // }
 
     public function payment_callback(Request $req)
     {

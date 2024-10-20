@@ -127,7 +127,9 @@
 
                 {{-- THÊM SẢN PHẨM --}}
                 <div class="col-md-6 d-flex align-items-center">
-                    <a href="{{route('home.index')}}" class="btn btn-outline-primary custom-btn"><i class="fa-solid fa-house"></i>&nbsp Thêm sản phẩm</a>
+                    <a id="add-product-cart" href="index.php" class="btn btn-outline-primary custom-btn">
+                        <i class="fa-solid fa-house"></i>&nbsp Thêm sản phẩm
+                    </a>
                 </div>
 
                 {{-- THANH TOÁN --}}
@@ -170,4 +172,6 @@
     </div>
     @endguest
 </div>
+
+
 @endsection

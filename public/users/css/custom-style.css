@@ -184,7 +184,6 @@ i.lnr.lnr-arrow-left {
 
 .box-both {
     width: 100%;
-    /* border: 1px solid #666; */
     background-color: #f8f8f8;
     padding: 4px;
     border-radius: 10px;
@@ -593,7 +592,7 @@ table .thead-light th {
 
 .order-btn {
     border-radius: 30px;
-    padding: 12px 70px;
+    padding: 10px 65px;
 }
 
 .product-text-view {
@@ -657,9 +656,9 @@ table .thead-light th {
 
 .sign-fail {
     display: none;
-    color: red;
+color: red;
 }
-
+    
 .input-fail {
     visibility: hidden;
     color: red;
@@ -942,8 +941,20 @@ table .thead-light th {
 
 
 .border-custom {
+    border: none;
+    background: #B5292F !important;
+    outline: none !important;
     border-radius: 16px;
 }
+
+.border-custom-1 {
+    min-width: 250px;
+     border: none;
+    background: #B5292F !important;
+    outline: none !important;
+    border-radius: 16px;
+}
+
 .box-coupon {
     display: flex;
     justify-content: center;

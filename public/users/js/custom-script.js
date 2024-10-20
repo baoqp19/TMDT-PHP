@@ -524,9 +524,10 @@ $(document).ready(function () {
     //     }
     // });
 
-    //UPDATE CART
+    // UPDATE CART
     $(".product-quantity-update").on("input", function () {
         const quantity = $(this).val();
+
         const product_id = parseInt($(this).data("id"));
 
         if (quantity < 1) return;
@@ -543,7 +544,10 @@ $(document).ready(function () {
                 );
 
                 // Cập nhật số tiền của sản phẩm (nếu cần)
-                $('#cart-item-' + product_id + ' .item-total').text(new Intl.NumberFormat('vi-VN').format(res.itemTotal) + ' VND');
+                $("#cart-item-" + product_id + " .item-total").text(
+                    new Intl.NumberFormat("vi-VN").format(res.itemTotal) +
+                        " VND"
+                );
             },
             error: function (rep) {
                 console.log("FAIL");
@@ -551,9 +555,32 @@ $(document).ready(function () {
         });
     });
 
+    // BÊN TRONG DELETE
+    function updateCartTotal() {
+        let total = 0;
+        $(".item-total").each(function () {
+            const itemText = $(this).text().trim(); // Lấy và loại bỏ khoảng trắng thừa
+
+            // Chuyển đổi giá trị sang số với dấu phẩy và dấu chấm phù hợp
+            const itemTotal = parseFloat(
+                itemText.replace(/\./g, "").replace(",", ".")
+            );
+
+            if (!isNaN(itemTotal)) {
+                total += itemTotal;
+            }
+        });
+
+        // Cập nhật tổng vào giao diện với định dạng Việt Nam
+        $("#total-price").text(
+            new Intl.NumberFormat("vi-VN").format(total) + " VND"
+        );
+    }
+
     // DELETE CART
     $(".del-cart").click(function () {
         const id = parseInt($(this).data("id"));
+        const cartItem = $(this).closest("tr"); // Lấy hàng (tr) chứa sản phẩm
 
         $.ajax({
             url: getBaseUrl() + "cart/delete",
@@ -564,12 +591,47 @@ $(document).ready(function () {
                     "Xóa sản phẩm thành công !!!",
                     "Thành công !!!"
                 );
+                cartItem.remove();
 
-                setTimeout(() => {
-                    location.reload();
-                }, 1 * 1000);
+                updateCartTotal();
             },
             error: function (rep) {},
+        });
+    });
+
+
+    // SELECT OPTIN PROVINCE AND VILLAGE
+    $(document).ready(function () {
+        // Lắng nghe sự kiện thay đổi trên dropdown province
+        $("#province").on("change", function () {
+            var provinceCode = $(this).val(); // Lấy mã tỉnh được chọn
+
+            if (provinceCode) {
+                // Gửi yêu cầu AJAX tới server
+                $.ajax({
+                    url: "/get-villages", // Đường dẫn tới route xử lý yêu cầu
+                    type: "GET",
+                    data: { province_code: provinceCode }, // dữ liệu gửi lên server
+                    success: function (data) {
+                        // Xóa danh sách làng cũ
+                        $("#village").empty();
+                        $("#village").append(
+                            '<option value="">-- Select Village --</option>'
+                        );
+
+                        // Duyệt qua dữ liệu trả về và thêm các option vào dropdown village
+                        $.each(data, function (key, village) {
+                            $("#village").append(
+                                '<option value="' +
+                                    village.village_code +
+                                    '">' +
+                                    village.name +
+                                    "</option>"
+                            );
+                        });
+                    },
+                });
+            }
         });
     });
 

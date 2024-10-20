@@ -361,7 +361,7 @@
     </div>
 </div>
 
-{{-- SẢN PHẨM LIÊN QUAN --}}
+        {{-- SẢN PHẨM LIÊN QUAN --}}
 
 <div class="hot-deal-products pb-90 pb-sm-50">
     <div class="container">

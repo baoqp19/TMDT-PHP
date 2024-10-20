@@ -23,7 +23,8 @@ use App\Http\Controllers\{
     SliderController,
     BrandController,
     CouponController,
-    ProductController
+    ProductController,
+    ProvinceController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -116,20 +117,30 @@ Route::group([
         Route::post('store', [CartController::class, 'store'])->name('store');
     });
 
-    Route::prefix('checkout')->group(function () {
-        Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index');
-        Route::post('calc-feeship', [CheckoutController::class, 'calc_feeship'])->name('checkout.calc_feeship');
+    Route::group([
+        'prefix' => 'checkout',
+        'as'     => 'checkout.',
+    ], function () {
+        Route::get('/', [CheckoutController::class, 'index'])->name('index');
+        Route::post('calc-feeship', [CheckoutController::class, 'calc_feeship'])->name('calc_feeship');
     });
 
-    Route::prefix('order')->group(function () {
-        Route::get('/', [OrderController::class, 'index'])->name('order.index');
-        //         Route::get('detail/{id}', [OrderController::class, 'show'])->name('order.show');
-        //         Route::get('delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
-
-        //         Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
-        //         Route::post('order-confirm', [OrderController::class, 'confirm_order'])->name('order.confirm');
-        //         Route::get('print-order/{id}', [OrderController::class, 'print_order'])->name('order.print');
+    Route::group([
+        'prefix' => 'order',
+        'as'     => 'order.',
+    ], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('detail/{id}', [OrderController::class, 'show'])->name('show');
+        Route::get('delete/{id}', [OrderController::class, 'delete'])->name('delete');
+        Route::post('order-confirm', [OrderController::class, 'confirm_order'])->name('confirm');
+        Route::get('print-order/{id}', [OrderController::class, 'print_order'])->name('print');
     });
+
+    Route::get('/get-villages', [ProvinceController::class, 'getVillages']);
+
+
+
+    Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
 
     //     Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
     //     Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);
