@@ -42,7 +42,7 @@ Route::get('lang/{locale}', function ($locale) {
 // Blocked User Route
 Route::get('blocked', [UserController::class, 'blocked'])->name('user.blocked');
 
-// Visitor Middleware Group  
+// Visitor Middleware Grou
 Route::group([
     'middleware' => ['block_user', 'visitor', 'user_online']
 ], function () {
@@ -58,7 +58,7 @@ Route::group([
     // Route::post('search-live', [SearchController::class, 'search_live'])->name('search.live');
 
     Route::get('product/{id}', [ProductController::class, 'detail'])->name('product.detail');
-    Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+
 
     Route::group([
         'prefix' => 'user',
@@ -110,6 +110,7 @@ Route::group([
         'prefix' => 'cart',
         'as'     => 'cart.',
     ], function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
         Route::post('delete', [CartController::class, 'delete'])->name('delete');
         Route::post('update', [CartController::class, 'update'])->name('update');
         Route::post('store', [CartController::class, 'store'])->name('store');

@@ -11,8 +11,8 @@
         </div>
         <div class="info-right">
             <h6 class="title-info">@lang('lang.about')</h6>
-            <p class="footer-info-item"><i class="fas fa-envelope"></i> Email: quocbaodtr70@gmail.com</p>
-            <p class="footer-info-item"><i class="fab fa-facebook-f"></i> Facebook: facebook.com/baodeptrai</p>
+            <p class="footer-info-item"><i class="fas fa-envelope"></i> Email: Quocbaodtr70@gmail.com</p>
+            <p class="footer-info-item"><i class="fab fa-facebook-f"></i> Facebook: Facebook.com/baodeptrai</p>
         </div>
 
     </div>
@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-<p class="title-end">MW Store website thương mại điện tử</p>
+<p class="title-end">Website Thương Mại Điện Tử</p>
 @auth
 <div id="btn-chat">
     <i class="far fa-envelope"></i>

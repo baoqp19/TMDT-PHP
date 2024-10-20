@@ -100,24 +100,22 @@
                                 @php $total = 0; @endphp
                                 @foreach($carts as $cart)
                                 @php $total += $cart->price(); @endphp
-                                <tr>
+                                <tr id="cart-item-{{ $cart->product->id }}">
                                     <td class="text-center" >
                                         <img src="{{asset('admins/uploads/products/'.$cart->product->image)}}" alt="{{$cart->getName()}}" class="img-thumbnail" style="max-height: 80px; object-fit: cover;">
                                     </td>
                                     <td class="text-center" ><a href="{{route('product.detail', $cart->product->slug)}}" class="titleProduct text-dark">{{$cart->getName()}}</a></td>
                                     <td class="text-center">{{ number_format($cart->getPrice(), 0, ',', '.') . ' VND' }}</td>
                                     <td class="input-quanlity text-center">
-                                        <input type="number" class="form-control product-quantity-update h-100 w-100 mx-auto" style="max-width: 80px;" data-id="{{$cart->product->id}}" min="1" value="{{$cart->quantity}}">
+                                        <input type="number" class="form-control product-quantity-update h-100 w-100 mx-auto" style="max-width: 80px; text-align: center" data-id="{{$cart->product->id}}" min="1" value="{{$cart->quantity}}">
                                     </td>
-                                    <td class="text-center">{{ number_format($cart->price(), 0, ',', '.') . ' VND' }}</td>
+                                    <td class="text-center item-total">{{ number_format($cart->price(), 0, ',', '.') . ' VND' }}</td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-outline-danger del-cart" data-id="{{$cart->id}}">
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </td>
-
                                 </tr>
-                               
                                 @endforeach
                             </tbody>
                         </table>
@@ -137,9 +135,10 @@
                     <div class="card-body d-flex justify-content-end align-items-center">
                         <h5 class="card1 titlePrice card-title">@lang('lang.total_money'):</h5>
                         <p class="card1 totalPrice card-text">
-                            <strong>{{ number_format($cart->totalPrice(), 0, ',', '.') . ' VND' }}</strong>
+                            <strong id="total-price" >{{ number_format($cart->totalPrice(), 0, ',', '.') . ' VND' }}</strong>
                         </p>
-                        <a href="{{route('checkout.index')}}" class=" card1 s3 btn btn-primary btn-block"> <i class="fa-solid fa-bag-shopping"></i>&nbsp @lang('lang.checkout')</a>
+                        <a href="{{route('checkout.index')}}" class=" card1 s3 btn btn-primary btn-block">
+                            <i class="fa-solid fa-bag-shopping"></i>&nbsp @lang('lang.checkout')</a>
                     </div>
                 </div>
 

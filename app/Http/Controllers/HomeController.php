@@ -14,7 +14,7 @@ class HomeController extends Controller
         $cacheTime = 600; // 10 minutes
         
 
-        // remember xem sliders coi có trong cache không, nếu có thì nó lấy trong đó
+        // remember xem sliders: khoá trong cache coi có trong cache không, nếu có thì nó lấy trong đó
         $sliders = cache()->remember('sliders', $cacheTime, function () {
             return Slider::with(['product'])
                 ->latest('id')   // Sắp xếp theo id giảm dần (tức là sliders mới nhất sẽ ở trên cùng).

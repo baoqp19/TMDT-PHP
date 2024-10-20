@@ -25,7 +25,7 @@
 
 @section('ContentPage')
 
-{{-- ======================================Slider========================================= --}}
+{{-- ======================================SLIDERS========================================= --}}
 @if(count($sliders) > 0)
     <div class="slider_box">
         <div class="slider-wrapper theme-default">
@@ -44,12 +44,12 @@
     <div class="container">
         <div class="trending-box">
 
-            {{-- Sản phẩm nổi bật --}}
+            {{-- SẢN PHẨM NỔI BẬT --}}
             <div class="Feather">
                 <p class="title-name">@lang('lang.feather')</p>
             </div>
 
-            {{-- InFo Product --}}
+            {{-- INFO PRODUCT --}}
             <div class="product-list-box">
                 <div class="trending-pro-active owl-carousel">
                     @if(count(array($product_feathers)) > 0)
@@ -64,13 +64,14 @@
                                 </div>
                                 <div class="pro-content">
                                     <div class="pro-info">
+
                                         <h4><a class="nameProduct" href="{{route('product.detail', $product_feather->slug)}}">{{$product_feather->name}}</a></h4>
-                                        {{-- Price --}}
+                                        {{-- PRICE --}}
                                         <p class="price" >
                                             <span>{{ number_format($product_feather->price, 0, ',', '.') . ' VND' }}
                                             </span>
                                         </p>
-                                        {{-- Start and Number Start --}}
+                                        {{-- START AND NUMBER START--}}
                                         <div class="rating">
                                             @for ($m = 0; $m < floor($product_feather->star()); $m++) <i class="fas fa-star"></i>
                                                 @endfor
@@ -79,7 +80,9 @@
                                                     @endfor
                                                     {{ number_format((float)$product_feather->star(), 1, '.', '')}}
                                         </div>
+
                                     </div>
+                                    {{-- XEM CHI TIẾT AND SO SÁNH AND FAVORITE --}}
                                     <div class="pro-actions">
                                         <div class="actions-primary">
                                             <a href="{{route('product.detail', $product_feather->slug)}}" title="@lang('lang.view_detail_more')">@lang('lang.view_detail')</a>
@@ -102,7 +105,7 @@
 <div class="trendig-product mt-70">
     <div class="container">
         <div class="trending-box">
-            {{-- Sản phẩm mới --}}
+            {{-- SẢN PHẨM MỚI --}}
             <div class="">
                 <p class="title-name">@lang('lang.new_product')</p>
             </div>
@@ -156,12 +159,12 @@
     </div>
 </div>
 
-{{-- ================================== SẢN PHẨM THEO BRAND================================== --}}
+{{-- ================================== SẢN PHẨM THEO BRAND ================================== --}}
 <div class="arrivals-product mt-70">
     <div class="container">
         <div class="main-product-tab-area">
             <div class="tab-menu mb-25 d-flex justify-content-center">
-                {{-- ForEach in ra thương hiệu --}}
+                {{-- FOREACH BRAND THEO SẢN PHẨM --}}
                 <ul class="nav tabs-area" role="tablist">
                     @if(count($brands) > 0)
                         <?php 
@@ -200,7 +203,7 @@
                     <div class="electronics-pro-active owl-carousel">
                         @php $products = $brand->products; @endphp
                         @foreach($products as $product)
-                        {{-- Lấy Product theo Brand --}}
+                        {{-- GET PRODUCT THEO BRAND --}}
                         <div class="single-product">
                             {{-- Image --}}
                             <div class="pro-img">

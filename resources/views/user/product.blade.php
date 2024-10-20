@@ -49,7 +49,7 @@
             <div class="row">
                 @if(count($gallerys))
 
-                {{-- Image Product khi không có ảnh  --}}
+                {{-- IMAGE PRODUCT  --}}
                     <div class="col-lg-5 mb-all-40">
                         <div class="tab-content">
                             @foreach($gallerys as $index => $gallery)
@@ -89,7 +89,7 @@
                     </div>
                 @endif
 
-                {{-- Detail Product --}}
+                {{-- DETAIL PRODUCT --}}
                 <div class="col-lg-7">
                     <div class="thubnail-desc fix">
                         <h3 class="product-header">{{ $product->name }}</h3>
@@ -169,7 +169,7 @@
     </div>
 </div>
 
-        {{-- đánh giá sản phẩm --}}
+        {{-- ĐÁNH GIÁ SẢN PHẨM --}}
 
 <div class="thumnail-desc pb-100 pb-sm-60">
     <div class="container">
@@ -361,7 +361,7 @@
     </div>
 </div>
 
-{{-- Sản phẩm liên quan --}}
+{{-- SẢN PHẨM LIÊN QUAN --}}
 
 <div class="hot-deal-products pb-90 pb-sm-50">
     <div class="container">
@@ -406,4 +406,5 @@
         </div>
     </div>
 </div>
+
 @endsection

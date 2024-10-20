@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\CartRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -39,18 +40,6 @@ class Cart extends Model
         return $this->product->price * $this->quantity;
     }
 
-    public static function updateOrStore($req)
-    {
-        Cart::updateOrCreate(
-            // tham số tìm kiếm
-            [
-            'user_id'   =>  Auth::user()->id,
-            'product_id'   =>  $req->product_id,
-            ],
-            // tham số cập nhật
-            ['quantity' => $req->quantity]);
-    }
-
     public static function totalPrice()
     {
         $carts = Cart::where('user_id', Auth::user()->id)->get();
@@ -60,6 +49,23 @@ class Cart extends Model
         }
         return $total;
     }
+
+    public static function updateOrStore(CartRequest $req)
+    {
+        // Tìm hoặc tạo mới một cart
+        $cart = Cart::updateOrCreate(
+            [
+                'user_id' => Auth::user()->id,
+                'product_id' => $req->product_id,
+            ],
+            [
+                'quantity' => $req->quantity,
+            ]
+        );
+
+        return $cart; // Trả về bản ghi đã cập nhật hoặc tạo mới
+    }
+
 
     public static function totalPriceChecked()
     {

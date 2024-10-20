@@ -26,8 +26,18 @@ class CartController extends Controller
 
     public function update(CartRequest $req)
     {
-        Cart::updateOrStore($req);
+        // Gọi phương thức updateOrStore trong model Cart
+        $cart = Cart::updateOrStore($req);
+
+        // Tính tổng giá trị giỏ hàng sau khi cập nhật
+        $totalPrice = Cart::totalPrice(); // Gọi phương thức tổng giá trị giỏ hàng
+
+        return response()->json([
+            'totalPrice' => $totalPrice,
+            'itemTotal' => $cart ? $cart->quantity * $cart->product->price : 0,
+        ]);
     }
+
 
     public function delete(Request $req)
     {

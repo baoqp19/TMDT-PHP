@@ -524,18 +524,26 @@ $(document).ready(function () {
     //     }
     // });
 
-    //update cart
+    //UPDATE CART
     $(".product-quantity-update").on("input", function () {
         const quantity = $(this).val();
         const product_id = parseInt($(this).data("id"));
 
         if (quantity < 1) return;
+
         $.ajax({
             url: getBaseUrl() + "cart/update",
             method: "POST",
             data: { product_id, quantity },
             success: function (res) {
-                location.reload();
+                // Cập nhật tổng tiền vào phần tử có id là total-price
+                $("#total-price").text(
+                    new Intl.NumberFormat("vi-VN").format(res.totalPrice) +
+                        " VND"
+                );
+
+                // Cập nhật số tiền của sản phẩm (nếu cần)
+                $('#cart-item-' + product_id + ' .item-total').text(new Intl.NumberFormat('vi-VN').format(res.itemTotal) + ' VND');
             },
             error: function (rep) {
                 console.log("FAIL");
@@ -543,7 +551,7 @@ $(document).ready(function () {
         });
     });
 
-    // del cart
+    // DELETE CART
     $(".del-cart").click(function () {
         const id = parseInt($(this).data("id"));
 
