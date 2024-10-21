@@ -111,7 +111,7 @@ return [
     'receive_info' => "Thông tin người nhận",
     'product_order' => "sản phẩm đã đặt",
     'discout' => "Giảm giá",
-    'print_order' => "In đơn hàng",
+    'print_order' => "In Đơn Hàng",
     'money_checkout' => "Tiền cần thanh toán",
     'block_user' => 'Khóa tài khoản',
 

@@ -599,7 +599,6 @@ $(document).ready(function () {
         });
     });
 
-
     // SELECT OPTIN PROVINCE AND VILLAGE
     $(document).ready(function () {
         // Lắng nghe sự kiện thay đổi trên dropdown province
@@ -717,9 +716,12 @@ $(document).ready(function () {
                 village_code,
             },
             success: function (res) {
-                location.reload();
+                // Cập nhật giao diện với địa chỉ và phí ship trả về
+                $(".address-delivery").text(res.address);
             },
-            error: function (rep) {},
+            error: function (rep) {
+                console.error("Có lỗi xảy ra khi tính phí ship.");
+            },
         });
     });
 

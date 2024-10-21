@@ -76,9 +76,8 @@
         }
 
         .name{
-            cursor: pointer !important;
-            all: unset; 
-            font-weight: 600 !important;
+            cursor: pointer !important; 
+            font-weight: 500 !important;
 
         }
     </style>
@@ -215,31 +214,31 @@
             
             <div class="header-bottom  header-sticky mb-30">
                 <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-3 col-lg-4 col-md-6"></div>
+                    <div class="row align-items-center"" >
+                        <div class="col-xl-3 col-lg-4 col-md-6" ></div>
 
                         <div class="col-xl-7 col-lg-8 col-md-12 ">
                             {{-- Laptop --}}
-                            <nav class="d-none d-lg-block">
+                            <nav class="d-none d-lg-block" >
                                 <ul class="header-bottom-list d-flex">
-                                    <li class="active name"><a href="{{route('home.index')}}">@lang('lang.home')</a></li>
-                                    <li class="name"><a href="{{route('cart.index')}}">@lang('lang.cart')</a></li>
-                                    <li class="name"><a href="{{route('order.index')}}">@lang('lang.order')</a></li>
-                                    <li class="name"><a href="{{route('contact.index')}}">@lang('lang.contact')</a></li>
+                                    <li class="active"><a class="name" href="{{route('home.index')}}">@lang('lang.home')</a></li>
+                                    <li class=""><a class="name" href="{{route('cart.index')}}">@lang('lang.cart')</a></li>
+                                    <li class=""><a class="name" href="{{route('order.index')}}">@lang('lang.order')</a></li>
+                                    <li class=""><a class="name" href="{{route('contact.index')}}">@lang('lang.contact')</a></li>
 
-                                    <li class="name"><a>@lang('lang.more')<i class="fa-solid fa-angle-down"></i></a>
+                                    <li class="name"><a class="name" >@lang('lang.more')<i class="fa-solid fa-angle-down"></i></a>
                                         <ul class="ht-dropdown dropdown-style-two">
-                                            <li><a href="{{route('news.index')}}">@lang('lang.news')</a></li>
-                                            <li><a href="{{route('weather.index')}}">@lang('lang.weather')</a></li>
-                                            <li><a href="{{route('music.index')}}">@lang('lang.music')</a></li>
-                                            <li><a href="{{route('covid.index')}}">@lang('lang.covid')</a></li>
+                                            <li><a class="name" href="{{route('news.index')}}">@lang('lang.news')</a></li>
+                                            <li><a class="name" href="{{route('weather.index')}}">@lang('lang.weather')</a></li>
+                                            <li><a class="name" href="{{route('music.index')}}">@lang('lang.music')</a></li>
+                                            <li><a class="name" href="{{route('covid.index')}}">@lang('lang.covid')</a></li>
                                         </ul>
                                     </li>
 
-                                    <li class="name" ><a>@lang('lang.language')<i class="fa-solid fa-angle-down"></i></a>
+                                    <li class="name" ><a class="name" >@lang('lang.language')<i class="fa-solid fa-angle-down"></i></a>
                                         <ul class="ht-dropdown dropdown-style-two">
-                                            <li><a href="{{route('lang', 'vi')}}">@lang('lang.vi')</a></li>
-                                            <li><a href="{{route('lang', 'en')}}">@lang('lang.en')</a></li>
+                                            <li><a class="name" href="{{route('lang', 'vi')}}">@lang('lang.vi')</a></li>
+                                            <li><a class="name" href="{{route('lang', 'en')}}">@lang('lang.en')</a></li>
                                         </ul>
                                     </li>
                                 </ul>

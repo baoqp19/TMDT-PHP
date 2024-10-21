@@ -9,13 +9,12 @@ use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Shipping;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
-use MoMoAIO;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\View;
 
 class OrderController extends Controller
 {
@@ -124,100 +123,100 @@ class OrderController extends Controller
         session()->forget(['data_order', 'coupon', 'feeship_id', 'address', 'feeship', 'total_money']);
     }
 
-    // public function confirm_order(OrderRequest $req)
-    // {
-    // return redirect()->route('home.index')
-    // if (!session('feeship')) {
-    //     return back()->with('error_shipping', 'Vui lòng chọn địa chỉ nhận hàng.');
-    // }
+    public function confirm_order(OrderRequest $req)
+    {
 
-    // $data_order = [
-    //     'order_code' => strtoupper(substr(md5(microtime()), rand(0, 26), 8)),
-    //     'name' => $req->name,
-    //     'email' => $req->email,
-    //     'phone' => $req->phone,
-    //     'note' => $req->note,
-    //     'method' => $req->payment,
-    //     'coupon_code' =>  session('coupon.code', 'NO'),
-    //     'feeship_id' => session('feeship_id'),
-    //     'address' => session('address'),
-    // ];
+        if (!session('feeship')) {
+            return back()->with('error_shipping', 'Vui lòng chọn địa chỉ nhận hàng.');
+        }
 
-    // //cash payment
-    // if ($req->payment == 0) {
-    //     $this->handle_order_shipping_coupon($data_order);
-    //     Cart::where('user_id', Auth::user()->id)->delete();
-    //     return redirect()->route('order.index');
-    // }
+        $data_order = [
+            'order_code' => strtoupper(substr(md5(microtime()), rand(0, 26), 8)),
+            'name' => $req->name,
+            'email' => $req->email,
+            'phone' => $req->phone,
+            'note' => $req->note,
+            'method' => $req->payment,
+            'coupon_code' =>  session('coupon.code', 'NO'),
+            'feeship_id' => session('feeship_id'),
+            'address' => session('address'),
+        ];
 
-    // $total_money =  session('total_money');
-    // session(['data_order' =>  $data_order]);
+        //cash payment
+        if ($req->payment == 0) {
+            $this->handle_order_shipping_coupon($data_order);
+            Cart::where('user_id', Auth::user()->id)->delete();
+            return redirect()->route('order.index');
+        }
 
-    // //vnpay payment
-    // if ($req->payment == 1) {
-    //     $vnp_OrderInfo = 'Thanh toán mua hàng tại hệ thống MW Store -' . Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
-    //     $vnp_BankCode = $req->bank_code;
+        $total_money =  session('total_money');
+        session(['data_order' =>  $data_order]);
 
-    //     $inputData = [
-    //         "vnp_Version" => "2.0.0",
-    //         "vnp_TmnCode" => env('VPN_TMN_CODE'),
-    //         "vnp_Amount" => $total_money * 100,
-    //         "vnp_Command" => "pay",
-    //         "vnp_CreateDate" => date('YmdHis'),
-    //         "vnp_CurrCode" => "VND",
-    //         "vnp_IpAddr" =>  $_SERVER['REMOTE_ADDR'],
-    //         "vnp_Locale" => 'vn',
-    //         "vnp_OrderInfo" => $vnp_OrderInfo,
-    //         "vnp_ReturnUrl" => env('RETURN_URL_PAYMENT'),
-    //         "vnp_TxnRef" => $data_order['order_code'],
-    //     ];
+        //vnpay payment
+        if ($req->payment == 1) {
+            $vnp_OrderInfo = 'Thanh toán mua hàng tại hệ thống MW Store -' . Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
+            $vnp_BankCode = $req->bank_code;
 
-    //     if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-    //         $inputData['vnp_BankCode'] = $vnp_BankCode;
-    //     }
+            $inputData = [
+                "vnp_Version" => "2.0.0",
+                "vnp_TmnCode" => env('VPN_TMN_CODE'),
+                "vnp_Amount" => $total_money * 100,
+                "vnp_Command" => "pay",
+                "vnp_CreateDate" => date('YmdHis'),
+                "vnp_CurrCode" => "VND",
+                "vnp_IpAddr" =>  $_SERVER['REMOTE_ADDR'],
+                "vnp_Locale" => 'vn',
+                "vnp_OrderInfo" => $vnp_OrderInfo,
+                "vnp_ReturnUrl" => env('RETURN_URL_PAYMENT'),
+                "vnp_TxnRef" => $data_order['order_code'],
+            ];
 
-    //     ksort($inputData);
-    //     $query = "";
-    //     $i = 0;
-    //     $hashdata = "";
-    //     foreach ($inputData as $key => $value) {
-    //         if ($i == 1) {
-    //             $hashdata .= '&' . $key . "=" . $value;
-    //         } else {
-    //             $hashdata .= $key . "=" . $value;
-    //             $i = 1;
-    //         }
-    //         $query .= urlencode($key) . "=" . urlencode($value) . '&';
-    //     }
+            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                $inputData['vnp_BankCode'] = $vnp_BankCode;
+            }
 
-    //     $vnp_Url = env('VPN_URL') . "?" . $query;
-    //     if (env('VPN_HASH_SERECT')) {
-    //         $vnpSecureHash = hash('sha256', env('VPN_HASH_SERECT') . $hashdata);
-    //         $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
-    //     }
-    //     return redirect($vnp_Url);
-    // }
+            ksort($inputData);
+            $query = "";
+            $i = 0;
+            $hashdata = "";
+            foreach ($inputData as $key => $value) {
+                if ($i == 1) {
+                    $hashdata .= '&' . $key . "=" . $value;
+                } else {
+                    $hashdata .= $key . "=" . $value;
+                    $i = 1;
+                }
+                $query .= urlencode($key) . "=" . urlencode($value) . '&';
+            }
 
-    //  momo payment
-    // if ($req->payment == 2) {
-    //     $moMoConfig = config('payment.gateways.MoMoAIO');
-    //     $response = \MoMoAIO::purchase([
-    //         'amount' => $total_money,
-    //         'returnUrl' => env('RETURN_URL_PAYMENT'),
-    //         'notifyUrl' => 'http://localhost:8000/order/ipn/',
-    //         'orderId' => $data_order['order_code'],
-    //         'requestId' => $data_order['order_code'],
-    //         'orderInfo' => 'Thanh toán mua hàng tại hệ thống MW Store -' . Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s'),
-    //     ])->send();
+            $vnp_Url = env('VPN_URL') . "?" . $query;
+            if (env('VPN_HASH_SERECT')) {
+                $vnpSecureHash = hash('sha256', env('VPN_HASH_SERECT') . $hashdata);
+                $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+            }
+            return redirect($vnp_Url);
+        }
 
-    //     if ($response->isRedirect()) {
-    //         $redirectUrl = $response->getRedirectUrl();
+        //  momo payment
+        // if ($req->payment == 2) {
+        //     $moMoConfig = config('payment.gateways.MoMoAIO');
+        //     $response = \MoMoAIO::purchase([
+        //         'amount' => $total_money,
+        //         'returnUrl' => env('RETURN_URL_PAYMENT'),
+        //         'notifyUrl' => 'http://localhost:8000/order/ipn/',
+        //         'orderId' => $data_order['order_code'],
+        //         'requestId' => $data_order['order_code'],
+        //         'orderInfo' => 'Thanh toán mua hàng tại hệ thống MW Store -' . Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s'),
+        //     ])->send();
 
-    //         return redirect($redirectUrl);
-    //         // TODO: chuyển khách sang trang MoMo để thanh toán
-    //     }
-    // }
-    // }
+        //     if ($response->isRedirect()) {
+        //         $redirectUrl = $response->getRedirectUrl();
+
+        //         return redirect($redirectUrl);
+        //         // TODO: chuyển khách sang trang MoMo để thanh toán
+        //     }
+        // }
+    }
 
     public function payment_callback(Request $req)
     {
@@ -245,10 +244,45 @@ class OrderController extends Controller
         return back();
     }
 
+
+    function removeVietnameseAccents($str) {
+        $accents_arr = [
+            'a' => ['à', 'á', 'ả', 'ã', 'ạ', 'â', 'ầ', 'ấ', 'ẩ', 'ẫ', 'ậ', 'ă', 'ằ', 'ắ', 'ẳ', 'ẵ', 'ặ'],
+            'e' => ['è', 'é', 'ẻ', 'ẽ', 'ẹ', 'ê', 'ề', 'ế', 'ể', 'ễ', 'ệ'],
+            'i' => ['ì', 'í', 'ỉ', 'ĩ', 'ị'],
+            'o' => ['ò', 'ó', 'ỏ', 'õ', 'ọ', 'ô', 'ồ', 'ố', 'ổ', 'ỗ', 'ộ', 'ơ', 'ờ', 'ớ', 'ở', 'ỡ', 'ợ'],
+            'u' => ['ù', 'ú', 'ủ', 'ũ', 'ụ', 'ư', 'ừ', 'ứ', 'ử', 'ữ', 'ự'],
+            'y' => ['ỳ', 'ý', 'ỷ', 'ỹ', 'ỵ'],
+            'd' => ['đ'],
+            'A' => ['À', 'Á', 'Ả', 'Ã', 'Ạ', 'Â', 'Ầ', 'Ấ', 'Ẩ', 'Ẫ', 'Ậ', 'Ă', 'Ằ', 'Ắ', 'Ẳ', 'Ẵ', 'Ặ'],
+            'E' => ['È', 'É', 'Ẻ', 'Ẽ', 'Ẹ', 'Ê', 'Ề', 'Ế', 'Ể', 'Ễ', 'Ệ'],
+            'I' => ['Ì', 'Í', 'Ỉ', 'Ĩ', 'Ị'],
+            'O' => ['Ò', 'Ó', 'Ỏ', 'Õ', 'Ọ', 'Ô', 'Ồ', 'Ố', 'Ổ', 'Ỗ', 'Ộ', 'Ơ', 'Ờ', 'Ớ', 'Ở', 'Ỡ', 'Ợ'],
+            'U' => ['Ù', 'Ú', 'Ủ', 'Ũ', 'Ụ', 'Ư', 'Ừ', 'Ứ', 'Ử', 'Ữ', 'Ự'],
+            'Y' => ['Ỳ', 'Ý', 'Ỷ', 'Ỹ', 'Ỵ'],
+            'D' => ['Đ']
+        ];
+    
+        foreach ($accents_arr as $nonAccent => $accents) {
+            $str = str_replace($accents, $nonAccent, $str);
+        }
+    
+        return $str;
+    }
+    
+
     public function print_order($order_code)
     {
         $order = Order::where('code', $order_code)->first();
-        $pdf = View::loadView('admin.order.print', compact('order'))->setPaper('a4', 'landscape');
+       
+
+        $pdf = FacadePdf::loadView('admin.order.print', compact('order'))->setPaper('a4', 'landscape')->setOption(
+            [
+                'fontDir' => public_path('/fonts'),
+                'fontCache' => public_path('/fonts'),
+                'defaultFont' => 'Poppins'
+            ]
+        );
         return $pdf->download('MW_Store_' . $order->code . '.pdf');
     }
 
@@ -259,7 +293,11 @@ class OrderController extends Controller
             $key = explode("--", $str);
             $order = Order::where(['code' => $key[1], "id" => $key[0], "user_id" => $key[2]])->first();
             if ($order) {
-                $pdf = View::loadView('admin.order.print', compact('order'))->setPaper('a4', 'landscape');
+                $pdf = FacadePdf::loadView('admin.order.print', compact('order'))->setPaper('a4', 'landscape')->setOption([
+                    'fontDir' => public_path('/fonts'),
+                    'fontCache' => public_path('/fonts'),
+                    'defaultFont' => 'Poppins'
+                ]);
                 return $pdf->download('MW_Store_' . $order->code . '.pdf');
             }
         } catch (Exception $e) {

@@ -79,19 +79,19 @@
             <div class="col-md-12">
                 <div class="box-both text-right">
                     <p style="font-weight: 600; font-size: 16px;">@lang('lang.total'):
-                        <span class="price-checkout" >{{ number_format($total, 0, ',', '.') . ' VND' }}</span>
+                        <span class="price-checkout" style="margin-left: 36px;" >{{ number_format($total, 0, ',', '.') . ' VND' }}</span>
                     </p>
 
                     @if(session('address'))
-                    <p style="font-weight: 600; font-size: 16px; ">@lang('lang.address'):
-                        {{session('address')}}
+                    <p class="" style="font-weight: 600; font-size: 16px;" >@lang('lang.address'):
+                        <span class="price-checkout address-delivery" style="color: #B5292F; margin-left: 67px;" >{{session('address')}}</span>
                     </p>
                     @endif
 
                     @if(session('feeship'))
                     <p style="font-weight: 600; font-size: 16px; ">@lang('lang.feeship'):
                         @php $money_feeship = session('feeship'); @endphp
-                       <span class="price-checkout" > {{ number_format($money_feeship, 0, ',', '.') . ' VND' }}</span>
+                       <span class="price-checkout" style="margin-left: 2px;" >{{ number_format($money_feeship, 0, ',', '.') . ' VND' }}</span>
                     </p>
                     @endif
 
@@ -100,7 +100,7 @@
                     <p style="font-weight: 600; font-size: 16px; ">@lang('lang.coupon_code'): {{$coupon['code']}} - @lang('lang.value'):
                         {{$coupon['percent']}}%
                     </p>
-                    <p style="font-weight: 600; font-size: 16px; ">@lang('lang.money_down'): &ensp 
+                    <p style="font-weight: 600; font-size: 16px; ">@lang('lang.money_down'): 
                         @php $money_coupon = ($cart->totalPrice() * $coupon['percent'])/100; @endphp
                         <span class="price-checkout" >{{ number_format($money_coupon, 0, ',', '.') . ' VND' }}</span>
                     </p>
@@ -118,7 +118,7 @@
                     }
                     ?>
                     <p style="font-weight: 600; font-size: 16px; ">@lang('lang.total_money'):
-                       <span class="price-checkout" style="margin-left: 9px;" > {{ number_format( $total_money, 0, ',', '.') . ' VND' }}</span>
+                       <span class="price-checkout" style="margin-left: 50px;" > {{ number_format( $total_money, 0, ',', '.') . ' VND' }}</span>
                         @php Session::put('total_money', $total_money ) @endphp
                     </p>
 

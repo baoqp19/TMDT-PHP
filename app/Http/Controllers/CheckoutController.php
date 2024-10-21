@@ -21,7 +21,7 @@ class CheckoutController extends Controller
         return view('user.checkout.checkout')->with(compact(['carts', 'citys', 'provinces', 'villages']));
     }
 
-    private function get_address($req)
+    private function getAddress($req)
     {
         $city = City::where('city_code', $req->city_code)->first();
         $province = Province::where('province_code', $req->province_code)->first();
@@ -31,12 +31,26 @@ class CheckoutController extends Controller
 
     public function calc_feeship(Request $req)
     {
-        $address = $this->get_address($req);
+        $address = $this->getAddress($req);
         $feeship = Feeship::where($req->all())->first();
-
-        session(['feeship' => '25000', 'feeship_id' =>  'NO', 'address' => $address]);
+    
+        // Mặc định nếu không có phí ship thì lấy giá trị mặc định
+        $feeship_value = 25000;
+        $feeship_id = 'NO';
+    
         if ($feeship) {
-            session(['feeship' => $feeship->feeship, 'feeship_id' =>  $feeship->id]);
+            $feeship_value = $feeship->feeship;
+            $feeship_id = $feeship->id;
         }
+    
+        // Lưu vào session
+        session(['feeship' => $feeship_value, 'feeship_id' =>  $feeship_id, 'address' => $address]);
+    
+        // Trả về JSON response để client có thể xử lý
+        return response()->json([
+            'feeship' => $feeship_value,
+            'feeship_id' => $feeship_id,
+            'address' => $address
+        ]);
     }
 }
