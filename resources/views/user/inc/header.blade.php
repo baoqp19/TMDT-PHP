@@ -17,7 +17,9 @@
     <meta property="og:description" content="@yield('desc_og')" />
     <meta property="og:url" content="@yield('canonical')" />
     <meta property="og:type" content="website" />
-     
+    
+
+
 
     {{-- B5292F: red --}}
     {{-- B5292F: cam --}}
@@ -218,7 +220,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-6" ></div>
 
                         <div class="col-xl-7 col-lg-8 col-md-12 ">
-                            {{-- Laptop --}}
+                            {{-- MENU LAPTOP --}}
                             <nav class="d-none d-lg-block" >
                                 <ul class="header-bottom-list d-flex">
                                     <li class="active"><a class="name" href="{{route('home.index')}}">@lang('lang.home')</a></li>
@@ -244,7 +246,7 @@
                                 </ul>
                             </nav>
 
-                            {{-- Menu mobile --}}
+                            {{-- MENU MOBILE --}}
                             <div class="mobile-menu d-block d-lg-none">
                                 <nav>
                                     <ul>

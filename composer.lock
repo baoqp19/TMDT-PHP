@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf02ce78cd19c25190e1baa49d576d52",
+    "content-hash": "b502bfff563e86b44832c0ad57cd875d",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -142,6 +142,57 @@
                 }
             ],
             "time": "2023-11-29T23:19:16+00:00"
+        },
+        {
+            "name": "caophihung94/php-simple-html-dom-parser",
+            "version": "v1.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caophihung94/php-simple-html-dom-parser.git",
+                "reference": "c93cd0caea5f77e7f214b98a691e90340a2e2d45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caophihung94/php-simple-html-dom-parser/zipball/c93cd0caea5f77e7f214b98a691e90340a2e2d45",
+                "reference": "c93cd0caea5f77e7f214b98a691e90340a2e2d45",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HungCP\\PhpSimpleHtmlDom\\HtmlDomParser": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "S.C. Chen",
+                    "email": "me578022@gmail.com"
+                },
+                {
+                    "name": "Cao Phi Hung",
+                    "email": "hungcp94@gmail.com"
+                }
+            ],
+            "description": "PHP Simple HTML DOM Parser with namespace and PHP 7.4 compatible",
+            "homepage": "http://simplehtmldom.sourceforge.net/",
+            "keywords": [
+                "Simple",
+                "dom",
+                "html",
+                "html dom parser"
+            ],
+            "support": {
+                "issues": "https://github.com/caophihung94/php-simple-html-dom-parser/issues",
+                "source": "https://github.com/caophihung94/php-simple-html-dom-parser/tree/v.17.4.1"
+            },
+            "time": "2020-08-18T07:09:03+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -4491,37 +4542,6 @@
                 "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v8.6.0"
             },
             "time": "2024-07-01T07:33:21+00:00"
-        },
-        {
-            "name": "simple-html-dom/simple-html-dom",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/miclf/simple-html-dom.git",
-                "reference": "961610576c460546677a635062e9d3d7b6dab745"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/miclf/simple-html-dom/zipball/961610576c460546677a635062e9d3d7b6dab745",
-                "reference": "961610576c460546677a635062e9d3d7b6dab745",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "S.C. Chen",
-                    "email": "me578022@gmail.com"
-                }
-            ],
-            "description": "A copy of the PHP Simple HTML DOM Parser project.",
-            "support": {
-                "source": "https://github.com/miclf/simple-html-dom/tree/1.5.0"
-            },
-            "time": "2013-05-14T22:27:35+00:00"
         },
         {
             "name": "socialiteproviders/github",

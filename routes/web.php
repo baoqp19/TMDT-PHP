@@ -36,9 +36,9 @@ Route::get('lang/{locale}', function ($locale) {
 })->name('lang');
 
 // Authenticated Routes
-// Route::group(['middleware' => ['auth:sanctum']], function () {
-//     Route::get('order/print/{id}', [OrderController::class, 'print_order'])->name('order.print');
-// });
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('order/print/{id}', [OrderController::class, 'print_order'])->name('order.print');
+});
 
 // Blocked User Route
 Route::get('blocked', [UserController::class, 'blocked'])->name('user.blocked');
@@ -142,14 +142,13 @@ Route::group([
 
     Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
 
-    //     Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
-    //     Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);
+        // Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
+        // Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);
 
-    //     Route::prefix('chat')->group(function () {
-    //         Route::post('get', [ChatController::class, 'get_user_chat']);
-    //         Route::post('send', [ChatController::class, 'send_user_chat']);
-    //     });
-    // });
+        // Route::prefix('chat')->group(function () {
+        //     Route::post('get', [ChatController::class, 'get_user_chat']);
+        //     Route::post('send', [ChatController::class, 'send_user_chat']);
+        // });
 });
 
 // Print Route

@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use HungCP\PhpSimpleHtmlDom\HtmlDomParser;
 
 class News extends Model
 {
     public static function getNews()
     {
-        $html =  file_get_html("https://www.techrum.vn");
+        $html = HtmlDomParser::file_get_html("https://www.techrum.vn");
         $getPosts = $html->find("div.block-container.porta-article-container");
         $posts = [];
 
