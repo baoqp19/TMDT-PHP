@@ -32,6 +32,31 @@ $(document).ready(function () {
         $(".box-edit").toggle();
     });
 
+    function sendReviewAjax(type) {
+        const product_id = $(".productID").val();
+        const comment = $(".review-comment").val();
+
+        $.ajax({
+            url: getBaseUrl() + "comment/" + type,
+            method: "POST",
+            data: {
+                product_id,
+                comment,
+                star: ratedIndex,
+            },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"), // Thêm CSRF token vào headers
+            },
+            success: function (res) {
+                toastr["success"]("Thành công !!!", "Thành công");
+                location.reload();
+            },
+            error: function (error) {
+                console.log(JSON.stringify(error));
+            },
+        });
+    }
+
     $(".review-submit").on("click", function (e) {
         e.preventDefault();
         sendReviewAjax("store");
@@ -59,27 +84,6 @@ $(document).ready(function () {
         });
     });
 
-    function sendReviewAjax(type) {
-        const product_id = $(".productID").val();
-        const comment = $(".review-comment").val();
-
-        $.ajax({
-            url: getBaseUrl() + "comment/" + type,
-            method: "POST",
-            data: {
-                product_id,
-                comment,
-                star: ratedIndex,
-            },
-            success: function (res) {
-                toastr["success"]("Thành công !!!", "Thành công");
-                location.reload();
-            },
-            error: function (error) {
-                console.log(JSON.stringify(error));
-            },
-        });
-    }
     // Khi người dùng click vào sao
     $(".review-list > .review-list-li > i.fa-light").on("click", function () {
         // Lấy chỉ số của sao được nhấp

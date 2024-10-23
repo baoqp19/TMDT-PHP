@@ -22,7 +22,9 @@ use App\Http\Controllers\{
     StaticController,
     SliderController,
     BrandController,
+    CommentController,
     CouponController,
+    DeliveryController,
     ProductController,
     ProvinceController
 };
@@ -36,9 +38,9 @@ Route::get('lang/{locale}', function ($locale) {
 })->name('lang');
 
 // Authenticated Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('order/print/{id}', [OrderController::class, 'print_order'])->name('order.print');
-});
+// Route::group(['middleware' => ['auth:sanctum']], function () {
+//     Route::get('order/print/{id}', [OrderController::class, 'print_order'])->name('order.print');
+// });
 
 // Blocked User Route
 Route::get('blocked', [UserController::class, 'blocked'])->name('user.blocked');
@@ -56,7 +58,7 @@ Route::group([
     Route::resource('weather', WeatherController::class);
 
     Route::any('search', [SearchController::class, 'search'])->name('search');
-    // Route::post('search-live', [SearchController::class, 'search_live'])->name('search.live');
+    Route::post('search-live', [SearchController::class, 'search_live'])->name('search.live');
 
     Route::get('product/{id}', [ProductController::class, 'detail'])->name('product.detail');
 
@@ -97,15 +99,17 @@ Route::group([
     //     Route::prefix('user')->group(function () {
     //         
     //         Route::post('update', [UserController::class, 'update'])->name('user.update');
-    //     });
+    // });
 
-    //     Route::get('signout', [UserAuthController::class, 'signout'])->name('user.signout');
+    Route::get('signout', [UserAuthController::class, 'signout'])->name('user.signout');
 
-    //     Route::prefix('comment')->group(function () {
-    //         Route::post('update', [CommentController::class, 'update'])->name('comment.update');
-    //         Route::post('store', [CommentController::class, 'store'])->name('comment.store');
-    //         Route::post('delete', [CommentController::class, 'delete'])->name('comment.delete');
-    //     });
+
+    // SEND MESSAGE
+    Route::prefix('comment')->name('comment.')->group(function () {
+        Route::post('update', [CommentController::class, 'update'])->name('update');
+        Route::post('store', [CommentController::class, 'store'])->name('store');
+        Route::post('delete', [CommentController::class, 'delete'])->name('delete');
+    });
 
     Route::group([
         'prefix' => 'cart',
@@ -142,13 +146,13 @@ Route::group([
 
     Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
 
-        // Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
-        // Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);
+    Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
+    Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);
 
-        // Route::prefix('chat')->group(function () {
-        //     Route::post('get', [ChatController::class, 'get_user_chat']);
-        //     Route::post('send', [ChatController::class, 'send_user_chat']);
-        // });
+    Route::prefix('chat')->group(function () {
+        Route::post('get', [ChatController::class, 'get_user_chat']);
+        Route::post('send', [ChatController::class, 'send_user_chat']);
+    });
 });
 
 // Print Route
@@ -215,14 +219,14 @@ Route::group([
 //     });
 
 //     // Comment Management
-//     Route::middleware('can:' . config('role.COMMENT'))->group(function () {
-//         Route::prefix('comment')->group(function () {
-//             Route::get('/', [CommentController::class, 'index'])->name('comment.index');
-//             Route::get('not-confirm', [CommentController::class, 'get_not_confirm'])->name('comment.not_confirm');
-//             Route::get('confirm/{id}', [CommentController::class, 'set_confirm'])->name('comment.confirm');
-//             Route::post('delete', [CommentController::class, 'delete'])->name('comment.delete');
-//         });
-//     });
+Route::middleware('can:' . config('role.COMMENT'))->group(function () {
+    Route::prefix('comment')->group(function () {
+        Route::get('/', [CommentController::class, 'index'])->name('comment.index');
+        Route::get('not-confirm', [CommentController::class, 'get_not_confirm'])->name('comment.not_confirm');
+        Route::get('confirm/{id}', [CommentController::class, 'set_confirm'])->name('comment.confirm');
+        Route::post('delete', [CommentController::class, 'delete'])->name('comment.delete');
+    });
+});
 
 //     // Order Management
 //     Route::middleware('can:' . config('role.ORDER'))->group(function () {

@@ -3,6 +3,7 @@
 @section('canonical', url()->current())
 @section('meta_desc', $product->description)
 
+
 @section('title_og', $product->name)
 @section('desc_og', $product->description)
 @section('img_og', asset('admins/uploads/products/'.$product->image))
@@ -32,7 +33,7 @@
 @endpush
 
 
-@section('ContentPage')
+@section('ContentPage') 
 <div class="breadcrumb-area mt-30">
     <div class="container">
         <div class="breadcrumb">
@@ -272,14 +273,13 @@
                                 </li>
                             </ul>
                             <div class="riview-field mt-40">
-                                <form autocomplete="off" action="" id="form-review" method="POST">
-                                    @csrf 
+                                <form autocomplete="off" id="form-review" method="POST">
                                     <div class="form-group">
                                         <label class="req" for="comments">@lang('lang.review')</label>
                                         <input type="hidden" class="productID" value="{{$product->id}}">
                                         <textarea class="form-control review-comment" rows="5" id="comment" name="review-comment" required="required"></textarea>
                                     </div>
-                                    <button class="customer-btn review-submit"> @lang('lang.send')</button>
+                                    <button class="customer-btn review-submit">@lang('lang.send')</button>
                                 </form>
                             </div>
                         </div>
