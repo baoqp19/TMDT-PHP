@@ -10,8 +10,9 @@ class SearchController extends Controller
     public function search(Request $req)
     {
         $keyword = $req->keyword;
-        $keyword == "" ? $products = [] : $products = Product::where('name', 'like', $keyword . '%')->get();
-        return view('user.search')->with(compact(['keyword', 'products']));
+        $products = $keyword ? Product::where('name', 'like', '%' . $keyword . '%')->get() : [];
+
+        return view('user.search', compact('keyword', 'products'));
     }
 
     public function search_live(Request $req)

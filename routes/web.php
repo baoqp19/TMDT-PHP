@@ -91,74 +91,75 @@ Route::group([
     });
 
     Route::get('forgot-password', [UserController::class, 'forgot_password'])->name('user.forgot_password');
-    // Route::get('new-password/{code}', [UserController::class, 'new_password'])->name('user.new_password');
-    // Route::post('set-password', [UserController::class, 'set_password'])->name('user.set_password');
-    // Route::post('send-mail-password', [MailController::class, 'handle_mail_reset_password'])->name('mail.reset_password');
+    Route::get('new-password/{code}', [UserController::class, 'new_password'])->name('user.new_password');
+    Route::post('set-password', [UserController::class, 'set_password'])->name('user.set_password');
+    Route::post('send-mail-password', [MailController::class, 'handle_mail_reset_password'])->name('mail.reset_password');
 
-    // Route::group(['middleware' => ['auth_user']], function () {
-    //     Route::prefix('user')->group(function () {
-    //         
-    //         Route::post('update', [UserController::class, 'update'])->name('user.update');
-    // });
+    Route::group(['middleware' => ['auth_user']], function () {
+        Route::prefix('user')->group(function () {
+            //         
+            Route::post('update', [UserController::class, 'update'])->name('user.update');
+        });
 
-    Route::get('signout', [UserAuthController::class, 'signout'])->name('user.signout');
-
-
-    // SEND MESSAGE
-    Route::prefix('comment')->name('comment.')->group(function () {
-        Route::post('update', [CommentController::class, 'update'])->name('update');
-        Route::post('store', [CommentController::class, 'store'])->name('store');
-        Route::post('delete', [CommentController::class, 'delete'])->name('delete');
-    });
-
-    Route::group([
-        'prefix' => 'cart',
-        'as'     => 'cart.',
-    ], function () {
-        Route::get('/', [CartController::class, 'index'])->name('index');
-        Route::post('delete', [CartController::class, 'delete'])->name('delete');
-        Route::post('update', [CartController::class, 'update'])->name('update');
-        Route::post('store', [CartController::class, 'store'])->name('store');
-    });
-
-    Route::group([
-        'prefix' => 'checkout',
-        'as'     => 'checkout.',
-    ], function () {
-        Route::get('/', [CheckoutController::class, 'index'])->name('index');
-        Route::post('calc-feeship', [CheckoutController::class, 'calc_feeship'])->name('calc_feeship');
-    });
-
-    Route::group([
-        'prefix' => 'order',
-        'as'     => 'order.',
-    ], function () {
-        Route::get('/', [OrderController::class, 'index'])->name('index');
-        Route::get('detail/{id}', [OrderController::class, 'show'])->name('show');
-        Route::get('delete/{id}', [OrderController::class, 'delete'])->name('delete');
-        Route::post('order-confirm', [OrderController::class, 'confirm_order'])->name('confirm');
-        Route::get('print-order/{id}', [OrderController::class, 'print_order'])->name('print');
-    });
-
-    Route::get('/get-villages', [ProvinceController::class, 'getVillages']);
+        Route::get('signout', [UserAuthController::class, 'signout'])->name('user.signout');
 
 
+        // SEND MESSAGE
+        Route::prefix('comment')->name('comment.')->group(function () {
+            Route::post('update', [CommentController::class, 'update'])->name('update');
+            Route::post('store', [CommentController::class, 'store'])->name('store');
+            Route::post('delete', [CommentController::class, 'delete'])->name('delete');
+        });
 
-    Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
+        Route::group([
+            'prefix' => 'cart',
+            'as'     => 'cart.',
+        ], function () {
+            Route::get('/', [CartController::class, 'index'])->name('index');
+            Route::post('delete', [CartController::class, 'delete'])->name('delete');
+            Route::post('update', [CartController::class, 'update'])->name('update');
+            Route::post('store', [CartController::class, 'store'])->name('store');
+        });
 
-    Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
-    Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);
+        Route::group([
+            'prefix' => 'checkout',
+            'as'     => 'checkout.',
+        ], function () {
+            Route::get('/', [CheckoutController::class, 'index'])->name('index');
+            Route::post('calc-feeship', [CheckoutController::class, 'calc_feeship'])->name('calc_feeship');
+        });
 
-    Route::prefix('chat')->group(function () {
-        Route::post('get', [ChatController::class, 'get_user_chat']);
-        Route::post('send', [ChatController::class, 'send_user_chat']);
+        Route::group([
+            'prefix' => 'order',
+            'as'     => 'order.',
+        ], function () {
+            Route::get('/', [OrderController::class, 'index'])->name('index');
+            Route::get('detail/{id}', [OrderController::class, 'show'])->name('show');
+            Route::get('delete/{id}', [OrderController::class, 'delete'])->name('delete');
+            Route::post('order-confirm', [OrderController::class, 'confirm_order'])->name('confirm');
+            Route::get('print-order/{id}', [OrderController::class, 'print_order'])->name('print');
+        });
+
+        Route::get('/get-villages', [ProvinceController::class, 'getVillages']);
+
+
+
+        Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
+
+        Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
+        Route::post('select-delivery', [DeliveryController::class, 'select_delivery']);
+
+        Route::prefix('chat')->group(function () {
+            Route::post('get', [ChatController::class, 'get_user_chat']);
+            Route::post('send', [ChatController::class, 'send_user_chat']);
+        });
     });
 });
 
 // Print Route
-// Route::prefix('print')->group(function () {
-//     Route::get('order/{code}', [OrderController::class, 'print_order_new']); //middleware admin
-// });
+Route::prefix('print')->group(function () {
+    Route::get('order/{code}', [OrderController::class, 'print_order_new']); //middleware admin
+});
 
 // // Admin Routes
 // Route::get('admin/signin', [AdminAuthController::class, 'signin'])->name('admin.signin');
