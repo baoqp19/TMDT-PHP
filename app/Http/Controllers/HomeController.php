@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $cacheTime = 600; // 10 minutes
-        
+
 
         // remember xem sliders: khoá trong cache coi có trong cache không, nếu có thì nó lấy trong đó
         $sliders = cache()->remember('sliders', $cacheTime, function () {
@@ -21,20 +21,18 @@ class HomeController extends Controller
                 ->take(10)
                 ->get();
         });
-    
+
         $product_feathers = cache()->remember('product_feathers', $cacheTime, function () {
             return Product::where('feather', 1)
                 ->latest('id')
-                ->take(15)
-                ->get();
+                ->paginate(4);
         });
-    
+
         $product_news = cache()->remember('product_news', $cacheTime, function () {
             return Product::latest('id')
-                ->take(15)
-                ->get();
+                ->paginate(4);
         });
-    
+
         $brands = cache()->remember('brands', $cacheTime, function () {
             return Brand::with(['products'])
                 ->latest('id')

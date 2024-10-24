@@ -57,14 +57,14 @@
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="button-login btn btn-lg btn-primary text-light w-100 fs-6">Đăng nhập</button>
-                            <button type="button" class="btn btn-lg btn-light w-100 fs-6">
+                            <a type="button" href="{{route('social.google')}}" class="btn btn-lg btn-light w-100 fs-6" >
                                 <img src="{{asset('users/img/google.png')}}" alt="Google" style="width:20px" class="me-2">
-                                Đăng nhập bằng Google
-                            </button>
+                                 Đăng nhập bằng Google
+                            </a>
                         </div>
                     </form>
                     <div class="text-center mt-3">
-                        <small>Chưa có tài khoản? <a href="{{route('user.register')}}" class="text-decoration-none">Đăng ký</a></small>
+                            <small>Chưa có tài khoản? <a href="{{route('user.register')}}" class="text-decoration-none">Đăng ký</a></small>
                     </div>
                 </div>
             </div>

@@ -81,12 +81,12 @@ Route::group([
         Route::get('/', [UserController::class, 'index'])->name('index');
     });
 
-    Route::prefix('signin')->group(function () {
-        //     Route::get('google', [SocialLoginController::class, 'redirect_to_google'])->name('social.google');
+    Route::prefix('')->group(function () {
         //     Route::get('zalo', [SocialLoginController::class, 'redirect_to_zalo'])->name('social.zalo');
         //     Route::get('facebook', [SocialLoginController::class, 'redirect_to_facebook'])->name('social.facebook');
         //     Route::get('zalo-social', [SocialLoginController::class, 'handle_signin_zalo']);
-        //     Route::get('google-social', [SocialLoginController::class, 'handle_signin_google']);
+        Route::get('signin.google', [SocialLoginController::class, 'redirect_to_google'])->name('social.google');
+        Route::get('auth/google/call-back', [SocialLoginController::class, 'handle_signin_google'])->name('auth.google.callback');
         //     Route::get('facebook-social', [SocialLoginController::class, 'handle_signin_facebook']);
     });
 

@@ -18,6 +18,7 @@
             <div class="col-md-12">
                 <div class="error-wrapper text-center">
                     <div class="error-text">
+                        <h2></h2>
                         <h3>@lang('lang.block_account_noti')</h3>
                     </div>
                     <div class="error-button">

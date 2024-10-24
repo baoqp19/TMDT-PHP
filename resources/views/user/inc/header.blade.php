@@ -189,7 +189,7 @@
                                             ?><i class="fas fa-angle-down"></i></span>
 
                                             <ul class="ht-dropdown dropdown-style-two" style="width: 200px;">
-                                                <li class="list-group-item list-group-item-action" style="border: none;"><a href="{{route('user.register')}}" style="color: #212529;">@lang('lang.signout')</a></li>
+                                                <li class="list-group-item list-group-item-action" style="border: none;"><a href="{{route('user.signout')}}" style="color: #212529;">@lang('lang.signout')</a></li>
                                                 <li class="list-group-item list-group-item-action" style="border: none;"><a href="{{route('user.index')}}" style="color: #212529;">@lang('lang.user_info')</a></li>
                                             </ul>
                                         </div>
