@@ -16,7 +16,7 @@
     <link href="{{asset('admins/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('admins/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{asset('admins/css/admin-style.css')}}" rel="stylesheet">
-    <link href="{{asset('admins/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
     <link href="{{asset('admins/css/toastr.min.css')}}" rel="stylesheet">
     <link href="{{asset('admins/css/select2.min.css')}}" rel="stylesheet">
     <script type="text/javascript" src="{{asset('admins/js/jquery-3.2.1.min.js')}}"></script>
@@ -24,18 +24,7 @@
 
 
     <style>
-        /* img[alt*="000webhost"],
-        img[alt*="000webhost"][style],
-        img[src*="000webhost"],
-        img[src*="000webhost"][style],
-        body>div:nth-last-of-type(1)[style] {
-            opacity: 0 !important;
-            pointer-events: none !important;
-            width: 0px !important;
-            height: 0px !important;
-            visibility: hidden !important;
-            display: none !important;
-        } */
+      
     </style>
 
 </head>

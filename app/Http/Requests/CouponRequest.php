@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CommentRequest extends FormRequest
+class CouponRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +21,15 @@ class CommentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->coupon;
+
         return [
-            'comment' => "required|string|min:2|max:100",
-            'product_id' => "required|min:0|integer",
-            'star' => "required|integer|between:1,5",
+            'name' => "required|string|min:2|max:20",
+            'code' => "required|string|min:2|max:10|unique:coupons,code" . ($id ? ",$id" : ''),
+            'quantity' => "required|min:1|integer",
+            'percent' => "required|min:1|integer",
+            'start_coupon' => 'required|date_format:Y-m-d',
+            'end_coupon' => 'required|date_format:Y-m-d',
         ];
     }
 }

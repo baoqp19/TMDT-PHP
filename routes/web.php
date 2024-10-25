@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\{
     AdminAuthController,
+    AdminController,
     HomeController,
     UserAuthController,
     OrderController,
@@ -26,8 +27,10 @@ use App\Http\Controllers\{
     CommentController,
     CouponController,
     DeliveryController,
+    PostController,
     ProductController,
-    ProvinceController
+    ProvinceController,
+    VisitorController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -172,121 +175,124 @@ Route::post('admin/login', [AdminAuthController::class, 'handleLogin'])->name('a
 
 
 
-// Route::group(['prefix' => 'admin',  'middleware' => ['auth:admin', 'auth_admin']], function () {
-//     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-//     Route::get('signout', [AdminAuthController::class, 'signout'])->name('admin.signout');
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => ['auth:admin', 'auth_admin']
+], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('signout', [AdminAuthController::class, 'signout'])->name('admin.signout');
 
-//     Route::post('send-coupon', [MailController::class, 'send_coupon']);
+    Route::post('send-coupon', [MailController::class, 'send_coupon']);
 
-//     // Role Management
-//     Route::middleware('can:' . config('role.ROLE'))->group(function () {
-//         Route::resource('role', RoleController::class);
-//     });
+    //     // Role Management   
+    Route::middleware('can:' . config('role.ROLE'))->group(function () {
+        Route::resource('role', RoleController::class);
+    });
 
-//     // Post Management
-//     Route::middleware('can:' . config('role.POST'))->group(function () {
-//         Route::resource('post', PostProductController::class);
-//     });
+    //     // Post Management
+    Route::middleware('can:' . config('role.POST'))->group(function () {
+        Route::resource('post', PostController::class);
+    });
 
-//     // Statistic Management
-//     Route::middleware('can:' . config('role.STATISTIC'))->group(function () {
-//         Route::get('static', [StaticController::class, 'index'])->name('static.index');
-//     });
+    //     // Statistic Management
+    Route::middleware('can:' . config('role.STATISTIC'))->group(function () {
+        Route::get('static', [StaticController::class, 'index'])->name('static.index');
+    });
 
-//     // Slider Management
-//     Route::middleware('can:' . config('role.SLIDER'))->group(function () {
-//         Route::resource('slider', SliderController::class);
-//     });
+    //     // Slider Management
+    Route::middleware('can:' . config('role.SLIDER'))->group(function () {
+        Route::resource('slider', SliderController::class);
+    });
 
-//     // Information Management
-//     Route::middleware('can:' . config('role.INFO'))->group(function () {
-//         Route::get('device', [DeviceController::class, 'admin_device'])->name('device.admin');
-//         Route::resource('visitor', VisitorController::class);
-//     });
+    //     // Information Management
+    Route::middleware('can:' . config('role.INFO'))->group(function () {
+        Route::get('device', [DeviceController::class, 'admin_device'])->name('device.admin');
+        Route::resource('visitor', VisitorController::class);
+    });
 
-//     // Admin Management
-//     Route::middleware('can:' . config('role.ADMIN'))->group(function () {
-//         Route::get('list', [AdminController::class, 'list'])->name('admin.list');
-//         Route::get('add', [AdminController::class, 'add'])->name('admin.add');
-//         Route::get('edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
-//         Route::post('update/{id}', [AdminController::class, 'update'])->name('admin.update');
-//         Route::post('store', [AdminController::class, 'store'])->name('admin.store');
-//         Route::get('delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
-//     });
+    //     // Admin Management
+    Route::middleware('can:' . config('role.ADMIN'))->group(function () {
+        Route::get('list', [AdminController::class, 'list'])->name('admin.list');
+        Route::get('add', [AdminController::class, 'add'])->name('admin.add');
+        Route::get('edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::post('update/{id}', [AdminController::class, 'update'])->name('admin.update');
+        Route::post('store', [AdminController::class, 'store'])->name('admin.store');
+        Route::get('delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
+    });
 
-//     // Brand Management
-//     Route::middleware('can:' . config('role.BRAND'))->group(function () {
-//         Route::post('brand/sort', [BrandController::class, 'sort']);
-//         Route::resource('brand', BrandController::class);
-//     });
+    //     // Brand Management
+    Route::middleware('can:' . config('role.BRAND'))->group(function () {
+        Route::post('brand/sort', [BrandController::class, 'sort']);
+        Route::resource('brand', BrandController::class);
+    });
 
-//     // Coupon Management
-//     Route::middleware('can:' . config('role.COUPON'))->group(function () {
-//         Route::post('coupon/send', [CouponController::class, 'send']);
-//         Route::resource('coupon', CouponController::class);
-//     });
+    //     // Coupon Management
+    Route::middleware('can:' . config('role.COUPON'))->group(function () {
+        Route::post('coupon/send', [CouponController::class, 'send']);
+        Route::resource('coupon', CouponController::class);
+    });
 
-//     // Comment Management
-Route::middleware('can:' . config('role.COMMENT'))->group(function () {
-    Route::prefix('comment')->group(function () {
-        Route::get('/', [CommentController::class, 'index'])->name('comment.index');
-        Route::get('not-confirm', [CommentController::class, 'get_not_confirm'])->name('comment.not_confirm');
-        Route::get('confirm/{id}', [CommentController::class, 'set_confirm'])->name('comment.confirm');
-        Route::post('delete', [CommentController::class, 'delete'])->name('comment.delete');
+    //     // Comment Management
+    Route::middleware('can:' . config('role.COMMENT'))->group(function () {
+        Route::prefix('comment')->group(function () {
+            Route::get('/', [CommentController::class, 'index'])->name('comment.index');
+            Route::get('not-confirm', [CommentController::class, 'get_not_confirm'])->name('comment.not_confirm');
+            Route::get('confirm/{id}', [CommentController::class, 'set_confirm'])->name('comment.confirm');
+            Route::post('admin/delete', [CommentController::class, 'delete'])->name('comment.comment.delete');
+        });
+    });
+
+    //     // Order Management
+    Route::middleware('can:' . config('role.ORDER'))->group(function () {
+        Route::prefix('order')->group(function () {
+            Route::get('/', [OrderController::class, 'manage'])->name('order.manage');
+            Route::get('/{id}', [OrderController::class, 'admin_detail'])->name('order.admin_detail');
+            Route::get('print-order/{id}', [OrderController::class, 'print_order'])->name('order.admin_print');
+            Route::get('order-delete/{id}', [OrderController::class, 'admin_delete'])->name('order.admin_delete');
+            Route::get('order-delivery/{id}', [OrderController::class, 'delivery'])->name('order.delivery');
+        });
+    });
+
+    //     // Delivery Management
+    Route::middleware('can:' . config('role.FEESHIP'))->group(function () {
+        Route::prefix('delivery')->group(function () {
+            Route::post('select', [DeliveryController::class, 'select_delivery'])->name('delivery.select');
+            Route::get('/', [DeliveryController::class, 'index'])->name('delivery.index');
+            Route::post('store', [DeliveryController::class, 'store'])->name('delivery.store');
+            Route::post('show', [DeliveryController::class, 'show'])->name('delivery.show');
+            Route::post('delete', [DeliveryController::class, 'delete'])->name('delivery.delete');
+        });
+    });
+
+    //     // Product Management
+    Route::middleware('can:' . config('role.PRODUCT'))->group(function () {
+        Route::prefix('product')->group(function () {
+            Route::get('reference', [ProductController::class, 'reference'])->name('product.reference');
+            Route::get('gallery/{id}', [ProductController::class, 'product_gallery'])->name('product.gallery');
+            Route::get('delete-gallery/{id}', [ProductController::class, 'delete_gallery'])->name('product.gallery.delete');
+            Route::post('gallery-store/{id}', [ProductController::class, 'product_gallery_store'])->name('product.gallery.store');
+            Route::post('get-product-crawl', [ProductController::class, 'get_product_crawl'])->name('product.get_product_crawl');
+            Route::post('add-product-crawl', [ProductController::class, 'add_product_crawl'])->name('product.add_product_crawl');
+        });
+        Route::resource('product', ProductController::class);
+    });
+
+    //     // User Management
+    Route::middleware('can:' . config('role.USER'))->group(function () {
+        Route::prefix('user')->group(function () {
+            Route::get('/', [UserController::class, 'all_user'])->name('user.list');
+            Route::get('more/{id}', [UserController::class, 'more_feature'])->name('user.more');
+            Route::post('unblock', [UserController::class, 'unblock'])->name('user.unblock');
+            Route::post('block', [UserController::class, 'block'])->name('user.block');
+            Route::post('delete', [UserController::class, 'delete'])->name('user.delete');
+            Route::match(['get', 'post'], 'online', [UserController::class, 'online_user'])->name('user.online');
+        });
+
+        Route::get('device/{id}', [DeviceController::class, 'user_device'])->name('device.user');
+
+        Route::prefix('chat')->group(function () {
+            Route::post('get', [ChatController::class, 'get_admin_chat']);
+            Route::post('send', [ChatController::class, 'send_admin_chat']);
+        });
     });
 });
-
-//     // Order Management
-//     Route::middleware('can:' . config('role.ORDER'))->group(function () {
-//         Route::prefix('order')->group(function () {
-//             Route::get('/', [OrderController::class, 'manage'])->name('order.manage');
-//             Route::get('/{id}', [OrderController::class, 'admin_detail'])->name('order.admin_detail');
-//             Route::get('print-order/{id}', [OrderController::class, 'print_order'])->name('order.admin_print');
-//             Route::get('order-delete/{id}', [OrderController::class, 'admin_delete'])->name('order.admin_delete');
-//             Route::get('order-delivery/{id}', [OrderController::class, 'delivery'])->name('order.delivery');
-//         });
-//     });
-
-//     // Delivery Management
-//     Route::middleware('can:' . config('role.FEESHIP'))->group(function () {
-//         Route::prefix('delivery')->group(function () {
-//             Route::post('select', [DeliveryController::class, 'select_delivery'])->name('delivery.select');
-//             Route::get('/', [DeliveryController::class, 'index'])->name('delivery.index');
-//             Route::post('store', [DeliveryController::class, 'store'])->name('delivery.store');
-//             Route::post('show', [DeliveryController::class, 'show'])->name('delivery.show');
-//             Route::post('delete', [DeliveryController::class, 'delete'])->name('delivery.delete');
-//         });
-//     });
-
-//     // Product Management
-//     Route::middleware('can:' . config('role.PRODUCT'))->group(function () {
-//         Route::prefix('product')->group(function () {
-//             Route::get('reference', [ProductController::class, 'reference'])->name('product.reference');
-//             Route::get('gallery/{id}', [ProductController::class, 'product_gallery'])->name('product.gallery');
-//             Route::get('delete-gallery/{id}', [ProductController::class, 'delete_gallery'])->name('product.gallery.delete');
-//             Route::post('gallery-store/{id}', [ProductController::class, 'product_gallery_store'])->name('product.gallery.store');
-//             Route::post('get-product-crawl', [ProductController::class, 'get_product_crawl'])->name('product.get_product_crawl');
-//             Route::post('add-product-crawl', [ProductController::class, 'add_product_crawl'])->name('product.add_product_crawl');
-//         });
-//         Route::resource('product', ProductController::class);
-//     });
-
-//     // User Management
-//     Route::middleware('can:' . config('role.USER'))->group(function () {
-//         Route::prefix('user')->group(function () {
-//             Route::get('/', [UserController::class, 'all_user'])->name('user.list');
-//             Route::get('more/{id}', [UserController::class, 'more_feature'])->name('user.more');
-//             Route::post('unblock', [UserController::class, 'unblock'])->name('user.unblock');
-//             Route::post('block', [UserController::class, 'block'])->name('user.block');
-//             Route::post('delete', [UserController::class, 'delete'])->name('user.delete');
-//             Route::match(['get', 'post'], 'online', [UserController::class, 'online_user'])->name('user.online');
-//         });
-        
-//         Route::get('device/{id}', [DeviceController::class, 'user_device'])->name('device.user');
-
-//         Route::prefix('chat')->group(function () {
-//             Route::post('get', [ChatController::class, 'get_admin_chat']);
-//             Route::post('send', [ChatController::class, 'send_admin_chat']);
-//         });
-//     });
-// });

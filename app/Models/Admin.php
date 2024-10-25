@@ -36,6 +36,6 @@ class Admin extends Authenticatable
             if ($permissions->contains('key_code', $permission_check)) {
                 return true;
             }
-        }
+        } 
     }
 }
