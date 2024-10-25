@@ -19,6 +19,6 @@ class UserMiddleware
         if (Auth::check()) {
             return $next($request);
         }
-        return redirect()->route('user.signin_get');
+        return redirect()->route('user.login');
     }
 }

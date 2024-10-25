@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
-    use  Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens;
 
     protected $table = 'admins';
     protected $guarded = ['admin'];
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     public function roles()
@@ -22,9 +23,8 @@ class Admin extends Model
         // Nhiều-Nhiều
         return $this->belongsToMany(Role::class);
     }
-    
 
-    public function checkPermissionAccess($pemission_check)
+    public function checkPermissionAccess($permission_check)
     {
         $admin = auth('admin')->user();
         if ($admin->role == config('role.FULL_PERMISSION')) return true;
@@ -33,7 +33,7 @@ class Admin extends Model
 
         foreach ($roles as $role) {
             $permissions = $role->permissions;
-            if ($permissions->contains('key_code', $pemission_check)) {
+            if ($permissions->contains('key_code', $permission_check)) {
                 return true;
             }
         }

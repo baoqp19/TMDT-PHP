@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
+    AdminAuthController,
     HomeController,
     UserAuthController,
     OrderController,
@@ -68,7 +69,7 @@ Route::group([
         'as'     => 'user.',
     ], function () {
         Route::get('login', [UserAuthController::class, 'login'])->name('login');
-        Route::post('handleSignin', [UserAuthController::class, 'handleSignin'])->name('handleSignin');
+        Route::post('handlelogin', [UserAuthController::class, 'handlelogin'])->name('handlelogin');
     });
 
     Route::group([
@@ -76,7 +77,7 @@ Route::group([
         'as'     => 'user.',
     ], function () {
         Route::get('register', [UserAuthController::class, 'register'])->name('register');
-        Route::post('handleSignup', [UserAuthController::class, 'handleSignup'])->name('handleSignup');
+        Route::post('handleSignin', [UserAuthController::class, 'handleSignin'])->name('handleSignin');
 
         Route::get('/', [UserController::class, 'index'])->name('index');
     });
@@ -84,10 +85,10 @@ Route::group([
     Route::prefix('')->group(function () {
         //     Route::get('zalo', [SocialLoginController::class, 'redirect_to_zalo'])->name('social.zalo');
         //     Route::get('facebook', [SocialLoginController::class, 'redirect_to_facebook'])->name('social.facebook');
-        //     Route::get('zalo-social', [SocialLoginController::class, 'handle_signin_zalo']);
-        Route::get('signin.google', [SocialLoginController::class, 'redirect_to_google'])->name('social.google');
-        Route::get('auth/google/call-back', [SocialLoginController::class, 'handle_signin_google'])->name('auth.google.callback');
-        //     Route::get('facebook-social', [SocialLoginController::class, 'handle_signin_facebook']);
+        //     Route::get('zalo-social', [SocialLoginController::class, 'handle_login_zalo']);
+        Route::get('login.google', [SocialLoginController::class, 'redirect_to_google'])->name('social.google');
+        Route::get('auth/google/call-back', [SocialLoginController::class, 'handle_login_google'])->name('auth.google.callback');
+        //     Route::get('facebook-social', [SocialLoginController::class, 'handle_login_facebook']);
     });
 
     Route::get('forgot-password', [UserController::class, 'forgot_password'])->name('user.forgot_password');
@@ -161,9 +162,15 @@ Route::prefix('print')->group(function () {
     Route::get('order/{code}', [OrderController::class, 'print_order_new']); //middleware admin
 });
 
+
+
 // // Admin Routes
-// Route::get('admin/signin', [AdminAuthController::class, 'signin'])->name('admin.signin');
-// Route::post('admin/signin', [AdminAuthController::class, 'handle_signin'])->name('admin.handle_signin');
+
+
+Route::get('admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+Route::post('admin/login', [AdminAuthController::class, 'handleLogin'])->name('admin.handleLogin');
+
+
 
 // Route::group(['prefix' => 'admin',  'middleware' => ['auth:admin', 'auth_admin']], function () {
 //     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
