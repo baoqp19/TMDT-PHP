@@ -3,7 +3,7 @@
 @section('title_page', 'Chỉnh sửa Slider')
 @section('sub_title_page', 'Chỉnh sửa Slider cho sản phẩm')
 
-@section('content_page')
+@section('ContentPage')
 <script>
     (function() {
         'use strict';

@@ -3,7 +3,8 @@
 @section('title_page', 'Danh sách slider')
 @section('sub_title_page', 'Danh sách slider')
 
-@section('content_page')
+@section('ContentPage')
+
 <div class="card-header">Danh sách slider</div>
 <div class="table-responsive" style="padding-bottom: 10px;">
     @if(count($sliders) > 0)

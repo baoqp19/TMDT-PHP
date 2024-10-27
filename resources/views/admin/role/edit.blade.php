@@ -3,7 +3,7 @@
 @section('title_page', 'Chỉnh sửa vai trò')
 @section('sub_title_page', 'Chỉnh sửa vai trò')
 
-@section('content_page')
+@section('ContentPage')
 <script>
     (function() {
         'use strict';

@@ -30,6 +30,7 @@ class BrandController extends Controller
 
     public function edit(Brand $brand)
     {
+        
         return view('admin.brand.edit')->with(compact(['brand']));
     }
 

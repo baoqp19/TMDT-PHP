@@ -3,7 +3,8 @@
 @section('title_page', 'Danh sách vai trò')
 @section('sub_title_page', 'Danh sách vai trò')
 
-@section('content_page')
+@section('ContentPage')
+
 <div class="card-header">Danh sách vai trò</div>
 <div class="table-responsive" style="padding-bottom: 10px;">
     @if(count($roles) > 0)
@@ -30,13 +31,24 @@
                 <td class="text-center text-muted">{{$role->description}}</td>
 
                 <td class="text-center">
-                    <a href="{{route('role.edit', $role->id)}}" class="btn btn-primary btn-sm">Chỉnh sửa</a>
-                    <form action="{{route('role.destroy', $role->id)}}" class="form-delete" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                    </form>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span class="container-span-icon">
+                            <a href="{{route('role.edit', $role->id)}}" class="link-icon icon-edit">
+                                <i class="fa-light fa-pen-to-square"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <form class="link-icon-1" action="{{route('role.destroy', $role->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button style="" type="submit" class="btn-icon">
+                                    <i class="fa-light fa-trash"></i>
+                                </button>
+                            </form>
+                        </span>
+                    </div>
                 </td>
+               
             </tr>
             @endforeach
         </tbody>

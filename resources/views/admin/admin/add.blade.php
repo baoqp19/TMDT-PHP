@@ -23,7 +23,7 @@
 </script>
 
 <div class="card-body">
-    <h5 class="card-title">Thêm admin</h5>
+    <h5 class="card-title" >Thêm admin</h5>
     <form class="needs-validation" action="{{route('admin.store')}}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
         <div class="form-row">
@@ -80,9 +80,9 @@
         </div>
 
         <div class="form-row text-center">
-            <div class="col-md-12 mb-3 mt-2">
-                <button class="btn btn-success " name="submit" style="padding-left: 35px; padding-right:35px ;" type="submit">Thêm</button>
+            <div class="col-md-12 mb-3 mt-2"><button class="btn btn-success" name="submit" style="padding-left: 35px; padding-right:35px; background: #B5292F; border: none; online " type="submit">Thêm</button>
             </div>
+                
         </div>
 
     </form>

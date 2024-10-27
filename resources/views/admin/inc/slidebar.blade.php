@@ -1,3 +1,4 @@
+
 <div class="app-sidebar sidebar-shadow">
 
     <div class="app-header__logo">
@@ -25,7 +26,7 @@
         <span>
             <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
                 <span class="btn-icon-wrapper">
-                    <i class="fa fa-ellipsis-v fa-w-6"></i>
+                   
                 </span>
             </button>
         </span>
@@ -36,35 +37,37 @@
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
 
-                <li class="app-sidebar__heading">Trang chủ</li>
+                <li style="color: #B5292F "  class="app-sidebar__heading">Trang chủ</li>
                 <li>
-                    <a href="{{route('admin.index')}}" class="mm-active">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Trang chủ
+                    <a style= href="{{route('admin.index')}}" class="mm-active">
+                        <i style="color: #B5292F"  class="fa-solid fa-house"></i>
+                        &nbsp; Trang chủ
                     </a>
                 </li>
 
-                <li class="app-sidebar__heading">Admin & Phân Quyền</li>
+                <li style="color: #B5292F "  class="app-sidebar__heading">Admin & Phân Quyền</li>
                 @can('ADMIN')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Admin
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Admin</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('admin.add')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Thêm Admin
+                                <i style="font-size: 17px;" class="fa-sharp-duotone fa-solid fa-plus"></i>
+                                <span style="margin-left: 3px;">Thêm Admin</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('admin.list')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Danh sách Admin
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="padding-right: 2px;"> Danh sách Admin</span>
                             </a>
                         </li>
                     </ul>
@@ -73,49 +76,54 @@
                 @can('ROLE')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Vai trò
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                             <div class="d-flex justify-content-between align-items-center" >
+                                <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                 <span style= >Vai trò</span>
+                             </div>
+                            <i class="fa-thin fa-caret-down"></i>
+                        </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('role.create')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Thêm vai trò
+                                <i style="font-size: 17px;" class="fa-sharp-duotone fa-solid fa-plus"></i>
+                                <span style="margin-left: 3px;" >Thêm vai trò</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('role.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Danh sách vai trò
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="margin-left: 3px;" >Danh sách vai trò</span>
                             </a>
                         </li>
 
                     </ul>
                 </li>
                 @endcan
-                <li class="app-sidebar__heading">Tính Năng Quản Trị</li>
+                <li style="color: #B5292F " class="app-sidebar__heading">Tính Năng Quản Trị</li>
                 @can('BRAND')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Thương hiệu
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style=>Thương hiệu</span>
+                            </div>
+                            <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('brand.create')}}">
-                                <i class="metismenu-icon"></i>
-                                Thêm thương hiệu
+                                <i style="font-size: 17px;" class="fa-sharp-duotone fa-solid fa-plus"></i>
+                                <span style="margin-left: 3px;" >Thêm thương hiệu</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('brand.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Danh sách thương hiệu
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="margin-left: 3px;" >Danh sách thương hiệu</span>
                             </a>
                         </li>
                     </ul>
@@ -124,29 +132,31 @@
                 @can('PRODUCT')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Sản phẩm
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Sản phẩm</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('product.create')}}">
-                                <i class="metismenu-icon"></i>
+                                <i style="font-size: 17px;" class="fa-sharp-duotone fa-solid fa-plus"></i>
                                 Thêm sản phẩm
                             </a>
                         </li>
                         <li>
                             <a href="{{route('product.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Danh sách sản phẩm
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="margin-left: 3px;" >Danh sách sản phẩm</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('product.reference')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Tham khảo sản phẩm
+                                <i class="fa-regular fa-asterisk"></i>
+                                <span style="margin-left: 3px;" >Tham khảo sản phẩm</span>
                             </a>
                         </li>
                     </ul>
@@ -155,22 +165,25 @@
                 @can('POST')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Bài viết
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Bài viết</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('post.create')}}">
-                                <i class="metismenu-icon"></i>
-                                Thêm bài viết
+                                <i style="font-size: 17px;" class="fa-sharp-duotone fa-solid fa-plus"></i>
+                                <span style="margin-left: 3px;" >Thêm bài viết</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('post.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Danh sách bài viết
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="margin-left: 3px;" >Danh sách bài viết</span>
                             </a>
                         </li>
                     </ul>
@@ -179,22 +192,25 @@
                 @can('SLIDER')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Slider
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Slider</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('slider.create')}}">
-                                <i class="metismenu-icon"></i>
-                                Thêm slider
+                                <i style="font-size: 17px;" class="fa-sharp-duotone fa-solid fa-plus"></i>
+                                <span style="margin-left: 3px;" >Thêm Slider</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('slider.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Danh sách slider
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="margin-left: 3px;" >Danh sách Slider</span>
                             </a>
                         </li>
                     </ul>
@@ -203,22 +219,25 @@
                 @can('COUPON')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Mã giảm giá
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Giảm giá</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('coupon.create')}}">
-                                <i class="metismenu-icon"></i>
-                                Thêm mã giảm giá
+                                <i style="font-size: 17px;" class="fa-sharp-duotone fa-solid fa-plus"></i>
+                                <span style="margin-left: 3px;" >Thêm mã giảm giá</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('coupon.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Danh sách mã giảm giá
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="margin-left: 3px;" >Danh sách mã giảm giá</span>
                             </a>
                         </li>
                     </ul>
@@ -227,16 +246,19 @@
                 @can('ORDER')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Mua hàng
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Mua hàng</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('order.manage')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Danh sách mua hàng
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="margin-left: 3px;" >Danh sách mua hàng</span>
                             </a>
                         </li>
                     </ul>
@@ -245,16 +267,19 @@
                 @can('FEESHIP')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Vận chuyển
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span >Vận chuyển</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('delivery.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Phí vận chuyển
+                                <i class="fa-light fa-truck-fast"></i>
+                                <span style="margin-left: 3px;" >Phí vận chuyển</span>
                             </a>
                         </li>
                     </ul>
@@ -263,23 +288,25 @@
                 @can('USER')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Người dùng
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Người dùng</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('user.online')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Người dùng đang trực tuyến
+                                <i style="" class="fa-thin fa-head-side-headphones"></i>
+                                <span style="margin-left: 3px;" >Người dùng online</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('user.list')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Tất cả người dùng
+                                <i style="margin-right: 3px;" class="fa-regular fa-list-ul"></i>
+                                <span style="margin-left: 3px;" >Tất cả người dùng</span>
                             </a>
                         </li>
                     </ul>
@@ -288,23 +315,25 @@
                 @can('COMMENT')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Bình luận
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Bình luận</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('comment.not_confirm')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Bình luận chờ duyệt
+                                <i class="fa-light fa-comment"></i>
+                                <span style="margin-left: 3px;" >Bình luật phê duyệt</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('comment.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Tât cả bình luận
+                                <i class="fa-thin fa-comments"></i>
+                                <span style="margin-left: 3px;" >Tất cả bình luật</span>
                             </a>
                         </li>
                     </ul>
@@ -313,23 +342,25 @@
                 @can('INFO')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Thông tin
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Thông tin</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('device.admin')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Thông tin thiết bị
+                                <i class="fa-thin fa-circle-info"></i>
+                                <span style="margin-left: 3px;" >Thông tin thiết bị</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('visitor.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Thiết bị truy cập
+                                <i class="fa-light fa-computer-speaker"></i>
+                                <span style="margin-left: 3px;" >Thiết bị truy cập</span>
                             </a>
                         </li>
                     </ul>
@@ -338,16 +369,19 @@
                 @can('STATISTIC')
                 <li>
                     <a href="#">
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Thống kê
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center" >
+                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
+                                <span style= >Thống kê</span>
+                            </div>
+                           <i class="fa-thin fa-caret-down"></i>
+                       </div>
                     </a>
                     <ul>
                         <li>
                             <a href="{{route('static.index')}}">
-                                <i class="metismenu-icon">
-                                </i>
-                                Tổng quan
+                                <i class="fa-thin fa-chart-simple"></i>
+                                 <span style="margin-left: 3px;" >Tổng quan</span>
                             </a>
                         </li>
                     </ul>

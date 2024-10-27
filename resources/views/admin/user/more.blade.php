@@ -3,7 +3,7 @@
 @section('title_page', 'Thông tin người dùng')
 @section('sub_title_page', 'Thông tin người dùng')
 
-@section('content_page')
+@section('ContentPage')
 <div class="card-body">
     <h5 class="card-title text-center mt-3 pb-4" style="font-size: 25px; border-bottom: 1px solid rgba(26,54,126,0.125);">
         <i class="fas fa-user-cog" style="font-size: 40px;"></i>

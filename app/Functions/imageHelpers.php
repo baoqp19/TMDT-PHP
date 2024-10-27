@@ -2,15 +2,35 @@
 
 use Illuminate\Support\Facades\File;
 
+use Illuminate\Support\Str;
 
 function uploadImage($file, $position)
 {
+    // Đường dẫn lưu ảnh
     $path = 'admins/uploads/' . $position . '/';
+
+    // Kiểm tra nếu thư mục chưa tồn tại, thì tạo mới
+    if (!File::exists($path)) {
+        File::makeDirectory($path, 0755, true);
+    }
+
+    // Kiểm tra định dạng file
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
     $file_ext = $file->getClientOriginalExtension();
-    $img_name =  substr(md5(time()), 0, 10) . rand(0, 99) . '.' . $file_ext;
+
+    if (!in_array(strtolower($file_ext), $allowedExtensions)) {
+        throw new \Exception('File type is not supported');
+    }
+
+    // Tạo tên file duy nhất
+    $img_name = Str::random(10) . time() . '.' . $file_ext;
+
+    // Di chuyển file vào thư mục
     $file->move($path, $img_name);
+
     return $img_name;
 }
+
 
 function deleteImage($name_img, $position)
 {

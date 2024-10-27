@@ -37,7 +37,7 @@
 
             <div class="col-md-6 mb-3">
                 <label for="validationTooltip01">Mô tả</label>
-                <input type="text" class="form-control" id="validationTooltip01" name="description" placeholder="Mô tả" value="{{$brand->description}}" required>
+                <input type="text" class="form-control" id="validationTooltip01" name="description" placeholder="Mô tả" value="{{$brand->description}}" maxlength="255" required>
                 <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
                 <div class="valid-feedback">Tuyệt vời!!!</div>
             </div>

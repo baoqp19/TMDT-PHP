@@ -5,11 +5,46 @@
 
 @section('ContentPage')
 
+@push('styles')
+    <style>
+        .container-span-icon{
+            margin-right: 5px;
+        }
+
+        .link-icon{
+            background-color: #c9c2bf;
+            border-radius: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 15px;
+            padding-left: 15px;
+            
+        }
+        .link-icon-1{
+            background-color: #B5292F !important;
+            border-radius: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .link-icon-1 i{
+            color: #f7f6f5;
+        }
+        .link-icon i {
+            font-size: 14px;
+            color: #333;
+        }
+
+
+    </style>   
+@endpush
+
 <div class="card-header">Danh sách admin</div>
 <div class="table-responsive" style="padding-bottom: 10px;">
     @if(count($admins))
 
-    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+    <table class="align-middle mb-0 table table-borderless table-striped">
         <thead>
             <tr>
                 <th class="text-center">STT</th>
@@ -52,8 +87,18 @@
                 </td>
                 <td class="text-center text-muted">{{$admin->description}}</td>
                 <td class="text-center">
-                    <a href="{{route('admin.edit', $admin->id)}}" class="btn btn-success btn-sm">Chỉnh sửa</a>
-                    <a href="{{route('admin.delete', $admin->id)}}" class="btn btn-danger btn-sm">Xóa</a>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span class="container-span-icon" >
+                            <a class="link-icon" class="icon-edit" href="{{route('admin.edit', $admin->id)}}" class="">
+                                <i class="fa-light fa-pen-to-square"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <a class="link-icon-1"  href="{{route('admin.delete', $admin->id)}}" class="btn btn-danger btn-sm">
+                                <i class="fa-light fa-trash"></i>
+                            </a>
+                        </span>
+                     </div>
                 </td>
             </tr>
             @endforeach

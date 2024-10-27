@@ -3,7 +3,8 @@
 @section('title_page', 'Sản phẩm')
 @section('sub_title_page', 'Danh sách sản phẩm')
 
-@section('content_page')
+@section('ContentPage')
+
 <div class="card-body">
     <h5 class="card-title"> Tham khảo sản phẩm</h5>
     <div class="form-row text-center">

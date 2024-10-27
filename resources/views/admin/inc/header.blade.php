@@ -21,11 +21,18 @@
     <link href="{{asset('admins/css/select2.min.css')}}" rel="stylesheet">
     <script type="text/javascript" src="{{asset('admins/js/jquery-3.2.1.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admins/js/select2.min.js')}}"></script>
-
+    <link href="{{asset('admins/css/EditAndDelete.css')}}" rel="stylesheet">
 
     <style>
-      
+        .search-icon{
+            color: #B5292F !important;
+        }  
+
     </style>
+
+
+    @stack('styles')
+   
 
 </head>
 
@@ -34,13 +41,13 @@
         <div class="app-header header-shadow">
             <div class="app-header__logo">
                 <a href="{{route('admin.index')}}" class="">
-                    <img src="{{asset('admins/img/logo.png')}}" alt="logo-image" style="width: 120px;">
+                    <i style="font-size: 25px; color: #B5292F"  class="fa-thin fa-mobile-notch"></i>
                 </a>
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
                             <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
+                                <i  style="font-size: 30px; color: #B5292F " class="fa-solid fa-ellipsis"></i>
                             </span>
                         </button>
                     </div>
@@ -59,7 +66,7 @@
                 <span>
                     <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
                         <span class="btn-icon-wrapper">
-                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                            <i class="fa-solid fa-ellipsis"></i>
                         </span>
                     </button>
                 </span>
@@ -69,14 +76,14 @@
                     <div class="search-wrapper">
                         <div class="input-holder">
                             <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
+                            <button class="search-icon"><span style="color: #B5292F !important"  ></span></button>
                         </div>
                         <button class="close"></button>
                     </div>
                     <ul class="header-menu nav">
                         <li class="nav-item">
                             <a href="{{route('admin.index')}}" class="nav-link">
-                                <i class="nav-link-icon fa fa-home"> </i>
+                                <i style="color: #B5292F" class="nav-link-icon fa fa-home"> </i>
                                 Trang chủ
                             </a>
                         </li>
@@ -91,10 +98,7 @@
 
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        {{Auth::guard('admin')->user()->name}}
-                                    </div>
-                                    <div class="widget-subheading">
-                                        {{Auth::guard('admin')->user()->description}}
+                                       <span style="color: #B5292F" > {{Auth::guard('admin')->user()->name}}</span>
                                     </div>
                                 </div>
 

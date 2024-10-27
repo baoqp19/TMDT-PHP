@@ -3,7 +3,7 @@
 @section('title_page', 'Người dùng')
 @section('sub_title_page', 'Tất cả người dùng')
 
-@section('content_page')
+@section('ContentPage')
 
 <div class="card-header">Danh sách người dùng</div>
 <div class="table-responsive" style="padding-bottom: 10px;">

@@ -9471,7 +9471,7 @@ button,
     opacity: 1;
 }
 .vertical-nav-menu li.mm-active > a {
-    font-weight: bold;
+    font-weight: normal;
 }
 .vertical-nav-menu li.mm-active > a i.metismenu-state-icon {
     transform: rotate(-180deg);
@@ -10038,6 +10038,7 @@ button,
     position: relative;
     z-index: 2;
     float: right;
+    
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     background: rgba(0, 0, 0, 0.06);
@@ -13562,6 +13563,7 @@ a.badge-alternate:focus {
     width: 30px;
     text-align: center;
 }
+
 .actions-icon-btn .btn-icon-only:hover {
     color: #3f6ad8;
 }
@@ -20909,10 +20911,10 @@ a.fc-more:hover {
     height: 100vh;
     transform: translate(500px);
     transition: all 0.2s;
-    box-shadow: -0.46875rem 0 2.1875rem rgba(4, 9, 20, 0.03),
+    /* box-shadow: -0.46875rem 0 2.1875rem rgba(4, 9, 20, 0.03),
         -0.9375rem 0 1.40625rem rgba(4, 9, 20, 0.03),
         -0.25rem 0 0.53125rem rgba(4, 9, 20, 0.05),
-        -0.125rem 0 0.1875rem rgba(4, 9, 20, 0.03);
+        -0.125rem 0 0.1875rem rgba(4, 9, 20, 0.03); */
 }
 .ui-theme-settings .btn-open-options {
     border-radius: 50px;
@@ -20931,6 +20933,10 @@ a.fc-more:hover {
         0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
     margin-top: -27px;
 }
+.ui-theme-settings .btn-open-options .setting{
+    /* margin-top: 12px; */
+}
+
 .ui-theme-settings .btn-open-options svg {
     top: 50%;
     left: 50%;

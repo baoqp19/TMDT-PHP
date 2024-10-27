@@ -1,6 +1,7 @@
 @include('admin.inc.header')
 @include('admin.inc.setting')
 
+
 <div class="app-main">
     @include('admin.inc.slidebar')
 
@@ -10,8 +11,7 @@
                 <div class="page-title-wrapper">
                     <div class="page-title-heading">
                         <div class="page-title-icon">
-                            <i class="pe-7s-car icon-gradient bg-mean-fruit">
-                            </i>
+                            <i class="fa-light fa-users" style="color: #B5292F; " ></i>
                         </div>
                         <div>
                             @yield('title_page')

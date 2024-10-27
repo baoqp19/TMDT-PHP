@@ -3,7 +3,7 @@
 @section('title_page', 'Sản phẩm')
 @section('sub_title_page', 'Danh sách sản phẩm')
 
-@section('content_page')
+@section('ContentPage')
 <div class="card-header">Danh sách sản phẩm</div>
 <div class="table-responsive" style="padding-bottom: 10px;">
     @if(count($products))
