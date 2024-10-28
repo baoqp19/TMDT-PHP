@@ -91,12 +91,12 @@
         </div>
     </form>
 </div>
-<script>
-    $(".check-all").on("click", function() {
-        $(this)
-            .parents()
-            .find(".checkbox-childrent")
-            .prop("checked", $(this).prop("checked"));
-    });
-</script>
+    <script>
+        $(".check-all").on("click", function() {
+            $(this)
+                .parents()
+                .find(".checkbox-childrent")
+                .prop("checked", $(this).prop("checked"));
+        });
+    </script>
 @endsection

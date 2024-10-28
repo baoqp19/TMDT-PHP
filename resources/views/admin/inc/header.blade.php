@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
     <link href="{{asset('admins/css/toastr.min.css')}}" rel="stylesheet">
     <link href="{{asset('admins/css/select2.min.css')}}" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script type="text/javascript" src="{{asset('admins/js/jquery-3.2.1.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('admins/js/select2.min.js')}}"></script>
     <link href="{{asset('admins/css/EditAndDelete.css')}}" rel="stylesheet">

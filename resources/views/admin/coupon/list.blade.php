@@ -3,6 +3,7 @@
 @section('title_page', 'Danh sách mã giảm giá')
 @section('sub_title_page', 'Danh sách mã giảm giá')
 
+
 <div class="modal fade" id="modal-coupon" style="display: none;" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content model-send-coupon" role="document">
@@ -61,7 +62,7 @@
     </div>
 </div>
 
-@section('content_page')
+@section('ContentPage')
 
 <div class="card-header">Danh sách mã giảm giá</div>
 <div class="table-responsive" style="padding-bottom: 10px;">

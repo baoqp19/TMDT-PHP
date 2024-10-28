@@ -54,14 +54,27 @@
                     @endif
                 </td>
                 <td class="text-center">
-                    <a href="{{route('product.edit', $product->id)}}" class="btn btn-primary btn-sm">Chỉnh sửa</a>
-                    <a href="{{route('product.gallery', $product->id)}}" class="btn btn-info btn-sm">Hình ảnh</a>
-                    <form action="{{route('product.destroy', $product->id)}}" class="form-delete" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                    </form>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span class="container-span-icon">
+                            <a href="{{route('product.edit', $product->id)}}" class="link-icon icon-edit">
+                                <i class="fa-light fa-pen-to-square"></i>
+                            </a>
+                        </span>
+                        <span style="margin-right: 4px;">
+                            <a style="border-radius: 10px; padding-right: 14px; padding-left: 14px;" href="{{route('product.gallery', $product->id)}}" class="btn btn-info btn-sm"><i class="fa-thin fa-images"></i></a>
+                        </span>
+                        <span>
+                            <form class="link-icon-1" action="{{route('product.destroy', $product->id)}}"  method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button style="" type="submit" class="btn-icon">
+                                    <i class="fa-light fa-trash"></i>
+                                </button>
+                            </form>
+                        </span>
+                    </div>
                 </td>
+
             </tr>
             @endforeach
         </tbody>

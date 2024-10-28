@@ -35,6 +35,9 @@
             font-size: 14px;
             color: #333;
         }
+        .confirmButton{
+            margin-right: 7px;
+        }
 
 
     </style>   
@@ -94,8 +97,8 @@
                             </a>
                         </span>
                         <span>
-                            <a class="link-icon-1"  href="{{route('admin.delete', $admin->id)}}" class="btn btn-danger btn-sm">
-                                <i class="fa-light fa-trash"></i>
+                            <a href="javascript:void(0);" onclick="confirmDelete('{{ route('admin.delete', $admin->id) }}')" class="link-icon-1 btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
                             </a>
                         </span>
                      </div>
@@ -108,4 +111,53 @@
     <div class="text-center text-noti">Không admin dùng nào để hiển thị</div>
     @endif
 </div>
+
+@push('scripts')
+    <script>
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger confirmButton"
+        },
+        buttonsStyling: false
+    });
+
+    function confirmDelete(url) {
+        swalWithBootstrapButtons.fire({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn sẽ không thể hoàn tác hành động này!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Có, xóa nó!",
+            cancelButtonText: "Không, hủy!",
+            reverseButtons: true,
+            background: "#fff"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Nếu người dùng xác nhận xóa, điều hướng đến URL để thực hiện hành động xóa
+            
+                swalWithBootstrapButtons.fire({
+                    title: "Đã xóa!",
+                    text: "Dữ liệu của bạn đã được xóa.",
+                    icon: "success",
+                    background: "#fff"
+
+                });
+
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 1000); // Thay đổi thời gian ở đây nếu cần
+
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: "Đã hủy",
+                    text: "Dữ liệu của bạn an toàn!",
+                    icon: "error",
+                    background: "#fff"
+                });
+            }
+        });
+    }
+    </script>
+@endpush
 @endsection

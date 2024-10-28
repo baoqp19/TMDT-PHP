@@ -29,7 +29,13 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="validationTooltip01">Tên sản phẩm</label>
-                <input type="text" class="form-control" name="name" id="validationTooltip01" placeholder="Tên sản phẩm" value="" required>
+                <input type="text" class="form-control" name="name" id="validationTooltip01" placeholder="Tên sản phẩm..." value="" required>
+                <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
+                <div class="valid-feedback">Tuyệt vời!!!</div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationTooltip01">Slug sản phẩm</label>
+                <input type="text" class="form-control" name="slug" id="validationTooltip01" placeholder="Slug sản phẩm..." value="" required>
                 <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
                 <div class="valid-feedback">Tuyệt vời!!!</div>
             </div>
@@ -53,21 +59,21 @@
 
             <div class="col-md-4 mb-3">
                 <label for="validationTooltip01">Giá sản phẩm</label>
-                <input type="number" class="form-control" name="price" id="validationTooltip01" placeholder="Giá sản phẩm" value="" required>
+                <input type="number" class="form-control" name="price" id="validationTooltip01" placeholder="Giá sản phẩm..." value="" required>
                 <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
                 <div class="valid-feedback">Tuyệt vời!!!</div>
             </div>
 
             <div class="col-md-4 mb-3">
                 <label for="validationTooltip01">Số lượng</label>
-                <input type="number" class="form-control" name="quantity" id="validationTooltip01" placeholder="Số lượng" value="" required>
+                <input type="number" class="form-control" name="quantity" id="validationTooltip01" placeholder="Số lượng..." value="" required>
                 <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
                 <div class="valid-feedback">Tuyệt vời!!!</div>
             </div>
 
-            <div class="col-md-4 mb-3">
+            <div class="col-md-12 mb-3">
                 <label for="validationTooltip01">Mô tả sản phẩm</label>
-                <input type="text" class="form-control" name="description" id="validationTooltip01" placeholder="Mô tả" value="" required>
+                <input type="text" class="form-control" name="description" id="validationTooltip01" placeholder="Mô tả..." value="" required>
                 <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
                 <div class="valid-feedback">Tuyệt vời!!!</div>
             </div>
@@ -75,7 +81,7 @@
             <div class="col-md-12 mb-3">
                 <div class="custom-file">
                     <label for="validationTooltip01">Hình ảnh</label>
-                    <input type="file" class="form-control" name="image" id="validatedCustomFile" accept=".PNG, .JPEG, .JPG" required>
+                    <input type="file" class="form-control" name="image" id="validatedCustomFile" accept=".PNG, .JPEG, .JPG..." required>
                     <div class="invalid-feedback">Vui lòng chọn một trong các định dạng ảnh: PNG, JPG, JPEG.</div>
                     <div class="valid-feedback">Tuyệt vời!!!</div>
                     @if ($errors->has('file_error'))
@@ -87,7 +93,7 @@
         </div>
 
         <div class="form-row text-center">
-            <div class="col-md-12 mb-3 mt-2"><button class="btn btn-success" name="submit" style="padding-left: 35px; padding-right:35px; background: #B5292F; border: none; online " type="submit">Thêm</button>
+            <div class="col-md-12 mb-3 mt-2"><button class="btn btn-success" name="submit" style="padding-left: 35px; padding-right:35px; background: #B5292F; border: none; online font-size: 24px;" type="submit">Thêm</button>
             </div>
                 
         </div>

@@ -40,7 +40,7 @@
                 <li style="color: #B5292F "  class="app-sidebar__heading">Trang chủ</li>
                 <li>
                     <a style= href="{{route('admin.index')}}" class="mm-active">
-                        <i style="color: #B5292F"  class="fa-solid fa-house"></i>
+                        <i style=""  class="fa-solid fa-house"></i>
                         &nbsp; Trang chủ
                     </a>
                 </li>

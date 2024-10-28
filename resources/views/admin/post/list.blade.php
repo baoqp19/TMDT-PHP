@@ -3,7 +3,7 @@
 @section('title_page', 'Danh sách bài viết')
 @section('sub_title_page', 'Danh sách bài viết')
 
-@section('content_page')
+@section('ContentPage')
 <div class="card-header">Danh sách bài viết</div>
 <div class="table-responsive" style="padding-bottom: 10px;">
     @if(count($posts))

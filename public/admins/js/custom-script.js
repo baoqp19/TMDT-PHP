@@ -79,19 +79,41 @@ $(document).ready(function () {
         });
     });
 
-    $(".get-data").click(function () {
+    // $(".get-data").click(function () {
+    //     const brand = $(".select-brand").val();
+
+    //     $.ajax({
+    //         url: "get-product-crawl",
+    //         method: "POST",
+    //         data: { brand },
+    //         success: function (res) {
+    //             $(".product-list").html(res.trim());
+    //             toastr["success"]("Lấy dữ liệu thành công !!!", "Thành công");
+    //         },
+    //         error: function (rep) {
+    //             toastr["error"]("Lấy dữ liệu thất bại !!!", "Thất bại");
+    //         },
+    //     });
+    // });
+    $(".get-data").click(function (event) {
+        event.preventDefault(); // Ngăn chặn reload trang khi nhấn submit nếu là trong form
+
         const brand = $(".select-brand").val();
+        const url = "{{ route('product.get_product_crawl') }}"; // Sử dụng tên route
 
         $.ajax({
-            url: "get-product-crawl",
+            url: "get_product_crawl",
             method: "POST",
-            data: { brand },
+            data: {
+                brand,
+                _token: $('meta[name="csrf-token"]').attr("content"), // CSRF token
+            },
             success: function (res) {
-                $(".product-list").html(res.trim());
-                toastr["success"]("Lấy dữ liệu thành công !!!", "Thành công");
+                $(".product-list").html(res.html.trim());
+                toastr["success"]("Lấy dữ liệu thành công!", "Thành công");
             },
             error: function (rep) {
-                toastr["error"]("Lấy dữ liệu thất bại !!!", "Thất bại");
+                toastr["error"]("Lấy dữ liệu thất bại!", "Thất bại");
             },
         });
     });

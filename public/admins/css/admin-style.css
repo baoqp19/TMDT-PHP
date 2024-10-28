@@ -458,8 +458,7 @@
 }
 
 .model-send-coupon {
-    max-width: 520px !important;
-    width: 520px !important;
+    min-width: 630px !important;
 }
 
 .index-home {

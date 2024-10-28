@@ -25,13 +25,31 @@ class ProductController extends Controller
         return view('admin.product.add')->with(compact(['brands']));
     }
 
+    // public function store(ProductRequest $req)
+    // {
+    //     $product = new Product;
+    //     $product->fill($req->all());
+    //     $product->save();
+    //     return redirect()->route('product.index');
+    // }
+
     public function store(ProductRequest $req)
     {
         $product = new Product;
-        $product->fill($req->all());
+
+        // Kiểm tra và xử lý file ảnh nếu có
+        if ($req->hasFile('image')) {
+            // Gọi hàm uploadImage với file và vị trí thư mục bạn muốn lưu
+            $img_name = uploadImage($req->file('image'), 'products');
+            $product->image = $img_name;
+        }
+
+        $product->fill($req->except('image')); // Loại bỏ 'image' nếu đã xử lý riêng
         $product->save();
-        return redirect()->route('product.index');
+
+        return redirect()->route('product.index')->with('success', 'Sản phẩm đã được thêm thành công!');
     }
+
 
     public function detail($slug)
     {
@@ -47,7 +65,7 @@ class ProductController extends Controller
             'product_id' => $product->id,
             'status' => 1,
         ])->latest('id')->take(15)->get();
-            
+
         $your_comment = [];
         if (Auth::check()) {
             $your_comment = Comment::where([

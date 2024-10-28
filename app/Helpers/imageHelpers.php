@@ -4,15 +4,13 @@ use Illuminate\Support\Facades\File;
 
 use Illuminate\Support\Str;
 
+// vì nó không được định nghĩa trong phạm vi của controller. xuống composoer.json để thêm
+
 function uploadImage($file, $position)
 {
     // Đường dẫn lưu ảnh
     $path = 'admins/uploads/' . $position . '/';
 
-    // Kiểm tra nếu thư mục chưa tồn tại, thì tạo mới
-    if (!File::exists($path)) {
-        File::makeDirectory($path, 0755, true);
-    }
 
     // Kiểm tra định dạng file
     $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
