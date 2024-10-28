@@ -58,12 +58,11 @@
                 <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
                 <div class="valid-feedback">Tuyệt vời!!!</div>
             </div>
-
         </div>
 
         <div class="form-row text-center">
             <div class="col-md-12 mb-3 mt-2">
-                <button class="btn btn-success add-delivery" name="add-delivery" style="padding-left: 35px; padding-right:35px ;" type="button">Thêm phí vận chuyển</button>
+                <button class="btn btn-success add-delivery" name="add-delivery" style="padding-left: 35px; padding-right: 35px; font-size: 15px; background: #B5292F; border: none;" type="button">Thêm phí vận chuyển</button>
             </div>
         </div>
     </form>

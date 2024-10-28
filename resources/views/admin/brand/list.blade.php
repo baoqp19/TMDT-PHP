@@ -38,9 +38,8 @@
             color: #333;
         }
         .confirmButton{
-            margin-left: 7px;
+           margin-left: 7px;
         }
-
 
     </style>
 @endpush;
@@ -74,7 +73,7 @@
                 <td class="text-center">
                     <div class="widget-subheading opacity-7">{{$brand->description}}</div>
                 </td>
-                <td class="text-center">
+                    <td class="text-center">
                         <div class="d-flex justify-content-center align-items-center">
                             <span class="container-span-icon">
                                 <a href="{{ route('brand.edit', $brand->id) }}" class="link-icon icon-edit">
@@ -82,18 +81,17 @@
                                 </a>
                             </span>
                             <span>
-                                <form class="link-icon-1" href="javascript:void(0);" onclick="confirmDelete('{{ route('brand.destroy', $brand->id) }}')" method="POST">
+                                <form class="link-icon-1" action="{{ route('brand.destroy', $brand->id) }}" method="POST" onsubmit="event.preventDefault(); confirmDelete('{{ route('brand.destroy', $brand->id) }}', this);">
                                     @csrf
                                     @method('DELETE')
-                                    <button style="" type="submit" class="btn-icon">
+                                    <button type="submit" class="btn-icon">
                                         <i class="fa-light fa-trash"></i>
                                     </button>
                                 </form>
                             </span>
+                            
                         </div>
-                    </td>
-                    
-                </td>
+                     </td>
             </tr>
             @endforeach
         </tbody>
@@ -105,16 +103,16 @@
 
 
 @push('scripts')
-    <script>
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-            confirmButton: "btn btn-success",
+<script>
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success confirmButton",
             cancelButton: "btn btn-danger confirmButton"
         },
         buttonsStyling: false
     });
 
-    function confirmDelete(url) {
+    function confirmDelete(url, form) {
         swalWithBootstrapButtons.fire({
             title: "Bạn có chắc chắn?",
             text: "Bạn sẽ không thể hoàn tác hành động này!",
@@ -126,18 +124,17 @@
             background: "#fff"
         }).then((result) => {
             if (result.isConfirmed) {
-                // Nếu người dùng xác nhận xóa, điều hướng đến URL để thực hiện hành động xóa
-            
+                // Hiển thị thông báo "Đã xóa!" trước khi gửi form
                 swalWithBootstrapButtons.fire({
                     title: "Đã xóa!",
                     text: "Dữ liệu của bạn đã được xóa.",
                     icon: "success",
                     background: "#fff"
-
                 });
 
+                // Gửi form sau 1 giây (1000 milliseconds)
                 setTimeout(() => {
-                    window.location.href = url;
+                    form.submit(); // Gửi form để thực hiện yêu cầu DELETE
                 }, 1000); // Thay đổi thời gian ở đây nếu cần
 
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -150,7 +147,8 @@
             }
         });
     }
-    </script>
+</script>
+
 @endpush
 
 @endsection

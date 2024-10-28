@@ -25,13 +25,6 @@ class ProductController extends Controller
         return view('admin.product.add')->with(compact(['brands']));
     }
 
-    // public function store(ProductRequest $req)
-    // {
-    //     $product = new Product;
-    //     $product->fill($req->all());
-    //     $product->save();
-    //     return redirect()->route('product.index');
-    // }
 
     public function store(ProductRequest $req)
     {

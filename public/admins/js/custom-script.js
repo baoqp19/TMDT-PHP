@@ -169,25 +169,6 @@ $(document).ready(function () {
         });
     });
 
-    //del coupon
-    $(".del-coupon").click(function () {
-        const id = parseInt($(this).data("id"));
-
-        $.ajax({
-            url: "coupon/destroy",
-            method: "POST",
-            data: { id },
-            success: function (res) {
-                location.reload();
-                toastr["success"](
-                    "Xóa mã giảm giá thành công !!!",
-                    "Thành công"
-                );
-            },
-            error: function (rep) {},
-        });
-    });
-
     //del comment
     $(".del-comment").click(function () {
         const id = parseInt($(this).data("id"));
@@ -306,7 +287,7 @@ $(document).ready(function () {
                                         <td class="text-center text-muted">
                                          <a data-id="${
                                              feeship.id
-                                         }" class="btn btn-danger btn-sm del-coupon">Xóa</a>
+                                         }" class="btn btn-danger btn-sm del-coupon"><i class="fa-light fa-trash"></i></a>
                                         </td>
 
                                     </tr>`;
@@ -323,17 +304,70 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on("click", ".del-coupon", function () {
-        const id = $(this).data("id");
+    $(".del-coupon").click(function () {
+        const id = parseInt($(this).data("id"));
 
         $.ajax({
-            url: getBaseUrl() + "admin/delivery/delete",
+            url: "coupon/destroy",
             method: "POST",
             data: { id },
             success: function (res) {
-                showFeeship();
+                location.reload();
+                toastr["success"](
+                    "Xóa mã giảm giá thành công !!!",
+                    "Thành công"
+                );
             },
-            error: function (res) {},
+            error: function (rep) {},
+        });
+    });
+
+    $(document).on("click", ".del-coupon", function () {
+        const id = $(this).data("id");
+
+        // SweetAlert xác nhận xóa
+        Swal.fire({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn sẽ không thể hoàn tác hành động này!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Có, xóa nó!",
+            cancelButtonText: "Không, hủy!",
+            reverseButtons: true,
+            background: "#fff",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Gửi yêu cầu xóa nếu xác nhận
+                $.ajax({
+                    url: getBaseUrl() + "admin/delivery/delete",
+                    method: "POST",
+                    data: {
+                        id: id,
+                        _token: "{{ csrf_token() }}", // Thêm token CSRF nếu cần
+                    },
+                    success: function (res) {
+                        Swal.fire(
+                            "Đã xóa!",
+                            "Phí vận chuyển đã được xóa.",
+                            "success"
+                        );
+                        showFeeship(); // Cập nhật lại danh sách phí vận chuyển
+                    },
+                    error: function (res) {
+                        Swal.fire(
+                            "Lỗi!",
+                            "Đã xảy ra lỗi khi xóa phí vận chuyển.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    "Đã hủy",
+                    "Phí vận chuyển của bạn vẫn an toàn :)",
+                    "error"
+                );
+            }
         });
     });
 

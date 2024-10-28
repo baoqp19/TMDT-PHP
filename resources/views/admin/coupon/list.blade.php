@@ -7,7 +7,7 @@
 <div class="modal fade" id="modal-coupon" style="display: none;" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content model-send-coupon" role="document">
-            <div class="card-header d-flex justify-content-between align-items-center">Danh sách người dùng <div data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></div>
+            <div class="card-header d-flex justify-content-between align-items-center">Danh sách người dùng <div style="cursor: pointer; font-size: 17px;" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></div>
             </div>
             <div class="table-responsive" style="padding-bottom: 10px;">
                 @if(count($users))
@@ -45,6 +45,7 @@
                                     </div>
                                 </div>
                             </td>
+
                             <td class="text-center text-muted">{{$user->email}}</td>
 
                             <td class="text-center">
@@ -63,6 +64,14 @@
 </div>
 
 @section('ContentPage')
+
+@push('styles')
+    <style>
+        .confirmButton{
+            margin-left: 7px;
+        }
+    </style>
+@endpush
 
 <div class="card-header">Danh sách mã giảm giá</div>
 <div class="table-responsive" style="padding-bottom: 10px;">
@@ -94,24 +103,47 @@
                 <td class="text-center text-muted">{{$coupon->code}}</td>
                 <td class="text-center text-muted">{{$coupon->quantity}} Mã</td>
                 <td class="text-center text-muted">{{$coupon->percent}}%</td>
-                <td class="text-center text-muted">{{$coupon->start_coupon}}</td>
-                <td class="text-center text-muted">{{$coupon->end_coupon}}</td>
+                @php
+                    $startCoupon = \Carbon\Carbon::parse($coupon->start_coupon)->format('d/m/Y');
+                @endphp
+                <td class="text-center text-muted">{{$startCoupon}}</td>
+                @php
+                    $endCoupon = \Carbon\Carbon::parse($coupon->end_coupon)->format('d/m/Y');
+                @endphp
+
+                <td class="text-center text-muted">{{$endCoupon}}</td>
                 <td class="text-center text-muted">
-                    @if($coupon->end_coupon >= $today)
+                    @php
+                        $todayDate = \Carbon\Carbon::now('Asia/Ho_Chi_Minh');
+                    @endphp
+                    @if($coupon->end_coupon >= $todayDate)
                     Còn hạn
                     @else
                     Hết hạn
                     @endif
                 </td>
                 <td class="text-center">
-                    <button data-toggle="modal" data-target="#modal-coupon" data-id="{{$coupon->code}}" class="btn btn-success btn-sm send-coupon">Gửi mã</button>
-                    <a href="{{route('coupon.edit', $coupon->id)}}" class="btn btn-primary btn-sm">Chỉnh sửa</a>
-                    <form action="{{route('coupon.destroy', $coupon->id)}}" class="form-delete" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                    </form>
-                </td>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span>
+                            <button style="border-radius: 10px; margin-right: 4px;" data-toggle="modal" data-target="#modal-coupon" data-id="{{$coupon->code}}" class="btn btn-success btn-sm send-coupon"><i style="padding: 5px; margin-left: 3px; margin-right: 3px;" class="fa-thin fa-paper-plane-top"></i></button>
+                        </span>
+                        <span class="container-span-icon">
+                            <a href="{{ route('coupon.edit', $coupon->id) }}" class="link-icon icon-edit">
+                                <i class="fa-light fa-pen-to-square"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <form class="link-icon-1" action="{{ route('coupon.destroy', $coupon->id) }}" method="POST" onsubmit="event.preventDefault(); confirmDelete('{{ route('coupon.destroy', $coupon->id) }}',this);">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-icon">
+                                    <i style="padding: 2px;" class="fa-light fa-trash"></i>
+                                </button>
+                            </form>
+                        </span>
+                        
+                    </div>
+                 </td>
             </tr>
             @endforeach
         </tbody>
@@ -120,4 +152,55 @@
     <div class="text-center text-noti">Không có mã giảm giá nào để hiển thị</div>
     @endif
 </div>
+
+@push('scripts')
+<script>
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success confirmButton",
+            cancelButton: "btn btn-danger confirmButton"
+        },
+        buttonsStyling: false
+    });
+
+    function confirmDelete(url, form) {
+        swalWithBootstrapButtons.fire({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn sẽ không thể hoàn tác hành động này!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Có, xóa nó!",
+            cancelButtonText: "Không, hủy!",
+            reverseButtons: true,
+            background: "#fff"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Hiển thị thông báo "Đã xóa!" trước khi gửi form
+                swalWithBootstrapButtons.fire({
+                    title: "Đã xóa!",
+                    text: "Dữ liệu của bạn đã được xóa.",
+                    icon: "success",
+                    background: "#fff"
+                });
+
+                // Gửi form sau 1 giây (1000 milliseconds)
+                setTimeout(() => {
+                    form.submit(); // Gửi form để thực hiện yêu cầu DELETE
+                }, 1000); // Thay đổi thời gian ở đây nếu cần
+
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: "Đã hủy",
+                    text: "Dữ liệu của bạn an toàn!",
+                    icon: "error",
+                    background: "#fff"
+                });
+            }
+        });
+    }
+</script>
+
+@endpush
+
+
 @endsection
