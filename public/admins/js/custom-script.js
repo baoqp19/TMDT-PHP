@@ -343,22 +343,23 @@ $(document).ready(function () {
                     method: "POST",
                     data: {
                         id: id,
-                        _token: "{{ csrf_token() }}", // Thêm token CSRF nếu cần
                     },
                     success: function (res) {
-                        Swal.fire(
-                            "Đã xóa!",
-                            "Phí vận chuyển đã được xóa.",
-                            "success"
-                        );
+                        Swal.fire({
+                            title: "Đã xóa!",
+                            text: "Phí vận chuyển đã được xóa.",
+                            icon: "success",
+                            background: "#fff",
+                        });
                         showFeeship(); // Cập nhật lại danh sách phí vận chuyển
                     },
                     error: function (res) {
-                        Swal.fire(
-                            "Lỗi!",
-                            "Đã xảy ra lỗi khi xóa phí vận chuyển.",
-                            "error"
-                        );
+                        Swal.fire({
+                            title: "Lỗi!",
+                            text: "Đã xảy ra lỗi khi xóa phí vận chuyển.",
+                            icon: "error",
+                            background: "#fff",
+                        });
                     },
                 });
             } else if (result.dismiss === Swal.DismissReason.cancel) {

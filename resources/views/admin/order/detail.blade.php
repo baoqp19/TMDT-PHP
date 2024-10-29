@@ -3,7 +3,7 @@
 @section('title_page', 'Chi tiết đơn hàng')
 @section('sub_title_page', 'Chi tiết đơn hàng')
 
-@section('ContentPage')
+@section('ContentPage') 
 <div class="card-header">Thông tin người mua</div>
 <div class="table-responsive" style="padding-bottom: 10px;">
     <table class="align-middle mb-0 table table-borderless table-striped table-hover">
@@ -110,9 +110,9 @@
                         </div>
                     </div>
                 </td>
-                <td class="text-center text-muted">@money($product->product_price)</td>
+                <td class="text-center text-muted">{{  number_format($product->product_price, 0, ',', '.') . ' VND'}}</td>
                 <td class="text-center text-muted">{{$product->product_quantity}}</td>
-                <td class="text-center text-muted">@money($product->total_price)</td>
+                <td class="text-center text-muted">{{  number_format($product->total_price, 0, ',', '.') . ' VND'}}</td>
                 <td class="text-center text-muted">{{$product->created_at}}</td>
             </tr>
             @endforeach
@@ -152,13 +152,13 @@
             @endif
 
             <tr>
-                <td class="text-center text-muted">@money($total)</td>
+                <td class="text-center text-muted">{{  number_format($total, 0, ',', '.') . ' VND'}}</td>
                 @if($order->coupon_code != "NO")
-                <td class="text-center text-muted">@money($coupon)</td>
+                <td class="text-center text-muted">{{  number_format($coupon, 0, ',', '.') . ' VND'}}</td>
                 @endif
-                <td class="text-center text-muted">@money($feeship)</td>
-                <td class="text-center text-muted">@money($total + $feeship - $coupon)</td>
-                <td class="text-center text-muted"><a href="{{route('order.admin_print', $order->code)}}">In đơn hàng</a></td>
+                <td class="text-center text-muted">{{  number_format($feeship, 0, ',', '.') . ' VND'}}</td>
+                <td class="text-center text-muted">{{  number_format($total + $feeship - $coupon, 0, ',', '.') . ' VND'}}</td>
+                <td class="text-center text-muted"><a style="color: #B52922;" href="{{route('order.admin_print', $order->code)}}">In đơn hàng</a></td>
                 <td class="text-center text-muted">
                     @if($order->status == 1)
                     Chờ xác nhận
@@ -169,9 +169,9 @@
                 <td class="text-center text-muted">
                     @if($order->status == 1)
                     <a href="{{route('order.delivery', $order->id)}}" class="btn btn-success btn-sm">Xác nhận & giao hàng</a>
-                    <a href="{{route('order.admin_delete', $order->id)}}" class="btn btn-danger btn-sm del-order-admin">Xóa</a>
+                    <a href="{{route('order.admin_delete', $order->id)}}" class="btn btn-danger btn-sm del-order-admin"><i style="padding: 2px; margin-left: 5px; margin-right: 5px;" class="fa-light fa-trash"></i></a>
                     @else
-                    <a href="{{route('order.admin_delete', $order->id)}}" class="btn btn-danger btn-sm del-order-admin">Xóa</a>
+                    <a href="{{route('order.admin_delete', $order->id)}}" class="btn btn-danger btn-sm del-order-admin"><i style="padding: 2px; margin-left: 5px; margin-right: 5px;" class="fa-light fa-trash"></i></a>
                     @endif
                 </td>
             </tr>
