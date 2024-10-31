@@ -18,7 +18,7 @@ class ProductObserver
         $product->image = $image;
         $product->slug = Str::slug(request()->name);
     }
-
+    
     public function updating(Product $product)
     {
         if ($file = request()->file('image')) {

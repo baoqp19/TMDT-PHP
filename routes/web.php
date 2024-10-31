@@ -167,7 +167,7 @@ Route::prefix('print')->group(function () {
 
 
 
-// // Admin Routes
+//  Admin Routes
 
 
 Route::get('admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
@@ -184,32 +184,32 @@ Route::group([
 
     Route::post('send-coupon', [MailController::class, 'send_coupon']);
 
-    //     // Role Management   
+    //        Role Management   
     Route::middleware('can:' . config('role.ROLE'))->group(function () {
         Route::resource('role', RoleController::class);
     });
 
-    //     // Post Management
+    //        Post Management
     Route::middleware('can:' . config('role.POST'))->group(function () {
         Route::resource('post', PostController::class);
     });
 
-    //     // Statistic Management
+    //        Statistic Management
     Route::middleware('can:' . config('role.STATISTIC'))->group(function () {
         Route::get('static', [StaticController::class, 'index'])->name('static.index');
     });
 
-    //     // Slider Management
+    //        Slider Management
     Route::middleware('can:' . config('role.SLIDER'))->group(function () {
         Route::resource('slider', SliderController::class);
     });
-
-    //     // Information Management
+    
+    //        Information Management
     Route::middleware('can:' . config('role.INFO'))->group(function () {
         Route::get('device', [DeviceController::class, 'admin_device'])->name('device.admin');
         Route::resource('visitor', VisitorController::class);
     });
-
+    
     //     // Admin Management
     Route::middleware('can:' . config('role.ADMIN'))->group(function () {
         Route::get('list', [AdminController::class, 'list'])->name('admin.list');

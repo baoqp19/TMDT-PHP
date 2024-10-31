@@ -13,7 +13,7 @@ class AdminObserver
             $image = uploadImage($file, 'admins/avatars');
             $admin->image = $image;
         }
-    }
+    } 
 
     public function updating(Admin $admin)
     {
@@ -22,6 +22,7 @@ class AdminObserver
             $admin->image = $image;
         }
     }
+    
 
     public function deleting(Admin $admin)
     {

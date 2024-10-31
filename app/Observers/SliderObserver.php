@@ -19,7 +19,7 @@ class SliderObserver
             $image = uploadImage($file, 'sliders');
             $slider->image = $image;
         }
-    }
+    }       
 
     public function deleting(Slider $slider)
     {

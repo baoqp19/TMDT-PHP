@@ -27,6 +27,7 @@
     <form class="needs-validation" action="" method="POST" novalidate>
         @csrf
         <div class="form-row">
+
             <div class="col-md-3 mb-3">
                 <label for="validationTooltip01">Chọn thành phố</label>
                 <select class="mb-2 form-control choose city" id="city" name="city">
@@ -35,6 +36,7 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="col-md-3 mb-3">
                 <label for="validationTooltip01">Chọn huyện/quận</label>
                 <select class="mb-2 form-control choose province" id="province" name="province">
@@ -43,6 +45,7 @@
                     @endforeach
                 </select>
             </div>
+            
             <div class="col-md-3 mb-3">
                 <label for="validationTooltip01">Chọn xã phường</label>
                 <select class="mb-2 form-control village" id="village" name="village">
@@ -58,6 +61,7 @@
                 <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
                 <div class="valid-feedback">Tuyệt vời!!!</div>
             </div>
+
         </div>
          
         <div class="form-row text-center">
