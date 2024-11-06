@@ -44,10 +44,15 @@ class UserController extends Controller
     {
         $user = User::find(Auth::user()->id);
 
-        if ($req->hasFile('image') && $user->image != "default.png") {
+        if ($req->hasFile('image')) {
             deleteImage($user->image, 'avatars');
+            $image = uploadImage($req->file('image'), 'avatars');
         }
-        $user->fill($req->all());
+
+        $user->image = $image;
+
+
+        $user->fill($req->except('image'));
         $user->save();
 
         return redirect()->route('user.index')->with([

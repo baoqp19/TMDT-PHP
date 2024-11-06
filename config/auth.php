@@ -42,6 +42,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // Sử dụng phiên (session) để quản lý xác thực cho quản trị viên
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        
         // Sử dụng xác thực dựa trên token. Người dùng sẽ gửi token trong header của mỗi yêu cầu API.
         'api' => [
             'driver' => 'token',
@@ -49,11 +56,6 @@ return [
             'hash' => false,
         ],
 
-        // Sử dụng phiên (session) để quản lý xác thực cho quản trị viên
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
         // sử dụng token để xác thực cho các yêu cầu API.
         'admin_api' => [
             'driver' => 'sanctum',

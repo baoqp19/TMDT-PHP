@@ -75,12 +75,10 @@ Route::group([
         Route::post('handlelogin', [UserAuthController::class, 'handlelogin'])->name('handlelogin');
     });
 
-    Route::group([
-        'prefix' => 'user',
-        'as'     => 'user.',
-    ], function () {
+
+    Route::prefix("user")->name("user.")->group(function () {
         Route::get('register', [UserAuthController::class, 'register'])->name('register');
-        Route::post('handleSignin', [UserAuthController::class, 'handleSignin'])->name('handleSignin');
+        Route::post('handleSignup', [UserAuthController::class, 'handleSignup'])->name('handleSignup');
 
         Route::get('/', [UserController::class, 'index'])->name('index');
     });
@@ -101,10 +99,8 @@ Route::group([
 
     Route::group(['middleware' => ['auth_user']], function () {
         Route::prefix('user')->group(function () {
-            //         
             Route::post('update', [UserController::class, 'update'])->name('user.update');
         });
-
         Route::get('signout', [UserAuthController::class, 'signout'])->name('user.signout');
 
 
@@ -146,8 +142,6 @@ Route::group([
 
         Route::get('/get-villages', [ProvinceController::class, 'getVillages']);
 
-
-
         Route::get('payment_callback', [OrderController::class, 'payment_callback'])->name('payment.callback');
 
         Route::post('use-coupon', [CouponController::class, 'use_coupon'])->name('coupon.use_coupon');
@@ -184,7 +178,7 @@ Route::group([
 
     Route::post('send-coupon', [MailController::class, 'send_coupon']);
 
-    //        Role Management   
+    //    Can:ROLE: true thì hiển thị    Role Management   
     Route::middleware('can:' . config('role.ROLE'))->group(function () {
         Route::resource('role', RoleController::class);
     });
@@ -203,14 +197,14 @@ Route::group([
     Route::middleware('can:' . config('role.SLIDER'))->group(function () {
         Route::resource('slider', SliderController::class);
     });
-    
+
     //        Information Management
     Route::middleware('can:' . config('role.INFO'))->group(function () {
         Route::get('device', [DeviceController::class, 'admin_device'])->name('device.admin');
         Route::resource('visitor', VisitorController::class);
     });
-    
-    //     // Admin Management
+
+    //        Admin Management
     Route::middleware('can:' . config('role.ADMIN'))->group(function () {
         Route::get('list', [AdminController::class, 'list'])->name('admin.list');
         Route::get('add', [AdminController::class, 'add'])->name('admin.add');
@@ -253,7 +247,7 @@ Route::group([
         });
     });
 
- // Delivery Management
+    // Delivery Management
     Route::middleware('can:' . config('role.FEESHIP'))->group(function () {
         Route::prefix('delivery')->group(function () {
             Route::post('select', [DeliveryController::class, 'select_delivery'])->name('delivery.select');

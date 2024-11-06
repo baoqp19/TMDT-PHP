@@ -16,7 +16,7 @@ class AdminController extends Controller
 
     public function list()
     {
-        $admins = Admin::where('role', '<>', config('role.FULL_PERMISSION'))->get();
+        $admins = Admin::all();
         return view('admin.admin.list')->with(['admins' => $admins]);
     }
 

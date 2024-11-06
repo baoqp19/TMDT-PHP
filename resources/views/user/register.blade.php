@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{asset('users/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('users/css/auth.css')}}" rel="stylesheet" />
-    <title>Đăng nhập</title>
+    <title>Đăng kí</title>
 </head>
 
 <body>

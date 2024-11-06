@@ -32,7 +32,7 @@
     <div class="box-chat">
         <div class="header-chat">
             <div class="header-chat-avatar">
-                <img src="{{asset('users/img/admin.png')}}" alt="">
+                <img src="{{asset('users/img/admin.jpg')}}" alt="">
             </div>
             <div class="header-chat-info">
                 <p class="name">@lang('lang.admin') <i class="fa fa-angle-down"></i></p>

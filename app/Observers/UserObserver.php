@@ -11,13 +11,13 @@ class UserObserver
         //
     }
 
-    public function updating(User $user)
-    {
-        if ($file = request()->file('image')) {
-            $image = uploadImage($file, 'avatars');
-            $user->image = $image;
-        }
-    }
+    // public function updating(User $user)
+    // {
+    //     if ($file = request()->file('image')) {
+    //         $image = uploadImage($file, 'avatars');
+    //         $user->image = $image;
+    //     }
+    // }
 
     public function deleting(User $user)
     {

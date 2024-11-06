@@ -12,6 +12,8 @@ class AdminPolicies
 
     public function __construct() {}
 
+
+    // trả về true false
     public function admin(Admin $admin)
     {
         return $admin->checkPermissionAccess(config('role.ADMIN'));

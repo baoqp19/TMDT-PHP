@@ -29,7 +29,7 @@
                         <h2 class="card-title">Đăng nhập</h2>
                         <small class="card-text">Chúng tôi rất vui khi được chào đón bạn trở lại.</small>
                     </div>
-                    <form action="{{route('user.handleSignin')}}" method="POST" class="sign-in-form">
+                    <form action="{{route('user.handlelogin')}}" method="POST" class="sign-in-form">
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Địa chỉ email</label>

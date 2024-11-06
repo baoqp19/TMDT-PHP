@@ -26,7 +26,7 @@ class UserAuthController extends Controller
         return view('user.register');
     }
 
-    public function handleSignin(SigninRequest $request): RedirectResponse
+    public function handlelogin(SigninRequest $request): RedirectResponse
     {
 
         // Lấy thông tin đăng nhập từ request
