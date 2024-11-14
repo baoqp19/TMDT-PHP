@@ -33,19 +33,19 @@ class CheckoutController extends Controller
     {
         $address = $this->getAddress($req);
         $feeship = Feeship::where($req->all())->first();
-    
+
         // Mặc định nếu không có phí ship thì lấy giá trị mặc định
         $feeship_value = 25000;
         $feeship_id = 'NO';
-    
+
         if ($feeship) {
             $feeship_value = $feeship->feeship;
             $feeship_id = $feeship->id;
         }
-    
+
         // Lưu vào session
         session(['feeship' => $feeship_value, 'feeship_id' =>  $feeship_id, 'address' => $address]);
-    
+
         // Trả về JSON response để client có thể xử lý
         return response()->json([
             'feeship' => $feeship_value,

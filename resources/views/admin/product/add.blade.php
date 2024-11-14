@@ -77,11 +77,10 @@
                 <div class="invalid-feedback">Vui lòng nhập đầy đủ dữ liệu.</div>
                 <div class="valid-feedback">Tuyệt vời!!!</div>
             </div>
-
             <div class="col-md-12 mb-3">
                 <div class="custom-file">
                     <label for="validationTooltip01">Hình ảnh</label>
-                    <input type="file" class="form-control" name="image" id="validatedCustomFile" accept=".PNG, .JPEG, .JPG..." required>
+                    <input type="file" class="form-control" name="image" id="validatedCustomFile" accept=".PNG, .JPEG, .JPG">
                     <div class="invalid-feedback">Vui lòng chọn một trong các định dạng ảnh: PNG, JPG, JPEG.</div>
                     <div class="valid-feedback">Tuyệt vời!!!</div>
                     @if ($errors->has('file_error'))

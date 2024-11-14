@@ -9,14 +9,25 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $carts = [];
         if (Auth::check()) {
             $carts = Auth::user()->carts;
         }
-        return view('user.cart')->with(compact(['carts']));
+
+        // Kiểm tra nếu đây là một yêu cầu AJAX
+        if ($request->ajax()) {
+            // Render phần nội dung giỏ hàng
+            $view = view('user.cart', compact('carts'))->render(); // Render HTML giỏ hàng
+            return response()->json([
+                'html' => $view
+            ]);
+        }
+
+        return view('user.cart', compact('carts'));
     }
+
 
     public function store(CartRequest $req)
     {

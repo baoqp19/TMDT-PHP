@@ -33,7 +33,7 @@ class ProductRequest extends FormRequest
             'price' => "required|min:1000|integer",
             'quantity' => "required|min:1|integer",
             'brand_id' => "required|min:0|integer",
-            'description' => "required|string|min:2|max:100",
+            'description' => "required|string|min:2|max:250",
             'feather' => "required|min:0|integer",
             'image' => $image_rule,
         ];

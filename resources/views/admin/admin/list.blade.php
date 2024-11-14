@@ -20,6 +20,7 @@
             padding-left: 15px;
             
         }
+        
         .link-icon-1{
             background-color: #B5292F !important;
             border-radius: 10px;

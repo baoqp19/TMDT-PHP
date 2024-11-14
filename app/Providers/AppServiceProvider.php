@@ -12,6 +12,8 @@ use App\Observers\GalleryObserver;
 use App\Observers\ProductObserver;
 use App\Observers\SliderObserver;
 use App\Observers\UserObserver;
+use Illuminate\Pagination\Paginator;
+// use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -39,5 +41,6 @@ class AppServiceProvider extends ServiceProvider
         Slider::observe(SliderObserver::class);
         User::observe(UserObserver::class);
         Admin::observe(AdminObserver::class);
+        Paginator::useBootstrap();
     }
 }

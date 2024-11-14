@@ -19,6 +19,41 @@
         .price,.rating{
             color: #B5292F; 
         }
+
+        .pagination-product{
+            
+        }
+
+        .pagination {
+    display: flex;
+    gap: 8px;
+}
+
+    .pagination .page-item .page-link {
+        color: #007bff; /* Màu chữ */
+        background-color: #ffffff; /* Màu nền */
+        border: 1px solid #ddd; /* Viền */
+        padding: 8px 12px; /* Khoảng cách bên trong */
+        border-radius: 5px; /* Bo góc */
+        transition: all 0.3s;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #007bff;
+        color: #ffffff;
+        border-color: #007bff;
+    }
+
+    .pagination .page-item:hover .page-link {
+        background-color: #f0f0f0;
+        color: #007bff;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        color: #6c757d;
+        background-color: #e9ecef;
+        border-color: #dee2e6;
+    }
         
     </style>
 @endpush
@@ -28,7 +63,7 @@
 {{-- ======================================SLIDERS========================================= --}}
 @if(count($sliders) > 0)
     <div class="slider_box">
-        <div class="slider-wrapper theme-default">
+        <div class="slider-wrapper theme-default slider_box_1">
             <div id="slider" class="nivoSlider">
                 @foreach($sliders as $slider)
                 <a href="{{route('product.detail', $slider->product->slug)}}"><img class="lazy" src="{{asset('admins/uploads/sliders/'.$slider->image)}}" alt="{{$slider->product->name}}" /></a>
@@ -37,6 +72,8 @@
         </div>
     </div>
 @endif
+
+
 
 {{-- ===================================SẢN PHẨM NỔI BẬT================================== --}}
 
@@ -97,6 +134,10 @@
                         @endforeach
                     @endif
                 </div>
+                <div class="d-flex justify-content-center align-items-center mt-4 pagination-product">
+                    {{ $product_feathers->links() }}
+
+                </div>
             </div>
         </div>
     </div>
@@ -153,6 +194,10 @@
                             </div>
                         @endforeach
                     @endif
+                </div>   
+                <div class="d-flex justify-content-center align-items-center mt-4 pagination-product">
+                    {{ $product_news->links() }}
+
                 </div>
             </div>
         </div>

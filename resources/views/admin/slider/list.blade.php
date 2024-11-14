@@ -4,7 +4,13 @@
 @section('sub_title_page', 'Danh sách slider')
 
 @section('ContentPage')
-
+@push('styles')
+    <style>
+         .confirmButton{
+           margin-left: 7px;
+        }
+    </style>
+@endpush
 <div class="card-header">Danh sách slider</div>
 <div class="table-responsive" style="padding-bottom: 10px;">
     @if(count($sliders) > 0)
@@ -49,15 +55,24 @@
                     Ẩn
                     @endif
                 </td>
-
                 <td class="text-center">
-                    <a href="{{route('slider.edit', $slider->id)}}" class="btn btn-primary btn-sm">Chỉnh sửa</a>
-                    <form action="{{route('slider.destroy', $slider->id)}}" class="form-delete" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                    </form>
-                </td>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span class="container-span-icon">
+                            <a href="{{ route('slider.edit', $slider->id) }}" class="link-icon icon-edit">
+                                <i class="fa-light fa-pen-to-square"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <form class="link-icon-1" action="{{ route('slider.destroy', $slider->id) }}" method="POST" onsubmit="event.preventDefault(); confirmDelete('{{ route('slider.destroy', $slider->id) }}', this);">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-icon">
+                                    <i class="fa-light fa-trash"></i>
+                                </button>
+                            </form>
+                        </span>
+                    </div>
+                 </td>
             </tr>
             @endforeach
         </tbody>
@@ -66,4 +81,54 @@
     <div class="text-center text-noti">Không có slider nào để hiển thị</div>
     @endif
 </div>
+
+@push('scripts')
+<script>
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success confirmButton",
+            cancelButton: "btn btn-danger confirmButton"
+        },
+        buttonsStyling: false
+    });
+
+    function confirmDelete(url, form) {
+        swalWithBootstrapButtons.fire({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn sẽ không thể hoàn tác hành động này!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Có, xóa nó!",
+            cancelButtonText: "Không, hủy!",
+            reverseButtons: true,
+            background: "#fff"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Hiển thị thông báo "Đã xóa!" trước khi gửi form
+                swalWithBootstrapButtons.fire({
+                    title: "Đã xóa!",
+                    text: "Dữ liệu của bạn đã được xóa.",
+                    icon: "success",
+                    background: "#fff"
+                });
+
+                // Gửi form sau 1 giây (1000 milliseconds)
+                setTimeout(() => {
+                    form.submit(); // Gửi form để thực hiện yêu cầu DELETE
+                }, 1000); // Thay đổi thời gian ở đây nếu cần
+
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: "Đã hủy",
+                    text: "Dữ liệu của bạn an toàn!",
+                    icon: "error",
+                    background: "#fff"
+                });
+            }
+        });
+    }
+</script>
+
+@endpush
+
 @endsection

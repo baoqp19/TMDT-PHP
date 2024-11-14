@@ -13,32 +13,32 @@ class HomeController extends Controller
     {
         $cacheTime = 600; // 10 minutes
 
-
-        // remember xem sliders: khoá trong cache coi có trong cache không, nếu có thì nó lấy trong đó
+        // Cache sliders
         $sliders = cache()->remember('sliders', $cacheTime, function () {
             return Slider::with(['product'])
-                ->latest('id')   // Sắp xếp theo id giảm dần (tức là sliders mới nhất sẽ ở trên cùng).
+                ->latest('id')
                 ->take(10)
                 ->get();
         });
 
-        $product_feathers = cache()->remember('product_feathers', $cacheTime, function () {
-            return Product::where('feather', 1)
-                ->latest('id')
-                ->paginate(4);
-        });
+        // Không cache phân trang cho sản phẩm nổi bật
+        $product_feathers = Product::where('feather', 1)
+            ->latest('id')
+            ->paginate(5)
+            ->appends('page_news', request('page_news'));
 
-        $product_news = cache()->remember('product_news', $cacheTime, function () {
-            return Product::latest('id')
-                ->paginate(4);
-        });
+        // Không cache phân trang cho sản phẩm mới
+        $product_news = Product::latest('id')
+            ->paginate(5)
+            ->appends('page_feathers', request('page_feathers'));
 
+        // Cache brands
         $brands = cache()->remember('brands', $cacheTime, function () {
             return Brand::with(['products'])
                 ->latest('id')
                 ->get();
         });
-        // compact truyền biến qua view để hiện thị 
+
         return view('user.index', compact('brands', 'sliders', 'product_feathers', 'product_news'));
     }
 }

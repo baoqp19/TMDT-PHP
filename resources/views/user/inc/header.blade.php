@@ -119,7 +119,7 @@
                             </div>
                         </div>
 
-
+                        
                         <div class="col-lg-4 col-md-12">
                             <div class="cart-box mt-all-30">
                                 <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
@@ -225,7 +225,8 @@
                             <nav class="d-none d-lg-block" >
                                 <ul class="header-bottom-list d-flex">
                                     <li class="active"><a class="name" href="{{route('home.index')}}">@lang('lang.home')</a></li>
-                                    <li class=""><a class="name" href="{{route('cart.index')}}">@lang('lang.cart')</a></li>
+                                    <li><a class="name" href="{{ route('cart.index') }}" onclick="loadContent(event, '{{ route('cart.index') }}')">@lang('lang.cart')</a></li>
+                                    
                                     <li class=""><a class="name" href="{{route('order.index')}}">@lang('lang.order')</a></li>
                                     <li class=""><a class="name" href="{{route('contact.index')}}">@lang('lang.contact')</a></li>
 
@@ -287,7 +288,8 @@
         </header>
     </div>
     @stack('scripts')
-
+    
+    </script>
     <script src="{{asset('users/js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{asset('users/js/axios.js')}}"></script>
     <script src="{{asset('users/js/moment.js')}}"></script>

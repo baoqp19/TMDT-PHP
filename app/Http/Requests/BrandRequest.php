@@ -23,7 +23,7 @@ class BrandRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:2|max:10',
-            'description' => 'required|string|min:2|max:50',
+            'description' => 'required|string|min:2|max:450',
         ];
     }
 }

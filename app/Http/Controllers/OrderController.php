@@ -245,7 +245,8 @@ class OrderController extends Controller
     }
 
 
-    function removeVietnameseAccents($str) {
+    function removeVietnameseAccents($str)
+    {
         $accents_arr = [
             'a' => ['à', 'á', 'ả', 'ã', 'ạ', 'â', 'ầ', 'ấ', 'ẩ', 'ẫ', 'ậ', 'ă', 'ằ', 'ắ', 'ẳ', 'ẵ', 'ặ'],
             'e' => ['è', 'é', 'ẻ', 'ẽ', 'ẹ', 'ê', 'ề', 'ế', 'ể', 'ễ', 'ệ'],
@@ -262,19 +263,19 @@ class OrderController extends Controller
             'Y' => ['Ỳ', 'Ý', 'Ỷ', 'Ỹ', 'Ỵ'],
             'D' => ['Đ']
         ];
-    
+
         foreach ($accents_arr as $nonAccent => $accents) {
             $str = str_replace($accents, $nonAccent, $str);
         }
-    
+
         return $str;
     }
-    
+
 
     public function print_order($order_code)
     {
         $order = Order::where('code', $order_code)->first();
-       
+
 
         $pdf = FacadePdf::loadView('admin.order.print', compact('order'))->setPaper('a4', 'landscape')->setOption(
             [

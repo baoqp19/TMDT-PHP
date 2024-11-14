@@ -91,18 +91,23 @@
                     @if(session('feeship'))
                     <p style="font-weight: 600; font-size: 16px; ">@lang('lang.feeship'):
                         @php $money_feeship = session('feeship'); @endphp
-                       <span class="price-checkout" style="margin-left: 2px;" >{{ number_format($money_feeship, 0, ',', '.') . ' VND' }}</span>
+                       <span class="price-checkout" style="margin-left: 2px; color: #B5292F;" >{{ number_format($money_feeship, 0, ',', '.') . ' VND' }}</span>
                     </p>
                     @endif
 
                     @if(session('coupon'))
                     @php $coupon = session('coupon'); @endphp
-                    <p style="font-weight: 600; font-size: 16px; ">@lang('lang.coupon_code'): {{$coupon['code']}} - @lang('lang.value'):
-                        {{$coupon['percent']}}%
+                    <p style="font-weight: 600; font-size: 16px;">
+                             @lang('lang.coupon_code') 
+                             :
+                             <span style="color: #B5292F; margin-left: 15px;"> 
+                                {{$coupon['code']}} - @lang('lang.value'):
+                                {{$coupon['percent']}}%
+                            </span>
                     </p>
-                    <p style="font-weight: 600; font-size: 16px; ">@lang('lang.money_down'): 
+                    <p style="font-weight: 600; font-size: 16px;  ">@lang('lang.money_down'): 
                         @php $money_coupon = ($cart->totalPrice() * $coupon['percent'])/100; @endphp
-                        <span class="price-checkout" >{{ number_format($money_coupon, 0, ',', '.') . ' VND' }}</span>
+                        <span class="price-checkout" style="margin-left: 40px;" >{{ number_format($money_coupon, 0, ',', '.') . ' VND' }}</span>
                     </p>
                     @endif
 
@@ -118,7 +123,7 @@
                     }
                     ?>
                     <p style="font-weight: 600; font-size: 16px; ">@lang('lang.total_money'):
-                       <span class="price-checkout" style="margin-left: 50px;" > {{ number_format( $total_money, 0, ',', '.') . ' VND' }}</span>
+                       <span class="price-checkout" style="margin-left: 43px;" > {{ number_format( $total_money, 0, ',', '.') . ' VND' }}</span>
                         @php Session::put('total_money', $total_money ) @endphp
                     </p>
 
@@ -162,32 +167,29 @@
                         @csrf
                         <div class="form-row row">
                             <div class="col-md-4 mb-3">
-                                <label for="validationTooltip01" class="label-name-ship" >@lang('lang.city')</label>
+                                <label for="validationTooltip01">@lang('lang.city')</label>
                                 <select class="mb-2 form-control choose city" id="city" name="city">
-                                    <option value="">-- Select City --</option>
                                     @foreach($citys as $city)
                                     <option value="{{$city->city_code}}">{{$city->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="validationTooltip01" class="label-name-ship">@lang('lang.province')</label>
+                                <label for="validationTooltip01">@lang('lang.province')</label>
                                 <select class="mb-2 form-control choose province" id="province" name="province">
-                                    <option value="">-- Select Province --</option>
                                     @foreach($provinces as $province)
-                                        <option value="{{$province->province_code}}">{{$province->name}}</option>
+                                    <option value="{{$province->province_code}}">{{$province->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            
                             <div class="col-md-4 mb-3">
-                                <label for="validationTooltip01" class="label-name-ship">@lang('lang.village')</label>
-                                <select class="mb-2 form-control village" id="village" name="village">
-                                    <option value="">-- Select Village --</option>
-                                    
+                                <label for="validationTooltip01">@lang('lang.village')</label>
+                                <select class="mb-2 form-control  village" id="village" name="village">
+                                    @foreach($villages as $village)
+                                    <option value="{{$village->village_code}}">{{$village->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            
 
                         </div>
 

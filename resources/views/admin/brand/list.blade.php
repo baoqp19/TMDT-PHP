@@ -73,25 +73,24 @@
                 <td class="text-center">
                     <div class="widget-subheading opacity-7">{{$brand->description}}</div>
                 </td>
-                    <td class="text-center">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <span class="container-span-icon">
-                                <a href="{{ route('brand.edit', $brand->id) }}" class="link-icon icon-edit">
-                                    <i class="fa-light fa-pen-to-square"></i>
-                                </a>
-                            </span>
-                            <span>
-                                <form class="link-icon-1" action="{{ route('brand.destroy', $brand->id) }}" method="POST" onsubmit="event.preventDefault(); confirmDelete('{{ route('brand.destroy', $brand->id) }}', this);">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-icon">
-                                        <i class="fa-light fa-trash"></i>
-                                    </button>
-                                </form>
-                            </span>
-                            
-                        </div>
-                     </td>
+                <td class="text-center">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span class="container-span-icon">
+                            <a href="{{ route('brand.edit', $brand->id) }}" class="link-icon icon-edit">
+                                <i class="fa-light fa-pen-to-square"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <form class="link-icon-1" action="{{ route('brand.destroy', $brand->id) }}" method="POST" onsubmit="event.preventDefault(); confirmDelete('{{ route('brand.destroy', $brand->id) }}', this);">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-icon">
+                                    <i class="fa-light fa-trash"></i>
+                                </button>
+                            </form>
+                        </span>
+                    </div>
+                 </td>
             </tr>
             @endforeach
         </tbody>

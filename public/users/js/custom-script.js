@@ -720,14 +720,13 @@ $(document).ready(function () {
                 village_code,
             },
             success: function (res) {
-                // Cập nhật giao diện với địa chỉ và phí ship trả về
-                $(".address-delivery").text(res.address);
+                location.reload();
             },
-            error: function (rep) {
-                console.error("Có lỗi xảy ra khi tính phí ship.");
-            },
+            error: function (rep) {},
         });
     });
+
+    
 
     //change paymenet
     $(document).on("change", ".ship_payment", function (e) {

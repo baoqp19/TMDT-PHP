@@ -11,7 +11,7 @@ class SliderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,12 @@ class SliderRequest extends FormRequest
      */
     public function rules(): array
     {
+        $image_rule = $this->slider ? 'nullable|mimes:jpg,jpeg,png,gif|max:20000' : 'required|mimes:jpg,jpeg,png,gif|max:20000';
         return [
-            //
+            'name' => 'required|string|min:2|max:20',
+            'product_id' => 'required|integer|min:0',
+            'show_hide' => 'required|integer|min:0',
+            'image' => $image_rule,
         ];
     }
 }
