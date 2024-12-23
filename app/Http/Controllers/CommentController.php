@@ -51,8 +51,21 @@ class CommentController extends Controller
         ])->update($req->only(['product_id', 'comment', 'star']));
     }
 
-    public function delete(Request $req)
+    public function delete(Request $request)
     {
-        Comment::find($req->id)->delete();
+        // Lấy id từ request
+        $id = $request->input('id');
+
+        // Kiểm tra xem bình luận có tồn tại không
+        $comment = Comment::find($id);
+
+        if (!$comment) {
+            return response()->json(['error' => 'Comment not found'], 404);
+        }
+
+        // Xóa bình luận
+        $comment->delete();
+
+        return response()->json(['success' => 'Comment deleted successfully'], 200);
     }
 }

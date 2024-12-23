@@ -232,7 +232,7 @@ Route::group([
             Route::get('/', [CommentController::class, 'index'])->name('comment.index');
             Route::get('not-confirm', [CommentController::class, 'get_not_confirm'])->name('comment.not_confirm');
             Route::get('confirm/{id}', [CommentController::class, 'set_confirm'])->name('comment.confirm');
-            Route::post('admin/delete', [CommentController::class, 'delete'])->name('comment.comment.delete');
+            Route::post('/delete', [CommentController::class, 'delete'])->name('comment.delete');
         });
     });
 

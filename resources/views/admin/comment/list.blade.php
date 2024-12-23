@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @php $i = 0; @endphp
+            @php $i = 1; @endphp
             @foreach($comments as $comment)
             <tr>
                 <td class="text-center text-muted">
@@ -69,7 +69,7 @@
                     @if ($comment->status == 0)
                     <a href="{{route('comment.confirm', $comment->id)}}" class="btn btn-success btn-sm">Xác nhận</a>
                     @endif
-                    <a data-id="{{$comment->id}}" class="btn btn-danger btn-sm del-comment">Xóa</a>
+                    <a data-id="{{$comment->id}}" class="btn btn-danger btn-sm del-comment">Xoá bình luận</a>
                 </td>
             </tr>
             @endforeach

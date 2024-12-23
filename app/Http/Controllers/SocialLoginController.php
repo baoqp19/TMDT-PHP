@@ -14,12 +14,7 @@ class SocialLoginController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function redirect_to_facebook()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
-
-    public function handle_signin_google()
+    public function handle_login_google()
     {
         $social_user = Socialite::driver("google")->user();
 

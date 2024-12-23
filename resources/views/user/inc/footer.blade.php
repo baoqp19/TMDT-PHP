@@ -17,8 +17,8 @@
 
     </div>
     <div class="content-right">
-        <div class="fb-page" data-href="https://www.facebook.com/MW-Store-100730118877099/" data-width="340" data-height="140" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
-            <blockquote cite="https://www.facebook.com/MW-Store-100730118877099/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/MW-Store-100730118877099/">MW Store</a></blockquote>
+        <div class="fb-page" data-href="https://www.facebook.com/shop.smartphone.2024/" data-width="340" data-height="140" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
+            <blockquote cite="https://www.facebook.com/shop.smartphone.2024/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/shop.smartphone.2024/">MW Store</a></blockquote>
         </div>
     </div>
 </div>
