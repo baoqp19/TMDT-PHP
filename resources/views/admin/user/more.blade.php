@@ -11,7 +11,7 @@
         {{$user->name}}
     </h5>
     <div class="row mt-5 mb-4">
-        <div class="col-md-3 text-center">
+        {{-- <div class="col-md-3 text-center">
             <a href="{{route('device.user', $user->id)}}">
                 <div class="card-device more-feature float-right">
                     <div class="card-device-title">
@@ -21,8 +21,8 @@
                     </div>
                 </div>
             </a>
-        </div>
-        @if($user->block < 5) <div class="col-md-3 text-center">
+        </div> --}}
+        @if($user->block < 5) <div class="col-md-4 text-center">
             <div class="card-device more-feature">
                 <div data-id="{{$user->id}}" class="card-device-title block-user">
                     <i class="fas fa-user-lock" style="font-size: 25px;"></i>
@@ -32,18 +32,18 @@
             </div>
     </div>
     @else
-    <div class="col-md-3 text-center">
+    <div class="col-md-4 text-center">
         <div class="card-device more-feature">
             <div data-id="{{$user->id}}" class="card-device-title unblock-user">
                 <i class="fas fa-unlock" style="font-size: 25px;"></i>
                 <br />
-                Mở khóa tài khoản
+                    Mở khóa tài khoản
             </div>
         </div>
     </div>
     @endif
 
-    <div class="col-md-3 text-center">
+    <div class="col-md-4 text-center">
         <div class="card-device more-feature">
             <div class="card-device-title chat-user" id="btn-chat-show">
                 <i class="fas fa-envelope" style="font-size: 25px;"></i>

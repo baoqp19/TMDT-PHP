@@ -13,6 +13,7 @@ class Admin extends Authenticatable
 
     protected $table = 'admins';
     protected $guarded = ['admin'];
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -36,6 +37,6 @@ class Admin extends Authenticatable
             if ($permissions->contains('key_code', $permission_check)) {
                 return true;
             }
-        } 
+        }
     }
 }

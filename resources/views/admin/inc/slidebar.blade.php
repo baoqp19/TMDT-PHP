@@ -264,27 +264,7 @@
                     </ul>
                 </li>
                 @endcan
-                @can('FEESHIP')
-                <li>
-                    <a href="#">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center" >
-                               <i style="margin-right: 12px;" class="fa-thin fa-sliders"></i>
-                                <span >Vận chuyển</span>
-                            </div>
-                           <i class="fa-thin fa-caret-down"></i>
-                       </div>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{route('delivery.index')}}">
-                                <i class="fa-light fa-truck-fast"></i>
-                                <span style="margin-left: 3px;" >Phí vận chuyển</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                @endcan
+               
                 @can('USER')
                 <li>
                     <a href="#">

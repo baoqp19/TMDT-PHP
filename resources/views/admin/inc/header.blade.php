@@ -101,7 +101,9 @@
 
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                       <span style="color: #B5292F" > {{Auth::guard('admin')->user()->name}}</span>
+                                        <img src="{{asset('admins/img/software-engineer.png')}}" alt="logo-image" style="width: 30px; height: 30px;" />
+                                        
+                                        <span style="color: #B5292F; margin-left: 5px;" > {{Auth::guard('admin')->user()->name}}</span>
                                     </div>
                                 </div>
 
@@ -109,7 +111,7 @@
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
                                             <div width="42" class="avatar-center avatar-border rounded-circle">
-                                                <img width="42" class="rounded-circle" src="{{asset('admins/img/avatars/' . Auth::guard('admin')->user()->image)}}" alt="">
+                                               
                                             </div>
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>

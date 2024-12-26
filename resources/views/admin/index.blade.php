@@ -8,12 +8,6 @@
     <div class="col-12">
         <div class="index-home">
             <h3 class="text-center">Xin chào <b style="color: #B5292F" >{{Auth::guard('admin')->user()->name}}</b> đến với trang quản trị của <b  style="color: #B5292F" >MW Store</b></h3>
-            <div class="index-icon">
-                <img src="{{asset('admins/img/logo.png')}}" alt="logo-image" style="width: 120px;" />
-                <div width="42" class="avatar-center avatar-border rounded-circle">
-                    <img width="42" class="rounded-circle" src="{{asset('admins/img/avatars/' . Auth::guard('admin')->user()->image)}}" alt="">
-                </div>
-            </div>
         </div>
     </div>
 </div>

@@ -31,6 +31,7 @@ class PostController extends Controller
 
     public function edit(PostProduct $post)
     {
+        // compact là truyền biến vào view 
         return view('admin.post.edit')->with(compact(['post']));
     }
 

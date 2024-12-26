@@ -23,7 +23,7 @@ function uploadImage($file, $position)
     // Tạo tên file duy nhất
     $img_name = Str::random(10) . time() . '.' . $file_ext;
 
-    // Di chuyển file vào thư mục
+
     $file->move($path, $img_name);
 
     return $img_name;

@@ -32,12 +32,29 @@ $(document).ready(function () {
 
     function getBaseUrl() {
         var pathArray = location.href.split("/");
-        var protocol = pathArray[0];
-        var host = pathArray[2];
+        var protocol = pathArray[0]; // httphttp
+        var host = pathArray[2]; // localhost
         var url = protocol + "//" + host + "/";
 
         return url;
     }
+
+    const sidebar = $('.scrollbar-sidebar'); // Lấy sidebar
+    const sidebarHeight = sidebar.prop('scrollHeight'); // Chiều cao nội dung thực tế
+    const windowHeight = $(window).height(); // Chiều cao cửa sổ trình duyệt
+
+    if (sidebarHeight > windowHeight) {
+        sidebar.css({
+            'overflow-y': 'auto', // Bật thanh cuộn dọc
+            'overflow-x': 'hidden' // Ẩn thanh cuộn ngang
+        });
+    } else {
+        sidebar.css({
+            'overflow': 'hidden' // Không cần thanh cuộn
+        });
+    }
+
+
 
     $(".del-user").click(function () {
         const id = parseInt($(this).data("id"));
@@ -580,6 +597,7 @@ $(document).ready(function () {
 
     $(".footer-chat-send").on("click", function () {
         sendChat();
+        console.log(getBaseUrl())
     });
 
     $(".message-content").keyup(function (e) {

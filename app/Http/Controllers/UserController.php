@@ -62,7 +62,7 @@ class UserController extends Controller
 
     public function blocked()
     {
-        if (!session('block')) {
+        if (!session('block')) {   // !false
             return redirect()->route('home.index');
         }
         return view('user.user.block');
@@ -70,9 +70,12 @@ class UserController extends Controller
 
     public function unblock(Request $req)
     {
+
         User::where('id', $req->id)->update([
             'block' => 0,
         ]);
+
+
         session()->forget('block');
     }
 

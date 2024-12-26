@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $cacheTime = 600; // 10 minutes
+        $cacheTime = 600;
 
         // Cache sliders
         $sliders = cache()->remember('sliders', $cacheTime, function () {
